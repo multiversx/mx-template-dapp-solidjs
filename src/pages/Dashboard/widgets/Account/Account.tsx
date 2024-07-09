@@ -1,6 +1,5 @@
 import { Label } from "components/Label";
 import { OutputContainer } from "components/OutputContainer";
-import { Username } from "./components";
 
 export const Account = () => {
   // const { network } = useGetNetworkConfig();
@@ -14,16 +13,16 @@ export const Account = () => {
           <span data-testid="accountAddress"> {"address"}</span>
         </p>
 
-        <Username account={"account"} />
+        {/* <Username account={"account"} /> */}
         <p>
           <Label>Shard: </Label> {"account.shard"}
         </p>
 
         <p>
           <Label>Balance: </Label>
-          <p>
+          <span>
             {"account.balance"} {"network.egldLabel"}
-          </p>
+          </span>
           {/* <FormatAmount
             value={account.balance}
             egldLabel={network.egldLabel}

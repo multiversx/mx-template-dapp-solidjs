@@ -1,4 +1,4 @@
-// import HeartIcon from "assets/img/heart.svg";
+import HeartIcon from "assets/img/heart.svg?component-solid";
 
 export const Footer = () => {
   return (
@@ -16,7 +16,7 @@ export const Footer = () => {
           href="https://multiversx.com/"
         >
           Made with
-          {/* <HeartIcon />  */}
+          <HeartIcon class="mx-1 fill-gray-400" />
           by the MultiversX team
         </a>
       </div>

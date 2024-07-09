@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
 // import devtools from 'solid-devtools/vite';
-import svgrPlugin from "vite-plugin-svgr";
+import solidSvg from "vite-plugin-solid-svg";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [
@@ -11,13 +12,14 @@ export default defineConfig({
     */
     // devtools(),
     solidPlugin(),
-    svgrPlugin({
-      svgrOptions: {
-        icon: true,
-        // Optional: Add other SVGR options here
-      },
-    }),
+    tsconfigPaths(),
+    solidSvg(),
   ],
+  resolve: {
+    alias: {
+      src: "/src",
+    },
+  },
   server: {
     port: 3001,
   },

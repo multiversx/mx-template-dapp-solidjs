@@ -1,3 +1,6 @@
+import { MxLink } from "components/MxLink";
+import { RouteNamesEnum } from "localConstants";
+``
 export const Unlock = () => {
   return (
     <div class="flex justify-center items-center">
@@ -11,7 +14,9 @@ export const Unlock = () => {
           <p class="text-center text-gray-400">Choose a login method</p>
         </div>
 
-        <div class="flex flex-col md:flex-row">Extension</div>
+        <div class="flex flex-col md:flex-row">
+          <MxLink to={RouteNamesEnum.dashboard}>Extension</MxLink>
+        </div>
       </div>
     </div>
   );

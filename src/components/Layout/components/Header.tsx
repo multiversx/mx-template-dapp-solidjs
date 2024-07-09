@@ -5,7 +5,7 @@ import { RouteNamesEnum } from "localConstants";
 
 export const Header = () => {
   const isLoggedIn = false;
-  const isUnlockRoute = true;
+  const isUnlockRoute = false;
 
   const ConnectButton = isUnlockRoute ? null : (
     <MxLink to={RouteNamesEnum.unlock}>Connect</MxLink>

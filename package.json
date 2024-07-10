@@ -2,13 +2,25 @@
   "name": "vite-template-solid",
   "version": "0.0.0",
   "description": "",
-  "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
-  },
   "license": "MIT",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "serve": "vite preview",
+    "start": "vite --force"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "6.5.1",
+    "@fortawesome/free-solid-svg-icons": "6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@multiversx/sdk-dapp-core": "0.0.0-alpha.2",
+    "@solidjs/router": "^0.13.6",
+    "axios": "1.6.5",
+    "classnames": "2.3.2",
+    "moment": "2.29.4",
+    "solid-fa": "^0.2.0",
+    "solid-js": "^1.8.11"
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.6",
     "autoprefixer": "^10.4.19",
@@ -22,16 +34,5 @@
     "vite-plugin-solid": "^2.10.2",
     "vite-plugin-solid-svg": "^0.8.1",
     "vite-tsconfig-paths": "^4.3.2"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "6.5.1",
-    "@fortawesome/free-solid-svg-icons": "6.5.1",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "@solidjs/router": "^0.13.6",
-    "axios": "1.6.5",
-    "classnames": "2.3.2",
-    "moment": "2.29.4",
-    "solid-fa": "^0.2.0",
-    "solid-js": "^1.8.11"
   }
 }

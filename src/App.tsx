@@ -1,16 +1,21 @@
-import type { Component } from "solid-js";
+import { Suspense, createResource, type Component } from "solid-js";
 import { Route, Router } from "@solidjs/router";
 import { routes } from "routes";
 import { Layout } from "./components/Layout/Layout";
+import { useFetchData } from "hooks";
 
 export const App: Component = () => {
+  const [data] = useFetchData();
+
   return (
-    <Router>
-      {routes.map(({ path, component }) => (
-        <Route path="/" component={Layout}>
-          <Route path={path} component={component} />
-        </Route>
-      ))}
-    </Router>
+    <Suspense fallback={<p>Loading...</p>}>
+      <Router>
+        {routes.map(({ path, component }) => (
+          <Route path="/" component={Layout}>
+            <Route path={path} component={component} />
+          </Route>
+        ))}
+      </Router>
+    </Suspense>
   );
 };

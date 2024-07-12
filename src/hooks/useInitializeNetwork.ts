@@ -1,6 +1,6 @@
 import { createResource } from "solid-js";
-import { initializeNetwork } from "@multiversx/sdk-dapp-core/out/store/slices/network/actions/initializeNetwork";
 import { EnvironmentsEnum } from "@multiversx/sdk-dapp-core/out/types";
+import { initializeNetwork } from "lib/sdkDappCore";
 
 const initNetwork = async () => {
   const data = await initializeNetwork({

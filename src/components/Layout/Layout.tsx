@@ -1,13 +1,13 @@
 import type { Component } from "solid-js";
-import { networkStore } from "@multiversx/sdk-dapp-core/out/store/slices/network/network";
 import { Footer } from "./components/Footer";
 import { IPropsWithChildren } from "types";
 import { Header } from "./components/Header";
 import { Button } from "components/Button";
+import { getState, networkSelector } from "lib/sdkDappCore";
 
 export const Layout: Component<IPropsWithChildren> = ({ children }) => {
   const logNetwork = () => {
-    const a = networkStore.getState();
+    const a = networkSelector(getState());
     console.log(11, a);
   };
 

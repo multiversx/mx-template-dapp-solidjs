@@ -1,10 +1,7 @@
 import { Label } from "components/Label";
+import { AccountType } from "lib/sdkDappCore";
 
-export const Username = (props: {
-  account: any | "AccountType | ProfileType | null";
-}) => {
-  const { account } = props;
-
+export const Username = ({ account }: { account: AccountType | null }) => {
   if (!account) {
     return null;
   }

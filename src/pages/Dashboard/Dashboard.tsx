@@ -1,5 +1,4 @@
 import { Account } from "./widgets";
-import { useScrollToElement } from "hooks";
 import { Widget } from "./components";
 import { WidgetType } from "types";
 
@@ -13,13 +12,11 @@ const WIDGETS: WidgetType[] = [
 ];
 
 export const Dashboard = () => {
-  // useScrollToElement();
-
   return (
     <div class="flex flex-col gap-6 max-w-3xl w-full">
-      {/* {WIDGETS.map((element) => (
-        <Widget key={element.title} {...element} />
-      ))} */}
+      {WIDGETS.map((element) => (
+        <Widget {...element} />
+      ))}
       asd
     </div>
   );

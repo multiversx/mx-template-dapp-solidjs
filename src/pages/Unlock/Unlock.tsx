@@ -1,14 +1,15 @@
+import { useNavigate } from "@solidjs/router";
 import { Button } from "components/Button";
-import { MxLink } from "components/MxLink";
 import { webWalletLogin } from "lib/sdkDappCore";
 import { RouteNamesEnum } from "localConstants";
 
 export const Unlock = () => {
+  const navigate = useNavigate();
   const handleWebWalletLogin = async () => {
-    const account = await webWalletLogin({
+    await webWalletLogin({
       nativeAuth: true,
     });
-    console.log(account);
+    navigate(RouteNamesEnum.dashboard);
   };
 
   return (

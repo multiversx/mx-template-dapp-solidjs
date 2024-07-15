@@ -1,7 +1,16 @@
+import { Button } from "components/Button";
 import { MxLink } from "components/MxLink";
+import { webWalletLogin } from "lib/sdkDappCore";
 import { RouteNamesEnum } from "localConstants";
-``
+
 export const Unlock = () => {
+  const handleWebWalletLogin = async () => {
+    const account = await webWalletLogin({
+      nativeAuth: true,
+    });
+    console.log(account);
+  };
+
   return (
     <div class="flex justify-center items-center">
       <div
@@ -15,7 +24,7 @@ export const Unlock = () => {
         </div>
 
         <div class="flex flex-col md:flex-row">
-          <MxLink to={RouteNamesEnum.dashboard}>Extension</MxLink>
+          <Button onClick={handleWebWalletLogin}>Web Wallet</Button>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import solid from "vite-plugin-solid";
 // import devtools from "solid-devtools/vite";
 import solidSvg from "vite-plugin-solid-svg";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
   plugins: [
@@ -17,6 +18,9 @@ export default defineConfig({
     solid(),
     tsconfigPaths(),
     solidSvg(),
+    nodePolyfills({
+      globals: { Buffer: true, global: true, process: true },
+    }),
   ],
   resolve: {
     alias: {

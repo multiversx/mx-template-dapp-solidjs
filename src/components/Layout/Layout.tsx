@@ -15,7 +15,6 @@ export const Layout: Component<IPropsWithChildren> = ({ children }) => {
     <div class="flex min-h-screen flex-col bg-slate-200">
       <Header />
       <main class="flex flex-grow items-stretch justify-center p-6">
-        <Button onClick={logNetwork}>Click me</Button>
         {children}
       </main>
       <Footer />

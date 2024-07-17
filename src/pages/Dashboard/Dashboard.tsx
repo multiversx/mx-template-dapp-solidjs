@@ -1,6 +1,7 @@
 import { Account } from "./widgets";
 import { Widget } from "./components";
 import { WidgetType } from "types";
+import { SignMessage } from "./widgets/SignMessage";
 
 const WIDGETS: WidgetType[] = [
   {
@@ -8,6 +9,13 @@ const WIDGETS: WidgetType[] = [
     widget: Account,
     description: "Connected account details",
     reference: "https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account",
+  },
+  {
+    title: "Sign message",
+    widget: SignMessage,
+    description: "Message signing using the connected account",
+    reference: "https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1",
+    anchor: "sign-message",
   },
 ];
 

@@ -1,0 +1,11 @@
+{
+  "version": "v1",
+  "packages": {
+    "@multiversx/sdk-dapp-core": {
+      "version": "0.0.0-alpha.2",
+      "signature": "eaa3a8528e8b3e1d384ec2c5d1d1e1d9",
+      "file": true,
+      "replaced": "0.0.0-alpha.2"
+    }
+  }
+}

@@ -14,7 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@multiversx/sdk-core": "13.2.1",
-    "@multiversx/sdk-dapp-core": "file:.yalc/@multiversx/sdk-dapp-core",
+    "@multiversx/sdk-dapp-core": "0.0.0-alpha.2",
     "@multiversx/sdk-dapp-utils": "^0.0.1",
     "@solidjs/router": "^0.13.6",
     "axios": "1.6.5",

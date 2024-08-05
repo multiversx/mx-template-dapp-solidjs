@@ -7,8 +7,16 @@ import { createSignal } from "solid-js";
 import { Button } from "components/Button";
 import { OutputContainer } from "components/OutputContainer";
 import { SignFailure, SignSuccess } from "./components";
-import { signMessage } from "lib/sdkDappCore";
+import { SignableMessage, signMessage } from "lib/sdkDappCore";
 import Fa from "solid-fa";
+
+type SignedMessageObjectType = {
+  address: string;
+  message: string;
+  signature: string;
+  signer: string;
+  version: number;
+};
 
 export const SignMessage = () => {
   // const { sessionId, signMessage, onAbort } = useSignMessage();
@@ -19,16 +27,14 @@ export const SignMessage = () => {
   );
   const [signatrue, setSignatrue] = createSignal("");
 
-  const isSuccess = state() === "success";
-  const isError = state() === "error";
-
   const handleSubmit = async () => {
     try {
       const signedMessage = await signMessage({
         message: message(),
       });
-      console.log(signedMessage?.toJSON());
+      const signedObject = signedMessage?.toJSON() as SignedMessageObjectType;
       setState("success");
+      setSignatrue(signedObject.signature);
       setMessage("");
     } catch (error) {
       console.error(error);
@@ -39,6 +45,8 @@ export const SignMessage = () => {
   const handleClear = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setSignatrue("");
+    setState("pending");
   };
 
   return (
@@ -50,23 +58,25 @@ export const SignMessage = () => {
             Sign
           </>
         </Button>
-        <p>{message()}</p>
 
-        {(isSuccess || isError) && (
+        {["success", "error"].includes(state()) && (
           <Button
             data-testid="closeTransactionSuccessBtn"
             id="closeButton"
             onClick={handleClear}
           >
             <>
-              <Fa icon={isSuccess ? faBroom : faArrowsRotate} class="mr-1" />
-              {isError ? "Try again" : "Clear"}
+              <Fa
+                icon={state() === "success" ? faBroom : faArrowsRotate}
+                class="mr-1"
+              />
+              {state() === "error" ? "Try again" : "Clear"}
             </>
           </Button>
         )}
       </div>
       <OutputContainer>
-        {!isSuccess && !isError && (
+        {!["success", "error"].includes(state()) && (
           <textarea
             placeholder="Write message here1"
             class="resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500"
@@ -79,11 +89,11 @@ export const SignMessage = () => {
           />
         )}
 
-        {isSuccess && (
+        {state() === "success" && (
           <SignSuccess messageToSign={message()} signature={signatrue()} />
         )}
 
-        {isError && <SignFailure />}
+        {state() === "error" && <SignFailure />}
       </OutputContainer>
     </div>
   );

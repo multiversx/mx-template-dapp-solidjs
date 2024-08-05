@@ -25,7 +25,6 @@ export const Dashboard = () => {
       {WIDGETS.map((element) => (
         <Widget {...element} />
       ))}
-      asd
     </div>
   );
 };

@@ -2,10 +2,7 @@ import { Label } from "components/Label";
 import { decodeMessage } from "../helpers";
 import { getAccount } from "lib/sdkDappCore";
 
-export const SignSuccess = ({
-  messageToSign,
-  signature,
-}: {
+export const SignSuccess = (props: {
   messageToSign: string;
   signature: string;
 }) => {
@@ -13,8 +10,8 @@ export const SignSuccess = ({
 
   const { encodedMessage, decodedMessage } = decodeMessage({
     address,
-    message: messageToSign,
-    signature,
+    message: props.messageToSign,
+    signature: props.signature,
   });
 
   return (
@@ -27,7 +24,7 @@ export const SignSuccess = ({
             readOnly
             class="w-full resize-none outline-none bg-transparent"
             rows={2}
-            value={signature}
+            value={props.signature}
           />
         </div>
 

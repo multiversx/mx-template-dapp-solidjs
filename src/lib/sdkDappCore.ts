@@ -8,3 +8,4 @@ export { getAccount } from "@multiversx/sdk-dapp-core/out/core/methods/account/g
 export { getIsLoggedIn } from "@multiversx/sdk-dapp-core/out/core/methods/account/getIsLoggedIn";
 export { logout } from "@multiversx/sdk-dapp-core/out/core/methods/logout/logout";
 export type { AccountType } from "@multiversx/sdk-dapp-core/out/types/account.types";
+export type { SignableMessage } from "@multiversx/sdk-core/out/signableMessage";

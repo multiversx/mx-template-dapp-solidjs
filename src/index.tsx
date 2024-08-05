@@ -3,6 +3,9 @@ import { render } from "solid-js/web";
 import "./styles/globals.css";
 
 import { App } from "./App";
+import { initStore } from "lib/sdkDappCore";
+
+initStore();
 
 const root = document.getElementById("root");
 

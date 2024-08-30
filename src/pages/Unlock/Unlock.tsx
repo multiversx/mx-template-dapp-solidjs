@@ -1,14 +1,30 @@
+import {
+  IProviderConfig,
+  ProviderTypeEnum,
+} from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
+import { login } from "@multiversx/sdk-dapp-core/out/core/methods/login/login";
 import { useNavigate } from "@solidjs/router";
 import { Button } from "components/Button";
-import { webWalletLogin } from "lib/sdkDappCore";
 import { RouteNamesEnum } from "localConstants";
 
 export const Unlock = () => {
   const navigate = useNavigate();
   const handleWebWalletLogin = async () => {
-    await webWalletLogin({
-      nativeAuth: true,
+    const config = {
+      type: ProviderTypeEnum.crossWindow,
+      config: {
+        network: {
+          walletAddress: "https://devnet-wallet.multiversx.com",
+        },
+      } as IProviderConfig,
+    };
+
+    const result = await login({
+      providerConfig: config,
     });
+
+    console.log("\x1b[42m%s\x1b[0m", "result", result);
+
     navigate(RouteNamesEnum.dashboard);
   };
 

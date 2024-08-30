@@ -2,7 +2,6 @@ export { networkSelector } from "@multiversx/sdk-dapp-core/out/store/selectors/n
 export { initializeNetwork } from "@multiversx/sdk-dapp-core/out/store/actions/network";
 export { getState } from "@multiversx/sdk-dapp-core/out/store/store";
 export { initStore } from "@multiversx/sdk-dapp-core/out/store/store";
-export { webWalletLogin } from "@multiversx/sdk-dapp-core/out/core/methods/login/webWalletLogin";
 export { signMessage } from "@multiversx/sdk-dapp-core/out/core/methods/signMessage/signMessage";
 export { verifyMessage } from "@multiversx/sdk-dapp-core/out/core/methods/signMessage/verifyMessage";
 export { getAccount } from "@multiversx/sdk-dapp-core/out/core/methods/account/getAccount";

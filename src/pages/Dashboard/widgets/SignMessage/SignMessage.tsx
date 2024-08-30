@@ -9,6 +9,7 @@ import { OutputContainer } from "components/OutputContainer";
 import { SignFailure, SignSuccess } from "./components";
 import { SignableMessage, signMessage } from "lib/sdkDappCore";
 import Fa from "solid-fa";
+import classNames from "classnames";
 
 type SignedMessageObjectType = {
   address: string;
@@ -52,14 +53,7 @@ export const SignMessage = () => {
   return (
     <div class="flex flex-col gap-6">
       <div class="flex gap-2 items-start">
-        <Button data-testid="signMsgBtn" onClick={handleSubmit}>
-          <>
-            <Fa icon={faFileSignature} class="mr-1" />
-            Sign
-          </>
-        </Button>
-
-        {["success", "error"].includes(state()) && (
+        {["success", "error"].includes(state()) ? (
           <Button
             data-testid="closeTransactionSuccessBtn"
             id="closeButton"
@@ -71,6 +65,13 @@ export const SignMessage = () => {
                 class="mr-1"
               />
               {state() === "error" ? "Try again" : "Clear"}
+            </>
+          </Button>
+        ) : (
+          <Button data-testid="signMsgBtn" onClick={handleSubmit}>
+            <>
+              <Fa icon={faFileSignature} class="mr-1" />
+              Sign
             </>
           </Button>
         )}

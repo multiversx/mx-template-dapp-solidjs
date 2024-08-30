@@ -9,7 +9,7 @@ const initNetwork = async () => {
   return data;
 };
 
-export const useFetchData = () => {
+export const useInitializeNetwork = () => {
   const [data, { mutate, refetch }] = createResource(initNetwork);
   return { data, mutate, refetch };
 };

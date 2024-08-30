@@ -7,9 +7,8 @@ import { createSignal } from "solid-js";
 import { Button } from "components/Button";
 import { OutputContainer } from "components/OutputContainer";
 import { SignFailure, SignSuccess } from "./components";
-import { SignableMessage, signMessage } from "lib/sdkDappCore";
+import { signMessage } from "lib/sdkDappCore";
 import Fa from "solid-fa";
-import classNames from "classnames";
 
 type SignedMessageObjectType = {
   address: string;
@@ -20,8 +19,6 @@ type SignedMessageObjectType = {
 };
 
 export const SignMessage = () => {
-  // const { sessionId, signMessage, onAbort } = useSignMessage();
-
   const [message, setMessage] = createSignal("");
   const [state, setState] = createSignal<"pending" | "success" | "error">(
     "pending"

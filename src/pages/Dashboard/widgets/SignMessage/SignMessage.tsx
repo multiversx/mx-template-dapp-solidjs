@@ -5,10 +5,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { createSignal } from "solid-js";
 import { Button } from "components/Button";
-import { OutputContainer } from "components/OutputContainer";
 import { SignFailure, SignSuccess } from "./components";
 import { signMessage } from "lib/sdkDappCore";
 import Fa from "solid-fa";
+import { OutputContainer } from "components/OutputContainer/OutputContainer";
 
 type SignedMessageObjectType = {
   address: string;

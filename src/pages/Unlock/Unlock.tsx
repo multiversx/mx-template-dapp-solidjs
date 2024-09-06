@@ -19,11 +19,9 @@ export const Unlock = () => {
       } as IProviderConfig,
     };
 
-    const result = await login({
+    await login({
       providerConfig: config,
     });
-
-    console.log("\x1b[42m%s\x1b[0m", "result", result);
 
     navigate(RouteNamesEnum.dashboard);
   };

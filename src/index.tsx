@@ -7,6 +7,7 @@ import { initApp } from "lib/sdkDappCore";
 import { EnvironmentsEnum } from "@multiversx/sdk-dapp-core/out/types/enums.types";
 
 initApp({
+  storage: { getStorageCallback: () => sessionStorage },
   dAppConfig: {
     nativeAuth: true,
     environment: EnvironmentsEnum.devnet,

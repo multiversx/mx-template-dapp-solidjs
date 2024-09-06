@@ -1,7 +1,7 @@
 import { Label } from "components/Label";
-import { OutputContainer } from "components/OutputContainer";
 import { getAccount, getState, networkSelector } from "lib/sdkDappCore";
 import { Username } from "./components";
+import { OutputContainer } from "components/OutputContainer/OutputContainer";
 
 export const Account = () => {
   const network = networkSelector(getState());

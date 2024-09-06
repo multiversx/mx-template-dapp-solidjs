@@ -1,7 +1,16 @@
 import classNames from "classnames";
+import {
+  DECIMALS,
+  DIGITS,
+  getState,
+  networkSelector,
+  ZERO,
+} from "lib/sdkDappCore";
 import { FormatAmountPropsType } from "./formatAmount.types";
+import { getFormattedAmount } from "./getFormattedAmount";
+import BigNumber from "bignumber.js";
 
-const formatAmountInvalid = (props: FormatAmountPropsType) => {
+const FormatAmountInvalid = (props: FormatAmountPropsType) => {
   const styles = props.styles ?? {};
 
   return (
@@ -22,7 +31,7 @@ const formatAmountValid = (props: FormatAmountPropsType, erdLabel: string) => {
   const decimals = props.decimals != null ? props.decimals : DECIMALS;
   const styles = props.styles ?? {};
 
-  const formattedValue = formatAmount({
+  const formattedValue = getFormattedAmount({
     input: value,
     decimals,
     digits,
@@ -49,32 +58,21 @@ const formatAmountValid = (props: FormatAmountPropsType, erdLabel: string) => {
 
   return (
     <span
-      data-testid={
-        props["data-testid"] || DataTestIdsEnum.formatAmountComponent
-      }
-      className={props.className}
+      data-testid={props["data-testid"] || "formatAmountComponent"}
+      class={props.class}
     >
-      <span
-        className={styles["int-amount"]}
-        data-testid={DataTestIdsEnum.formatAmountInt}
-      >
+      <span class={styles["int-amount"]} data-testid={"formatAmountInt"}>
         {valueParts[0]}
       </span>
       {valueParts.length > 1 && (
-        <span
-          className={styles.decimals}
-          data-testid={DataTestIdsEnum.formatAmountDecimals}
-        >
+        <span class={styles.decimals} data-testid={"formatAmountDecimals"}>
           .{valueParts[1]}
         </span>
       )}
       {showLabel && (
         <span
-          className={classNames(
-            styles.symbol,
-            props.token && globalStyles.textMuted
-          )}
-          data-testid={DataTestIdsEnum.formatAmountSymbol}
+          class={classNames(styles.symbol, props.token)}
+          data-testid={"formatAmountSymbol"}
         >
           {` ${props.token ?? erdLabel}`}
         </span>
@@ -83,31 +81,22 @@ const formatAmountValid = (props: FormatAmountPropsType, erdLabel: string) => {
   );
 };
 
-const FormatAmountComponent = (
-  props: FormatAmountPropsType & WithStylesImportType
-) => {
+const FormatAmountComponent = (props: FormatAmountPropsType) => {
   const { value } = props;
 
-  return !stringIsInteger(value)
-    ? formatAmountInvalid(props)
+  return new BigNumber(value).isInteger()
+    ? FormatAmountInvalid(props)
     : formatAmountValid(props, props.egldLabel || "");
 };
 
 /**
  * @param props.egldLabel  if not provided, will fallback on **EGLD**
  */
-const FormatAmountWrapper = (
-  props: FormatAmountPropsType & WithStylesImportType
-) => {
-  const egldLabel = props.egldLabel || getEgldLabel();
+export const FormatAmount = (props: FormatAmountPropsType) => {
+  const network = networkSelector(getState());
+  const egldLabel = props.egldLabel || network.egldLabel;
 
   const formatAmountProps = { ...props, egldLabel };
 
   return <FormatAmountComponent {...formatAmountProps} />;
 };
-
-export const FormatAmount = withStyles(FormatAmountWrapper, {
-  ssrStyles: () => import("UI/FormatAmount/formatAmountStyles.scss"),
-  clientStyles: () =>
-    require("UI/FormatAmount/formatAmountStyles.scss").default,
-});

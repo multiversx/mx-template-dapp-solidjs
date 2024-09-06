@@ -1,7 +1,7 @@
 import { TokenTransfer } from "@multiversx/sdk-core";
 import BigNumber from "bignumber.js";
 import { pipe } from "./pipe";
-import { DECIMALS, DIGITS } from "lib/sdkDappCore";
+import { DECIMALS, DIGITS, ZERO } from "lib/sdkDappCore";
 
 BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_FLOOR });
 
@@ -14,7 +14,7 @@ export interface FormatAmountType {
   addCommas?: boolean;
 }
 
-export function formatAmount({
+export function getFormattedAmount({
   input,
   decimals = DECIMALS,
   digits = DIGITS,
@@ -22,7 +22,7 @@ export function formatAmount({
   showIsLessThanDecimalsLabel = false,
   addCommas = false,
 }: FormatAmountType) {
-  if (!new BigNumber(input).isInteger) {
+  if (!new BigNumber(input).isInteger()) {
     throw new Error("Invalid input");
   }
 

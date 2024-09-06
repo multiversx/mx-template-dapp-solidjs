@@ -1,4 +1,5 @@
 import { ACCOUNTS_ENDPOINT } from "@multiversx/sdk-dapp-core/out/apiCalls/endpoints";
+import { ExplorerLink } from "components/CoreComponents/ExplorerLink";
 import { Label } from "components/Label";
 import { contractAddress } from "config";
 

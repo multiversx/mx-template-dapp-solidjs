@@ -7,7 +7,7 @@
     "build": "vite build",
     "dev": "vite",
     "serve": "vite preview",
-    "start": "vite --force"
+    "start": "tsc && vite --force"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.5.1",

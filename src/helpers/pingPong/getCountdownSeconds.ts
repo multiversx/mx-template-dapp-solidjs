@@ -1,23 +1,21 @@
-import type { SetStateAction } from 'react';
-
 type GetCountdownSecondsType = {
   secondsLeft: number;
-  setSecondsLeft: (value: SetStateAction<number>) => void;
+  setSecondsLeft: (value: number) => void;
 };
 export const getCountdownSeconds = ({
   secondsLeft,
-  setSecondsLeft
+  setSecondsLeft,
 }: GetCountdownSecondsType) => {
+  let current = secondsLeft;
   if (secondsLeft) {
     const interval = setInterval(() => {
-      setSecondsLeft((existing) => {
-        if (existing) {
-          return existing - 1;
-        } else {
-          clearInterval(interval);
-          return 0;
-        }
-      });
+      if (current) {
+        current = current - 1;
+      } else {
+        clearInterval(interval);
+        return 0;
+      }
+      setSecondsLeft(current);
     }, 1000);
     return () => {
       clearInterval(interval);

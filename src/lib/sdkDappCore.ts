@@ -13,4 +13,8 @@ export {
   TRANSACTIONS_ENDPOINT,
   ACCOUNTS_ENDPOINT,
 } from "@multiversx/sdk-dapp-core/out/apiCalls/endpoints";
-export { ZERO } from "@multiversx/sdk-dapp-core/out/constants";
+export {
+  ZERO,
+  DIGITS,
+  DECIMALS,
+} from "@multiversx/sdk-dapp-core/out/constants";

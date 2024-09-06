@@ -10,20 +10,16 @@ import { getCountdownSeconds, setTimeRemaining } from "helpers";
 import { OutputContainer } from "components/OutputContainer/OutputContainer";
 import { PingPongOutput } from "components/OutputContainer/components";
 import { createSignal } from "solid-js";
+import { useSendPingPongTransaction } from "hooks/transactions/useSendPingPongTransaction";
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
   const getTimeToPong = useGetTimeToPong();
   const hasPendingTransactions = false; // TODO: Implement this somewhere
-  const { sendPingTransaction, sendPongTransaction, transactionStatus } =
-    useSendPingPongTransaction({
-      type: SessionEnum.rawPingPongSessionId,
-    });
+  const { sendPingTransaction, sendPongTransaction } =
+    useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
-  const [stateTransactions, setStateTransactions] = createSignal<
-    SignedTransactionType[] | null
-  >(null);
   const [hasPing, setHasPing] = createSignal<boolean>(true);
   const [secondsLeft, setSecondsLeft] = createSignal<number>(0);
 
@@ -38,11 +34,11 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransaction({ amount: pingAmount, callbackRoute });
+    await sendPingTransaction(pingAmount());
   };
 
   const onSendPongTransaction = async () => {
-    await sendPongTransaction({ callbackRoute });
+    await sendPongTransaction();
   };
 
   const timeRemaining = moment()
@@ -53,10 +49,6 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
   const pongAllowed = secondsLeft() === 0;
 
   getCountdownSeconds({ secondsLeft: secondsLeft(), setSecondsLeft });
-
-  if (transactionStatus.transactions) {
-    setStateTransactions(transactionStatus.transactions);
-  }
 
   setSecondsRemaining();
 
@@ -87,20 +79,18 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
       </div>
 
       <OutputContainer>
-        {!stateTransactions && (
-          <>
-            <ContractAddress />
-            {!pongAllowed && (
-              <p>
-                <Label>Time remaining: </Label>
-                <span class="text-red-600">{timeRemaining}</span> until able to
-                pong
-              </p>
-            )}
-          </>
-        )}
+        <>
+          <ContractAddress />
+          {!pongAllowed && (
+            <p>
+              <Label>Time remaining: </Label>
+              <span class="text-red-600">{timeRemaining}</span> until able to
+              pong
+            </p>
+          )}
+        </>
         <PingPongOutput
-          transactions={stateTransactions()}
+          transactions={[]}
           pongAllowed={pongAllowed}
           timeRemaining={timeRemaining}
         />

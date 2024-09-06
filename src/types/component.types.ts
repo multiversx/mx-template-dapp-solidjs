@@ -8,3 +8,7 @@ export interface IPropsWithClass {
   class?: string;
   "data-testid"?: string;
 }
+
+export interface IPropsWithStyles {
+  styles?: Record<string, string>;
+}

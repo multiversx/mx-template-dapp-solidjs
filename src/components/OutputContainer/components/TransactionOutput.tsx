@@ -1,4 +1,11 @@
+import { ExplorerLink } from "components/CoreComponents/ExplorerLink";
 import { Label } from "components/Label";
+import {
+  ACCOUNTS_ENDPOINT,
+  getState,
+  networkSelector,
+  TRANSACTIONS_ENDPOINT,
+} from "lib/sdkDappCore";
 import { SignedTransactionType } from "types";
 
 export const TransactionOutput = ({
@@ -6,17 +13,18 @@ export const TransactionOutput = ({
 }: {
   transaction: SignedTransactionType;
 }) => {
-  const { network } = useGetNetworkConfig();
+  const network = networkSelector(getState());
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, "base64").toString("ascii")
     : "N/A";
+
   return (
     <div class="flex flex-col">
       <p>
         <Label>Hash:</Label>
         <ExplorerLink
           page={`/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`}
-          className="border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800"
+          class="border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800"
         >
           {transaction.hash}
         </ExplorerLink>
@@ -25,7 +33,7 @@ export const TransactionOutput = ({
         <Label>Receiver:</Label>
         <ExplorerLink
           page={`/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
-          className="border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800"
+          class="border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800"
         >
           {transaction.receiver}
         </ExplorerLink>
@@ -48,7 +56,7 @@ export const TransactionOutput = ({
         <Label>Gas limit: </Label>
         {transaction.gasLimit}
       </p>
-      <p className="whitespace-nowrap">
+      <p class="whitespace-nowrap">
         <Label>Data: </Label> {decodedData}
       </p>
     </div>

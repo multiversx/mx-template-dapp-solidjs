@@ -1,5 +1,5 @@
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Fa from "solid-fa";
 import moment from "moment";
 import { Button } from "components/Button";
 import { ContractAddress } from "components/ContractAddress";
@@ -57,12 +57,12 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
       <div class="flex flex-col gap-2">
         <div class="flex justify-start gap-2">
           <Button
-            disabled={!hasPing || hasPendingTransactions}
+            disabled={!hasPing() || hasPendingTransactions}
             onClick={onSendPingTransaction}
             data-testid="btnPingRaw"
             data-cy="transactionBtn"
           >
-            <FontAwesomeIcon icon={faArrowUp} className="mr-1" />
+            <Fa icon={faArrowUp} size="sm" class="mr-1" />
             Ping
           </Button>
 
@@ -72,23 +72,13 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
             data-cy="transactionBtn"
             onClick={onSendPongTransaction}
           >
-            <FontAwesomeIcon icon={faArrowDown} className="mr-1" />
+            <Fa icon={faArrowDown} size="sm" class="mr-1" />
             Pong
           </Button>
         </div>
       </div>
 
       <OutputContainer>
-        <>
-          <ContractAddress />
-          {!pongAllowed && (
-            <p>
-              <Label>Time remaining: </Label>
-              <span class="text-red-600">{timeRemaining}</span> until able to
-              pong
-            </p>
-          )}
-        </>
         <PingPongOutput
           transactions={[]}
           pongAllowed={pongAllowed}

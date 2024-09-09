@@ -1,7 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowUpRightFromSquare,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
 import { getState, networkSelector } from "lib/sdkDappCore";
+import Fa from "solid-fa";
 import { IPropsWithChildren, IPropsWithClass } from "types";
 
 export interface ExplorerLinkPropsType
@@ -9,7 +12,7 @@ export interface ExplorerLinkPropsType
     IPropsWithChildren {
   page: string;
   text?: any;
-  customExplorerIcon?: IconProp;
+  customExplorerIcon?: IconDefinition;
   title?: string;
   onClick?: () => void;
   "data-testid"?: string;
@@ -26,7 +29,7 @@ export const ExplorerLink = ({
   const network = networkSelector(getState());
 
   const defaultContent = text ?? (
-    <FontAwesomeIcon icon={customExplorerIcon ?? faArrowUpRightFromSquare} />
+    <Fa icon={customExplorerIcon ?? faArrowUpRightFromSquare} />
   );
 
   return (

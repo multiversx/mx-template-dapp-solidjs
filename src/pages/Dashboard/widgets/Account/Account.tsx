@@ -2,6 +2,7 @@ import { Label } from "components/Label";
 import { getAccount, getState, networkSelector } from "lib/sdkDappCore";
 import { Username } from "./components";
 import { OutputContainer } from "components/OutputContainer/OutputContainer";
+import { FormatAmount } from "components/CoreComponents/FormatAmount/FormatAmount";
 
 export const Account = () => {
   const network = networkSelector(getState());
@@ -22,14 +23,12 @@ export const Account = () => {
 
         <p>
           <Label>Balance: </Label>
-          <span>
-            {account.balance} {network.egldLabel}
-          </span>
-          {/* <FormatAmount
+
+          <FormatAmount
             value={account.balance}
             egldLabel={network.egldLabel}
             data-testid="balance"
-          /> */}
+          />
         </p>
       </div>
     </OutputContainer>

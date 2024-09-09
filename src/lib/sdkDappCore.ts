@@ -3,6 +3,7 @@ export { initializeNetwork } from "@multiversx/sdk-dapp-core/out/store/actions/n
 export { getState } from "@multiversx/sdk-dapp-core/out/store/store";
 export { initApp } from "@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp";
 export { signMessage } from "@multiversx/sdk-dapp-core/out/core/methods/signMessage/signMessage";
+export { signTransactions } from "@multiversx/sdk-dapp-core/out/core/methods/signTransactions/signTransactions";
 export { verifyMessage } from "@multiversx/sdk-dapp-core/out/core/methods/signMessage/verifyMessage";
 export { getAccount } from "@multiversx/sdk-dapp-core/out/core/methods/account/getAccount";
 export { getIsLoggedIn } from "@multiversx/sdk-dapp-core/out/core/methods/account/getIsLoggedIn";

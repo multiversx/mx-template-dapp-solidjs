@@ -1,7 +1,6 @@
-import { Account } from "./widgets";
+import { Account, PingPongRaw, SignMessage } from "./widgets";
 import { Widget } from "./components";
 import { WidgetType } from "types";
-import { SignMessage } from "./widgets/SignMessage";
 
 const WIDGETS: WidgetType[] = [
   {
@@ -9,6 +8,15 @@ const WIDGETS: WidgetType[] = [
     widget: Account,
     description: "Connected account details",
     reference: "https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account",
+  },
+  {
+    title: "Ping & Pong (Manual)",
+    widget: PingPongRaw,
+    description:
+      "Smart Contract interactions using manually formulated transactions",
+    reference:
+      "https://docs.multiversx.com/sdk-and-tools/indices/es-index-transactions/",
+    anchor: "ping-pong-manual",
   },
   {
     title: "Sign message",

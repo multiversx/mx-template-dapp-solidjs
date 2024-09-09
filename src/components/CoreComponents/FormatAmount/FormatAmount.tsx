@@ -84,7 +84,9 @@ const formatAmountValid = (props: FormatAmountPropsType, erdLabel: string) => {
 const FormatAmountComponent = (props: FormatAmountPropsType) => {
   const { value } = props;
 
-  return new BigNumber(value).isInteger()
+  const isInteger = new BigNumber(value).isInteger();
+
+  return !isInteger
     ? FormatAmountInvalid(props)
     : formatAmountValid(props, props.egldLabel || "");
 };

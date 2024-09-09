@@ -1,6 +1,11 @@
 import { Transaction, TransactionPayload } from "@multiversx/sdk-core/out";
 import { contractAddress } from "config";
-import { getAccount, getState, networkSelector } from "lib/sdkDappCore";
+import {
+  getAccount,
+  getState,
+  networkSelector,
+  signTransactions,
+} from "lib/sdkDappCore";
 
 export const useSendPingPongTransaction = () => {
   const network = networkSelector(getState());
@@ -18,6 +23,11 @@ export const useSendPingPongTransaction = () => {
       sender: address,
       version: 1,
     });
+
+    // TODO: remove any after upgrade of sdk-core
+    const signedTxs = await signTransactions([pingTransaction as any]);
+
+    console.log(signedTxs);
 
     // TODO: send here
     // const sessionId = await signAndSendTransactions({

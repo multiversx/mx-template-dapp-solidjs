@@ -4,6 +4,7 @@ import {
   getAccount,
   getState,
   networkSelector,
+  sendTransactions,
   signTransactions,
 } from "lib/sdkDappCore";
 
@@ -15,7 +16,7 @@ export const useSendPingPongTransaction = () => {
     const pingTransaction = new Transaction({
       value: amount,
       data: new TransactionPayload("ping"),
-      receiver: contractAddress,
+      receiver: address,
       gasLimit: 60000000,
       gasPrice: 1000000000,
       chainID: network.chainId,
@@ -25,15 +26,10 @@ export const useSendPingPongTransaction = () => {
     });
 
     // TODO: remove any after upgrade of sdk-core
-    const signedTxs = await signTransactions([pingTransaction as any]);
+    const signedTransactions = await signTransactions([pingTransaction as any]);
 
-    console.log(signedTxs);
-
-    // TODO: send here
-    // const sessionId = await signAndSendTransactions({
-    //   transactions: [pingTransaction],
-    //   transactionsDisplayInfo: PING_TRANSACTION_INFO,
-    // });
+    const plainSentTransactions = await sendTransactions(signedTransactions);
+    console.log({ sessionId: plainSentTransactions });
   };
 
   const sendPongTransaction = async () => {

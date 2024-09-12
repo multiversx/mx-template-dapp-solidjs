@@ -1,7 +1,7 @@
 import { Label } from "components/Label";
 import { TransactionsOutput } from "./TransactionsOutput";
 import { ContractAddress } from "components/ContractAddress";
-import { SignedTransactionType } from "types";
+import { SignedTransactionType } from "lib/sdkDappCore";
 
 type PingPongOutputType = {
   timeRemaining: string;

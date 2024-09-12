@@ -1,9 +1,5 @@
 import { JSX } from "solid-js";
 
-export type WidgetProps = {
-  callbackRoute: string;
-};
-
 export type WidgetType<T = any> = {
   title: string;
   widget: (props: T) => JSX.Element;

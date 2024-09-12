@@ -5,9 +5,9 @@ import {
   ACCOUNTS_ENDPOINT,
   getState,
   networkSelector,
+  SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
 } from "lib/sdkDappCore";
-import { SignedTransactionType } from "types";
 
 export const TransactionOutput = ({
   transaction,

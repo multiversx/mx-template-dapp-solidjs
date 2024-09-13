@@ -28,8 +28,9 @@ export const useSendPingPongTransaction = () => {
     // TODO: remove any after upgrade of sdk-core
     const signedTransactions = await signTransactions([pingTransaction as any]);
 
-    const plainSentTransactions = await sendTransactions(signedTransactions);
-    console.log({ sessionId: plainSentTransactions });
+    const sessionId = await sendTransactions(signedTransactions);
+
+    console.log("Session id: ", sessionId);
   };
 
   const sendPongTransaction = async () => {

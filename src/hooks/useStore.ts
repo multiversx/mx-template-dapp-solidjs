@@ -6,7 +6,6 @@ export function useStore() {
   const [state, setState] = createSignal(store.getState());
 
   const unsubscribe = store.subscribe((newState) => {
-    console.log("newState", newState);
     setState(newState);
   });
 

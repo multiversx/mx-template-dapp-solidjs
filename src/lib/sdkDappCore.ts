@@ -2,6 +2,7 @@ export { networkSelector } from "@multiversx/sdk-dapp-core/out/store/selectors/n
 export { initializeNetwork } from "@multiversx/sdk-dapp-core/out/store/actions/network";
 export { getState } from "@multiversx/sdk-dapp-core/out/store/store";
 export { initApp } from "@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp";
+export { trackTransactions } from "@multiversx/sdk-dapp-core/out/core/methods/trackTransactions/trackTransactions";
 export { signMessage } from "@multiversx/sdk-dapp-core/out/core/methods/signMessage/signMessage";
 export { signTransactions } from "@multiversx/sdk-dapp-core/out/core/methods/signTransactions/signTransactions";
 export { sendTransactions } from "@multiversx/sdk-dapp-core/out/core/methods/sendTransactions/sendTransactions";

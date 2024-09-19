@@ -6,33 +6,38 @@ import {
 import { createSignal } from "solid-js";
 import { Button } from "components/Button";
 import { SignFailure, SignSuccess } from "./components";
-import { signMessage } from "lib/sdkDappCore";
+import { getAccount, signMessage } from "lib/sdkDappCore";
 import Fa from "solid-fa";
 import { OutputContainer } from "components/OutputContainer/OutputContainer";
-
-type SignedMessageObjectType = {
-  address: string;
-  message: string;
-  signature: string;
-  signer: string;
-  version: number;
-};
+import { Address, Message } from "@multiversx/sdk-core/out";
 
 export const SignMessage = () => {
   const [message, setMessage] = createSignal("");
+  const [signedMessage, setSignedMessage] = createSignal<Message | null>(null);
   const [state, setState] = createSignal<"pending" | "success" | "error">(
     "pending"
   );
   const [signatrue, setSignatrue] = createSignal("");
+  const address = getAccount()?.address;
 
   const handleSubmit = async () => {
     try {
-      const signedMessage = await signMessage({
-        message: message(),
+      const messageToSign = new Message({
+        address: new Address(address),
+        data: Buffer.from(message()),
       });
-      const signedObject = signedMessage?.toJSON() as SignedMessageObjectType;
+      const signedMessage = await signMessage({
+        message: messageToSign,
+      });
+
+      if (!signedMessage?.signature) {
+        setState("error");
+        return;
+      }
+
       setState("success");
-      setSignatrue(signedObject.signature);
+      setSignatrue(Buffer.from(signedMessage?.signature).toString("hex"));
+      setSignedMessage(signedMessage);
       setMessage("");
     } catch (error) {
       console.error(error);
@@ -87,8 +92,11 @@ export const SignMessage = () => {
           />
         )}
 
-        {state() === "success" && (
-          <SignSuccess messageToSign={message()} signature={signatrue()} />
+        {state() === "success" && signedMessage() != null && (
+          <SignSuccess
+            signedMessage={signedMessage()}
+            signature={signatrue()}
+          />
         )}
 
         {state() === "error" && <SignFailure />}

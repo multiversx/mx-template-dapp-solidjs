@@ -1,17 +1,17 @@
+import { login } from "@multiversx/sdk-dapp-core/out/core/methods/login/login";
 import {
   IProviderConfig,
   ProviderTypeEnum,
 } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
-import { login } from "@multiversx/sdk-dapp-core/out/core/methods/login/login";
 import { useNavigate } from "@solidjs/router";
 import { Button } from "components/Button";
 import { RouteNamesEnum } from "localConstants";
 
 export const Unlock = () => {
   const navigate = useNavigate();
-  const handleWebWalletLogin = async () => {
+  const handletLogin = (type: ProviderTypeEnum) => async () => {
     const config = {
-      type: ProviderTypeEnum.crossWindow,
+      type,
       config: {
         network: {
           walletAddress: "https://devnet-wallet.multiversx.com",
@@ -39,7 +39,14 @@ export const Unlock = () => {
         </div>
 
         <div class="flex flex-col md:flex-row">
-          <Button onClick={handleWebWalletLogin}>Web Wallet</Button>
+          <Button onClick={handletLogin(ProviderTypeEnum.crossWindow)}>
+            Web Wallet
+          </Button>
+          <div class="mx-2">
+            <Button onClick={handletLogin(ProviderTypeEnum.ledger)}>
+              Ledger
+            </Button>
+          </div>
         </div>
       </div>
     </div>

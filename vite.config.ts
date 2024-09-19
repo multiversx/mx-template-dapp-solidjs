@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 import solid from "vite-plugin-solid";
 // import devtools from "solid-devtools/vite";
 import solidSvg from "vite-plugin-solid-svg";
@@ -17,6 +18,7 @@ export default defineConfig({
     // }),
     solid(),
     tsconfigPaths(),
+    basicSsl(),
     solidSvg(),
     nodePolyfills({
       globals: { Buffer: true, global: true, process: true },

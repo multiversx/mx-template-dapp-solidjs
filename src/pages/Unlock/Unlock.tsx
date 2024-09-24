@@ -42,9 +42,14 @@ export const Unlock = () => {
           <Button onClick={handletLogin(ProviderTypeEnum.crossWindow)}>
             Web Wallet
           </Button>
-          <div class="mx-2">
+          <div class="ml-2">
             <Button onClick={handletLogin(ProviderTypeEnum.ledger)}>
               Ledger
+            </Button>
+          </div>
+          <div class="ml-2">
+            <Button onClick={handletLogin(ProviderTypeEnum.extension)}>
+              Extension
             </Button>
           </div>
         </div>

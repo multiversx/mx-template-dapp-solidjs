@@ -40,16 +40,21 @@ export const Unlock = () => {
 
         <div class="flex flex-col md:flex-row">
           <Button onClick={handletLogin(ProviderTypeEnum.crossWindow)}>
-            Web Wallet
+            🆆 Web Wallet
           </Button>
           <div class="ml-2">
             <Button onClick={handletLogin(ProviderTypeEnum.ledger)}>
-              Ledger
+              🅻 Ledger
             </Button>
           </div>
           <div class="ml-2">
             <Button onClick={handletLogin(ProviderTypeEnum.extension)}>
-              Extension
+              🅴 Extension
+            </Button>
+          </div>
+          <div class="ml-2">
+            <Button onClick={handletLogin(ProviderTypeEnum.metamask)}>
+              Ⓜ️ Metamask
             </Button>
           </div>
         </div>

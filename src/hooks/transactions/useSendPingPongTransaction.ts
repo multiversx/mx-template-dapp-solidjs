@@ -25,7 +25,7 @@ export const useSendPingPongTransaction = () => {
       version: 1,
     });
 
-    const signedTransactions = await signTransactions([pingTransaction]);
+    const signedTransactions = await signTransactions([pingTransaction as any]);
 
     const sessionId = await sendTransactions(signedTransactions);
 

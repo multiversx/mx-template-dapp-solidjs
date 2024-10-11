@@ -1,5 +1,6 @@
 import { Transaction, TransactionPayload } from "@multiversx/sdk-core/out";
 import { contractAddress } from "config";
+import { useStore } from "hooks/useStore";
 import {
   getAccount,
   getState,
@@ -10,9 +11,11 @@ import {
 
 export const useSendPingPongTransaction = () => {
   const network = networkSelector(getState());
-  const { address, nonce } = getAccount();
+  const store = useStore();
 
   const sendPingTransaction = async (amount: string) => {
+    const { address, nonce } = getAccount(store());
+
     const pingTransaction = new Transaction({
       value: amount,
       data: new TransactionPayload("ping"),
@@ -33,6 +36,8 @@ export const useSendPingPongTransaction = () => {
   };
 
   const sendPongTransaction = async () => {
+    const { address, nonce } = getAccount(store());
+
     const pongTransaction = new Transaction({
       value: "0",
       data: new TransactionPayload("pong"),

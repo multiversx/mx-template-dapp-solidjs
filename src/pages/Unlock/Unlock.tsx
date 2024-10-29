@@ -15,6 +15,7 @@ export const Unlock = () => {
       config: {
         network: {
           walletAddress: "https://devnet-wallet.multiversx.com",
+          walletConnectV2ProjectId: "9b1a9564f91cb659ffe21b73d5c4e2d8",
         },
       } as IProviderConfig,
     };
@@ -54,9 +55,14 @@ export const Unlock = () => {
           </div>
           <div class="ml-2">
             <Button onClick={handletLogin(ProviderTypeEnum.metamask)}>
-              Ⓜ️ Metamask
+              🅼 Metamask
             </Button>
           </div>
+          {/* <div class="ml-2">
+            <Button onClick={handletLogin(ProviderTypeEnum.walletconnect)}>
+              🅲 Walletconnect
+            </Button>
+          </div> */}
         </div>
       </div>
     </div>

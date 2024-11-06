@@ -58,6 +58,11 @@ export const Unlock = () => {
               🅼 Metamask
             </Button>
           </div>
+          <div class="ml-2">
+            <Button onClick={handletLogin(ProviderTypeEnum.passkey)}>
+              🅼 Passkey
+            </Button>
+          </div>
           {/* <div class="ml-2">
             <Button onClick={handletLogin(ProviderTypeEnum.walletconnect)}>
               🅲 Walletconnect

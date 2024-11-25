@@ -3,15 +3,16 @@ import { contractAddress } from "config";
 import { useStore } from "hooks/useStore";
 import {
   getAccount,
+  getAccountProvider,
   getState,
   networkSelector,
   sendTransactions,
-  signTransactions,
 } from "lib/sdkDappCore";
 
 export const useSendPingPongTransaction = () => {
   const network = networkSelector(getState());
   const store = useStore();
+  const provider = getAccountProvider();
 
   const sendPingTransaction = async (amount: string) => {
     const { address, nonce } = getAccount(store());
@@ -28,7 +29,9 @@ export const useSendPingPongTransaction = () => {
       version: 1,
     });
 
-    const signedTransactions = await signTransactions([pingTransaction as any]);
+    const signedTransactions = await provider.signTransactions([
+      pingTransaction as any,
+    ]);
 
     const sessionId = await sendTransactions(signedTransactions);
 

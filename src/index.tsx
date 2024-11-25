@@ -12,6 +12,7 @@ initApp({
     nativeAuth: true,
     environment: EnvironmentsEnum.devnet,
     network: {
+      // walletAddress: "https://localhost:3002",
       walletAddress: "https://devnet-wallet.multiversx.com",
     },
   },

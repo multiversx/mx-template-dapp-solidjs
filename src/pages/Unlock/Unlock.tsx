@@ -1,8 +1,5 @@
-import { login } from "@multiversx/sdk-dapp-core/out/core/methods/login/login";
-import {
-  IProviderConfig,
-  ProviderTypeEnum,
-} from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
+import { ProviderFactory } from "@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory";
+import { ProviderTypeEnum } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
 import { useNavigate } from "@solidjs/router";
 import { Button } from "components/Button";
 import { RouteNamesEnum } from "localConstants";
@@ -12,17 +9,12 @@ export const Unlock = () => {
   const handletLogin = (type: ProviderTypeEnum) => async () => {
     const config = {
       type,
-      config: {
-        network: {
-          walletAddress: "https://devnet-wallet.multiversx.com",
-          walletConnectV2ProjectId: "9b1a9564f91cb659ffe21b73d5c4e2d8",
-        },
-      } as IProviderConfig,
     };
 
-    await login({
-      providerConfig: config,
-    });
+    const factory = new ProviderFactory();
+    const provider = await factory.create(config);
+
+    await provider?.login();
 
     navigate(RouteNamesEnum.dashboard);
   };

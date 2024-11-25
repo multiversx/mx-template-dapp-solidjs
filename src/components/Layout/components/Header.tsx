@@ -2,13 +2,14 @@ import { MxLink } from "components/MxLink";
 import MultiversXLogo from "assets/img/multiversx-logo.svg?component-solid";
 import { Button } from "components/Button";
 import { RouteNamesEnum } from "localConstants";
-import { getIsLoggedIn, logout } from "lib/sdkDappCore";
+import { getAccountProvider, getIsLoggedIn } from "lib/sdkDappCore";
 import { useLocation, useNavigate } from "@solidjs/router";
 
 export const Header = () => {
   const isLoggedIn = getIsLoggedIn();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const provider = getAccountProvider();
 
   const isUnlockRoute = pathname === RouteNamesEnum.unlock;
 
@@ -17,7 +18,7 @@ export const Header = () => {
   );
 
   const handleLogout = async () => {
-    await logout();
+    await provider.logout();
     navigate(RouteNamesEnum.unlock);
   };
 

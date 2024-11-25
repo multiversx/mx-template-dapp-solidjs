@@ -6,7 +6,7 @@ import {
 import { createSignal } from "solid-js";
 import { Button } from "components/Button";
 import { SignFailure, SignSuccess } from "./components";
-import { getAccount, signMessage } from "lib/sdkDappCore";
+import { getAccount, getAccountProvider } from "lib/sdkDappCore";
 import Fa from "solid-fa";
 import { OutputContainer } from "components/OutputContainer/OutputContainer";
 import { Address, Message } from "@multiversx/sdk-core/out";
@@ -19,6 +19,7 @@ export const SignMessage = () => {
   );
   const [signatrue, setSignatrue] = createSignal("");
   const address = getAccount()?.address;
+  const provider = getAccountProvider();
 
   const handleSubmit = async () => {
     try {
@@ -26,9 +27,7 @@ export const SignMessage = () => {
         address: new Address(address),
         data: Buffer.from(message()),
       });
-      const signedMessage = await signMessage({
-        message: messageToSign,
-      });
+      const signedMessage = await provider.signMessage(messageToSign);
 
       if (!signedMessage?.signature) {
         setState("error");

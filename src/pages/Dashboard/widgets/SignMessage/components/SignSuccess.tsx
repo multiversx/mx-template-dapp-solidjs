@@ -1,6 +1,6 @@
 import { Label } from "components/Label";
 import { decodeMessage } from "../helpers";
-import { getAccount, signMessage } from "lib/sdkDappCore";
+import { getAccount } from "lib/sdkDappCore";
 import { Message } from "@multiversx/sdk-core/out";
 
 export const SignSuccess = (props: {

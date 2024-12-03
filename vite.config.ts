@@ -25,6 +25,7 @@ export default defineConfig({
     }),
   ],
   resolve: {
+    preserveSymlinks: true, // 👈
     alias: {
       src: "/src",
     },

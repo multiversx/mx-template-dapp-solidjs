@@ -4,19 +4,9 @@ import "./styles/globals.css";
 
 import { App } from "./App";
 import { initApp } from "lib/sdkDappCore";
-import { EnvironmentsEnum } from "@multiversx/sdk-dapp-core/out/types/enums.types";
+import { appConfig } from "config/appConfig";
 
-initApp({
-  storage: { getStorageCallback: () => sessionStorage },
-  dAppConfig: {
-    nativeAuth: true,
-    environment: EnvironmentsEnum.devnet,
-    network: {
-      // walletAddress: "https://localhost:3002",
-      walletAddress: "https://devnet-wallet.multiversx.com",
-    },
-  },
-}).then(() => {
+initApp(appConfig).then(() => {
   const root = document.getElementById("root");
   if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
     throw new Error(

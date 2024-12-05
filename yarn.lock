@@ -601,10 +601,6 @@
     axios "^1.7.4"
     bip39 "3.1.0"
 
-"@multiversx/sdk-dapp-core-ui@file:../mx-sdk-dapp-core-ui":
-  version "0.0.0"
-  resolved "file:../mx-sdk-dapp-core-ui"
-
 "@multiversx/sdk-dapp-core@file:../mx-sdk-dapp-core":
   version "0.0.0-alpha.11"
   resolved "file:../mx-sdk-dapp-core"

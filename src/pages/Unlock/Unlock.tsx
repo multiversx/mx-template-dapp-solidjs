@@ -3,16 +3,16 @@ import { ProviderTypeEnum } from "@multiversx/sdk-dapp-core/out/core/providers/t
 import { useNavigate } from "@solidjs/router";
 import { Button } from "components/Button";
 import { RouteNamesEnum } from "localConstants";
+import { ExtendedProviders } from "config/appConfig";
 
 export const Unlock = () => {
   const navigate = useNavigate();
-  const handletLogin = (type: ProviderTypeEnum) => async () => {
+  const handletLogin = (type: keyof typeof ExtendedProviders) => async () => {
     const config = {
       type,
     };
 
-    const factory = new ProviderFactory();
-    const provider = await factory.create(config);
+    const provider = await ProviderFactory.create(config);
 
     await provider?.login();
 
@@ -39,6 +39,9 @@ export const Unlock = () => {
             <Button onClick={handletLogin(ProviderTypeEnum.ledger)}>
               🅻 Ledger
             </Button>
+          </div>
+          <div class="ml-2">
+            <Button onClick={handletLogin("PEM" as any)}>🅻 PEM</Button>
           </div>
           <div class="ml-2">
             <Button onClick={handletLogin(ProviderTypeEnum.extension)}>

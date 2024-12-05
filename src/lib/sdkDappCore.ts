@@ -19,3 +19,9 @@ export {
   DIGITS,
   DECIMALS,
 } from "@multiversx/sdk-dapp-core/out/constants";
+export type { IProvider } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
+export { ProviderTypeEnum } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
+export type { InitAppType } from "@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp.types";
+export type { IProviderConfig } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
+export { createCrossWindowProvider } from "@multiversx/sdk-dapp-core/out/core/providers/helpers/crossWindow/createCrossWindowProvider";
+export { EnvironmentsEnum } from "@multiversx/sdk-dapp-core/out/types/enums.types";

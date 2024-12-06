@@ -14,7 +14,7 @@ export const Unlock = () => {
 
     const provider = await ProviderFactory.create(config);
 
-    await provider?.login();
+    await provider.login();
 
     navigate(RouteNamesEnum.dashboard);
   };
@@ -41,7 +41,9 @@ export const Unlock = () => {
             </Button>
           </div>
           <div class="ml-2">
-            <Button onClick={handletLogin("PEM" as any)}>🅻 PEM</Button>
+            <Button onClick={handletLogin(ExtendedProviders.customWallet)}>
+              🆆 Custom Wallet
+            </Button>
           </div>
           <div class="ml-2">
             <Button onClick={handletLogin(ProviderTypeEnum.extension)}>

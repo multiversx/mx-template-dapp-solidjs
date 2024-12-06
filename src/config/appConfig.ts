@@ -7,17 +7,8 @@ import {
   createCrossWindowProvider,
 } from "lib/sdkDappCore";
 
-// (window as any).multiversx = {};
-// (window as any).multiversx.providers = [
-//   {
-//     name: "PEM",
-//     icon: "",
-//     class: new KeystoreProvider(),
-//   },
-// ];
-
 const ADDITIONAL_PROVIDERS = {
-  xAlias: "xAlias",
+  customWallet: "customWallet",
 } as const;
 
 export const ExtendedProviders = {
@@ -38,12 +29,13 @@ export const appConfig: InitAppType = {
   customProviders: [
     {
       name: "xAlias",
-      type: ExtendedProviders.xAlias,
+      type: ExtendedProviders.customWallet,
       icon: "",
       constructor: async (config: IProviderConfig) => {
         const provider = await createCrossWindowProvider({
           address: config.account?.address,
         });
+
         return provider as unknown as IProvider;
       },
     },

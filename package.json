@@ -7,7 +7,7 @@
     "build": "vite build",
     "dev": "vite",
     "serve": "vite preview",
-    "start": "tsc && vite --force",
+    "start": "tsc && vite",
     "start-no-tsc": "vite --force"
   },
   "dependencies": {

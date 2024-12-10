@@ -6,7 +6,6 @@ import {
   getAccountProvider,
   getState,
   networkSelector,
-  sendTransactions,
 } from "lib/sdkDappCore";
 
 export const useSendPingPongTransaction = () => {
@@ -33,9 +32,9 @@ export const useSendPingPongTransaction = () => {
       pingTransaction as any,
     ]);
 
-    const sessionId = await sendTransactions(signedTransactions);
+    // const sessionId = await sendTransactions(signedTransactions);
 
-    console.log("Session id: ", sessionId);
+    console.log("Session id: ", "sessionId");
   };
 
   const sendPongTransaction = async () => {

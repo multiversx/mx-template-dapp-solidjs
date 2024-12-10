@@ -1,9 +1,8 @@
-import { ProviderFactory } from "@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory";
-import { ProviderTypeEnum } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
 import { useNavigate } from "@solidjs/router";
 import { Button } from "components/Button";
 import { RouteNamesEnum } from "localConstants";
 import { ExtendedProviders } from "config/appConfig";
+import { ProviderFactory, ProviderTypeEnum } from "lib/sdkDappCore";
 
 export const Unlock = () => {
   const navigate = useNavigate();

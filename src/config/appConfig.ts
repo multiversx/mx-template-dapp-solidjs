@@ -1,7 +1,6 @@
 import {
   EnvironmentsEnum,
   IProvider,
-  IProviderConfig,
   InitAppType,
   ProviderTypeEnum,
   createCrossWindowProvider,
@@ -31,12 +30,9 @@ export const appConfig: InitAppType = {
       name: "xAlias",
       type: ExtendedProviders.customWallet,
       icon: "",
-      constructor: async (config: IProviderConfig) => {
-        const provider = await createCrossWindowProvider({
-          address: config.account?.address,
-        });
-
-        return provider as unknown as IProvider;
+      constructor: async (address: any) => {
+        const newProvider = await createCrossWindowProvider({ address });
+        return newProvider as unknown as IProvider<ProviderTypeEnum>;
       },
     },
   ],

@@ -1,23 +1,30 @@
-import { ProviderFactory } from "@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory";
-import { ProviderTypeEnum } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
-import { useNavigate } from "@solidjs/router";
-import { Button } from "components/Button";
-import { RouteNamesEnum } from "localConstants";
-import { ExtendedProviders } from "config/appConfig";
+import { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory';
+import { ProviderTypeEnum } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
+import { useNavigate } from '@solidjs/router';
+import { Button } from 'components/Button';
+import { RouteNamesEnum } from 'localConstants';
+import { ExtendedProviders } from 'config/appConfig';
+import { walletConnectV2ProjectId } from 'config';
 
 export const Unlock = () => {
   const navigate = useNavigate();
-  const handletLogin = (type: keyof typeof ExtendedProviders) => async () => {
-    const config = {
-      type,
+
+  const handleLogin =
+    (type: keyof typeof ExtendedProviders, config = {}) =>
+    async () => {
+      const providerConfig = {
+        type,
+        config
+      };
+
+      const provider = await ProviderFactory.create(providerConfig);
+
+      const result = await provider.login();
+
+      if (result?.address) {
+        navigate(RouteNamesEnum.dashboard);
+      }
     };
-
-    const provider = await ProviderFactory.create(config);
-
-    await provider.login();
-
-    navigate(RouteNamesEnum.dashboard);
-  };
 
   return (
     <div class="flex justify-center items-center">
@@ -32,39 +39,48 @@ export const Unlock = () => {
         </div>
 
         <div class="flex flex-col md:flex-row">
-          <Button onClick={handletLogin(ProviderTypeEnum.crossWindow)}>
+          <Button onClick={handleLogin(ProviderTypeEnum.crossWindow)}>
             🆆 Web Wallet
           </Button>
           <div class="ml-2">
-            <Button onClick={handletLogin(ProviderTypeEnum.ledger)}>
+            <Button onClick={handleLogin(ProviderTypeEnum.ledger)}>
               🅻 Ledger
             </Button>
           </div>
           <div class="ml-2">
-            <Button onClick={handletLogin(ExtendedProviders.customWallet)}>
+            <Button onClick={handleLogin(ExtendedProviders.customWallet)}>
               🆆 Custom Wallet
             </Button>
           </div>
           <div class="ml-2">
-            <Button onClick={handletLogin(ProviderTypeEnum.extension)}>
+            <Button onClick={handleLogin(ProviderTypeEnum.extension)}>
               🅴 Extension
             </Button>
           </div>
           <div class="ml-2">
-            <Button onClick={handletLogin(ProviderTypeEnum.metamask)}>
+            <Button onClick={handleLogin(ProviderTypeEnum.metamask)}>
               🅼 Metamask
             </Button>
           </div>
           <div class="ml-2">
-            <Button onClick={handletLogin(ProviderTypeEnum.passkey)}>
+            <Button onClick={handleLogin(ProviderTypeEnum.passkey)}>
               🅼 Passkey
             </Button>
           </div>
-          {/* <div class="ml-2">
-            <Button onClick={handletLogin(ProviderTypeEnum.walletconnect)}>
-              🅲 Walletconnect
+          <div class="ml-2">
+            <Button
+              onClick={handleLogin(ProviderTypeEnum.walletConnect, {
+                walletConnect: {
+                  walletConnectV2ProjectId,
+                  onLogout: async () => {
+                    navigate(RouteNamesEnum.unlock);
+                  }
+                }
+              })}
+            >
+              🅲 WalletConnect
             </Button>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

@@ -612,7 +612,7 @@
     "@multiversx/sdk-native-auth-client" "^1.0.8"
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.5.1"
-    "@multiversx/sdk-wallet-connect-provider" "4.1.2"
+    "@multiversx/sdk-wallet-connect-provider" "5.0.0"
     "@multiversx/sdk-web-wallet-iframe-provider" "2.0.1"
     "@multiversx/sdk-web-wallet-provider" "3.2.1"
     isomorphic-fetch "3.0.0"
@@ -1165,9 +1165,7 @@ available-typed-arrays@^1.0.7:
     possible-typed-array-names "^1.0.0"
 
 axios@^1.7.4:
-  version "1.7.8"
-  resolved "https://registry.npmjs.org/axios/-/axios-1.7.8.tgz"
-  integrity sha512-Uu0wb7KNqK2t5K+YQyVCLM76prD5sRFjKHbJYCP1J7JFGEQ6nN7HWn9+04LAeiJ3ji54lgS/gZCH1oxyrf1SPw==
+  version "1.7.9"
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"

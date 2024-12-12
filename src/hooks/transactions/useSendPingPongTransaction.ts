@@ -1,12 +1,12 @@
 import { Transaction, TransactionPayload } from '@multiversx/sdk-core/out';
-import { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';
 import { contractAddress } from 'config';
 import { useStore } from 'hooks/useStore';
 import {
   getAccount,
   getAccountProvider,
   getState,
-  networkSelector
+  networkSelector,
+  TransactionManager
 } from 'lib/sdkDappCore';
 
 export const useSendPingPongTransaction = () => {

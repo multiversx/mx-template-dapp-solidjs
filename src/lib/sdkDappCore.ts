@@ -24,3 +24,4 @@ export type { InitAppType } from '@multiversx/sdk-dapp-core/out/core/methods/ini
 export { createCrossWindowProvider } from '@multiversx/sdk-dapp-core/out/core/providers/helpers/crossWindow/createCrossWindowProvider';
 export { EnvironmentsEnum } from '@multiversx/sdk-dapp-core/out/types/enums.types';
 export { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory';
+export { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';

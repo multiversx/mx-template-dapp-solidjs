@@ -1,4 +1,5 @@
 import { Transaction, TransactionPayload } from "@multiversx/sdk-core/out";
+import { TransactionManager } from "@multiversx/sdk-dapp-core/out/core/managers/TransactionManager";
 import { contractAddress } from "config";
 import { useStore } from "hooks/useStore";
 import {
@@ -29,12 +30,13 @@ export const useSendPingPongTransaction = () => {
     });
 
     const signedTransactions = await provider.signTransactions([
-      pingTransaction as any,
+      pingTransaction,
     ]);
 
-    // const sessionId = await sendTransactions(signedTransactions);
+    const transactionManager = TransactionManager.getInstance();
+    const txHashes = await transactionManager.send(signedTransactions);
 
-    console.log("Session id: ", "sessionId");
+    console.log("Ping transaction hashes: ", txHashes);
   };
 
   const sendPongTransaction = async () => {

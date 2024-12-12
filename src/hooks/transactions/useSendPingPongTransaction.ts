@@ -29,8 +29,15 @@ export const useSendPingPongTransaction = () => {
       version: 1,
     });
 
+    const secondTx = Transaction.fromPlainObject(
+      pingTransaction.toPlainObject()
+    );
+    secondTx.setNonce(nonce + 1);
+    secondTx.setValue(Number(amount) + Number(amount));
+
     const signedTransactions = await provider.signTransactions([
       pingTransaction,
+      secondTx,
     ]);
 
     const transactionManager = TransactionManager.getInstance();

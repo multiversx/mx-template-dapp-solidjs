@@ -29,14 +29,21 @@ export const useSendPingPongTransaction = () => {
       version: 1
     });
 
+    const secondTx = Transaction.fromPlainObject(
+      pingTransaction.toPlainObject()
+    );
+    secondTx.setNonce(nonce + 1);
+    secondTx.setValue(Number(amount) + Number(amount));
+
     const signedTransactions = await provider.signTransactions([
-      pingTransaction as any
+      pingTransaction,
+      secondTx
     ]);
 
-    const txManager = TransactionManager.getInstance();
-    const sessionId = await txManager.send(signedTransactions);
+    const transactionManager = TransactionManager.getInstance();
+    const txHashes = await transactionManager.send(signedTransactions);
 
-    console.log('Session id: ', sessionId);
+    console.log('Ping transaction hashes: ', txHashes);
   };
 
   const sendPongTransaction = async () => {

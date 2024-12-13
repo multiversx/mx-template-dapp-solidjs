@@ -1,19 +1,18 @@
 import {
   EnvironmentsEnum,
   IProvider,
-  IProviderConfig,
   InitAppType,
   ProviderTypeEnum,
-  createCrossWindowProvider,
-} from "lib/sdkDappCore";
+  createCrossWindowProvider
+} from 'lib/sdkDappCore';
 
 const ADDITIONAL_PROVIDERS = {
-  customWallet: "customWallet",
+  customWallet: 'customWallet'
 } as const;
 
 export const ExtendedProviders = {
   ...ProviderTypeEnum,
-  ...ADDITIONAL_PROVIDERS,
+  ...ADDITIONAL_PROVIDERS
 } as const;
 
 export const appConfig: InitAppType = {
@@ -23,21 +22,18 @@ export const appConfig: InitAppType = {
     environment: EnvironmentsEnum.devnet,
     network: {
       // walletAddress: "https://localhost:3002",
-      walletAddress: "https://devnet-wallet.multiversx.com",
-    },
+      walletAddress: 'https://devnet-wallet.multiversx.com'
+    }
   },
   customProviders: [
     {
-      name: "xAlias",
+      name: 'xAlias',
       type: ExtendedProviders.customWallet,
-      icon: "",
-      constructor: async (config: IProviderConfig) => {
-        const provider = await createCrossWindowProvider({
-          address: config.account?.address,
-        });
-
-        return provider as unknown as IProvider;
-      },
-    },
-  ],
+      icon: '',
+      constructor: async (address: any) => {
+        const newProvider = await createCrossWindowProvider({ address });
+        return newProvider as unknown as IProvider<ProviderTypeEnum>;
+      }
+    }
+  ]
 };

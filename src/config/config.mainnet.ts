@@ -1,4 +1,4 @@
-export * from "../../../mx-template-dapp/src/config/sharedConfig";
+export * from "./sharedConfig";
 
 export const contractAddress =
   "erd1qqqqqqqqqqqqqpgqtmcuh307t6kky677ernjj9ulk64zq74w9l5qxyhdn7";

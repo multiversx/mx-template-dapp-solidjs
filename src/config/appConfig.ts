@@ -43,7 +43,7 @@ export const appConfig: InitAppType = {
       type: ExtendedProviders.customWallet,
       icon: '',
       constructor: async (address?: string) => {
-        const providerInstance = new CrossWindowProviderStrategy(address);
+        const providerInstance = new CrossWindowProviderStrategy({ address });
         const provider = await providerInstance.createProvider();
 
         return provider;

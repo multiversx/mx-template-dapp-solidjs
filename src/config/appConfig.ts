@@ -1,10 +1,11 @@
 import {
   EnvironmentsEnum,
-  IProvider,
   InitAppType,
   ProviderTypeEnum,
-  createCrossWindowProvider
+  CrossWindowProviderStrategy
 } from 'lib/sdkDappCore';
+import { walletConnectV2ProjectId } from 'config';
+import { RouteNamesEnum } from 'localConstants';
 
 const ADDITIONAL_PROVIDERS = {
   customWallet: 'customWallet'
@@ -23,6 +24,17 @@ export const appConfig: InitAppType = {
     network: {
       // walletAddress: "https://localhost:3002",
       walletAddress: 'https://devnet-wallet.multiversx.com'
+    },
+    providers: {
+      crossWindow: {
+        isBrowserWithPopupConfirmation: true
+      },
+      walletConnect: {
+        walletConnectV2ProjectId,
+        onLogout: async () => {
+          window.location.replace(RouteNamesEnum.unlock);
+        }
+      }
     }
   },
   customProviders: [
@@ -30,9 +42,11 @@ export const appConfig: InitAppType = {
       name: 'xAlias',
       type: ExtendedProviders.customWallet,
       icon: '',
-      constructor: async (address: any) => {
-        const newProvider = await createCrossWindowProvider({ address });
-        return newProvider as unknown as IProvider<ProviderTypeEnum>;
+      constructor: async (address?: string) => {
+        const providerInstance = new CrossWindowProviderStrategy(address);
+        const provider = await providerInstance.createProvider();
+
+        return provider;
       }
     }
   ]

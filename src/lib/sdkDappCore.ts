@@ -21,7 +21,8 @@ export {
 export type { IProvider } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export { ProviderTypeEnum } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type { InitAppType } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp.types';
-export { createCrossWindowProvider } from '@multiversx/sdk-dapp-core/out/core/providers/helpers/crossWindow/createCrossWindowProvider';
+export type { IProviderConfig } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
+export { CrossWindowProviderStrategy } from '@multiversx/sdk-dapp-core/out/core//providers-strategy/CrossWindowProviderStrategy';
 export { EnvironmentsEnum } from '@multiversx/sdk-dapp-core/out/types/enums.types';
 export { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory';
 export { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';

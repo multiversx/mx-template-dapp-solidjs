@@ -3,27 +3,23 @@ import { ProviderFactory, ProviderTypeEnum } from 'lib/sdkDappCore';
 import { useNavigate } from '@solidjs/router';
 import { RouteNamesEnum } from 'localConstants';
 import { ExtendedProviders } from 'config/appConfig';
-import { walletConnectV2ProjectId } from 'config';
 
 export const Unlock = () => {
   const navigate = useNavigate();
 
-  const handleLogin =
-    (type: keyof typeof ExtendedProviders, config = {}) =>
-    async () => {
-      const providerConfig = {
-        type,
-        config
-      };
-
-      const provider = await ProviderFactory.create(providerConfig);
-
-      const result = await provider.login();
-
-      if (result?.address) {
-        navigate(RouteNamesEnum.dashboard);
-      }
+  const handleLogin = (type: keyof typeof ExtendedProviders) => async () => {
+    const providerConfig = {
+      type
     };
+
+    const provider = await ProviderFactory.create(providerConfig);
+
+    const result = await provider.login();
+
+    if (result?.address) {
+      navigate(RouteNamesEnum.dashboard);
+    }
+  };
 
   return (
     <div class="flex justify-center items-center">
@@ -67,16 +63,7 @@ export const Unlock = () => {
             </Button>
           </div>
           <div class="ml-2">
-            <Button
-              onClick={handleLogin(ProviderTypeEnum.walletConnect, {
-                walletConnect: {
-                  walletConnectV2ProjectId,
-                  onLogout: async () => {
-                    navigate(RouteNamesEnum.unlock);
-                  }
-                }
-              })}
-            >
+            <Button onClick={handleLogin(ProviderTypeEnum.walletConnect)}>
               🅲 WalletConnect
             </Button>
           </div>

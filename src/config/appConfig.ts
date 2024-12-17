@@ -26,9 +26,6 @@ export const appConfig: InitAppType = {
       walletAddress: 'https://devnet-wallet.multiversx.com'
     },
     providers: {
-      crossWindow: {
-        isBrowserWithPopupConfirmation: true
-      },
       walletConnect: {
         walletConnectV2ProjectId,
         onLogout: async () => {
@@ -43,7 +40,7 @@ export const appConfig: InitAppType = {
       type: ExtendedProviders.customWallet,
       icon: '',
       constructor: async (address?: string) => {
-        const providerInstance = new CrossWindowProviderStrategy(address);
+        const providerInstance = new CrossWindowProviderStrategy();
         const provider = await providerInstance.createProvider();
 
         return provider;

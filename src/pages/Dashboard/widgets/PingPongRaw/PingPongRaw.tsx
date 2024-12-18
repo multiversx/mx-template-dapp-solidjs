@@ -1,19 +1,19 @@
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Fa from "solid-fa";
-import moment from "moment";
-import { Button } from "components/Button";
-import { useGetTimeToPong, useGetPingAmount } from "./hooks";
-import { getCountdownSeconds, setTimeRemaining } from "helpers";
-import { OutputContainer } from "components/OutputContainer/OutputContainer";
-import { PingPongOutput } from "components/OutputContainer/components";
-import { createSignal } from "solid-js";
-import { useSendPingPongTransaction } from "hooks/transactions/useSendPingPongTransaction";
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import Fa from 'solid-fa';
+import moment from 'moment';
+import { Button } from 'components/Button';
+import { useGetTimeToPong, useGetPingAmount } from './hooks';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
+import { OutputContainer } from 'components/OutputContainer/OutputContainer';
+import { PingPongOutput } from 'components/OutputContainer/components';
+import { createSignal } from 'solid-js';
+import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
   const hasPendingTransactions = false; // TODO: Implement this somewhere
-  const { sendPingTransaction, sendPongTransaction } =
+  const { sendPingTransaction, sendPongTransaction, sendMultitransfer } =
     useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
@@ -34,14 +34,18 @@ export const PingPongRaw = () => {
     await sendPingTransaction(pingAmount());
   };
 
+  const onSendMultiTransaction = async () => {
+    await sendMultitransfer('1800000000000000000');
+  };
+
   const onSendPongTransaction = async () => {
     await sendPongTransaction();
   };
 
   const timeRemaining = moment()
-    .startOf("day")
+    .startOf('day')
     .seconds(secondsLeft() ?? 0)
-    .format("mm:ss");
+    .format('mm:ss');
 
   const pongAllowed = secondsLeft() === 0;
 
@@ -61,6 +65,15 @@ export const PingPongRaw = () => {
           >
             <Fa icon={faArrowUp} size="sm" class="mr-1" />
             Ping
+          </Button>
+
+          <Button
+            onClick={onSendMultiTransaction}
+            data-testid="btnPingRaw"
+            data-cy="transactionBtn"
+          >
+            <Fa icon={faArrowUp} size="sm" class="mr-1" />
+            Multitransfer
           </Button>
 
           <Button

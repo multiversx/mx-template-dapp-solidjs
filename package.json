@@ -17,7 +17,7 @@
     "@multiversx/sdk-core": ">= 13.5.0",
     "@multiversx/sdk-dapp-core": "0.0.0-alpha.11",
     "@multiversx/sdk-dapp-utils": "1.0.1",
-    "@multiversx/sdk-web-wallet-cross-window-provider": ">= 2.0.2",
+    "@multiversx/sdk-web-wallet-cross-window-provider": ">= 2.0.4",
     "@solidjs/router": "^0.13.6",
     "axios": "1.7.4",
     "bignumber.js": "^9.1.2",

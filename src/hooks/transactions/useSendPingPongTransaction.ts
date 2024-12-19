@@ -89,6 +89,46 @@ export const useSendPingPongTransaction = () => {
     console.log('Multitransfer transaction hashes: ', txHashes);
   };
 
+  const sendSFTNFT = async () => {
+    const { address, accounts } = store().account;
+    const nonce = accounts[address].nonce;
+
+    const sendSFT = new Transaction({
+      value: '0',
+      data: new TransactionPayload(
+        'ESDTNFTTransfer@434f4e4e4e2d616266376663@01@02@c2b5214f2077d386b403cbe92bd23f9ec92a4ce5552cf1f91805ba1b8d519cc3'
+      ),
+      receiver: address,
+      gasLimit: 1_000_000,
+      gasPrice: 1000000000,
+      chainID: network.chainId,
+      nonce,
+      sender: address,
+      version: 1
+    });
+
+    const sendNFT = new Transaction({
+      value: '0',
+      data: new TransactionPayload(
+        'ESDTNFTTransfer@434f524f2d303361383932@02@01@c2b5214f2077d386b403cbe92bd23f9ec92a4ce5552cf1f91805ba1b8d519cc3'
+      ),
+      receiver: address,
+      gasLimit: 1_000_000,
+      gasPrice: 1000000000,
+      chainID: network.chainId,
+      nonce: nonce + 1,
+      sender: address,
+      version: 1
+    });
+
+    const signedTransactions = await provider.signTransactions([
+      sendSFT,
+      sendNFT
+    ]);
+
+    console.log('NFT SFT signedTransactions: ', signedTransactions);
+  };
+
   const sendPongTransaction = async () => {
     const { address, nonce } = getAccount(store());
 
@@ -109,6 +149,7 @@ export const useSendPingPongTransaction = () => {
   return {
     sendPingTransaction,
     sendPongTransaction,
+    sendSFTNFT,
     sendMultitransfer
   };
 };

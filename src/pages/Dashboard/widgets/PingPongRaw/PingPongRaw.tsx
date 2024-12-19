@@ -13,8 +13,12 @@ import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTr
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
   const hasPendingTransactions = false; // TODO: Implement this somewhere
-  const { sendPingTransaction, sendPongTransaction, sendMultitransfer } =
-    useSendPingPongTransaction();
+  const {
+    sendPingTransaction,
+    sendPongTransaction,
+    sendMultitransfer,
+    sendSFTNFT
+  } = useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
   const [hasPing, setHasPing] = createSignal<boolean>(true);
@@ -74,6 +78,15 @@ export const PingPongRaw = () => {
           >
             <Fa icon={faArrowUp} size="sm" class="mr-1" />
             Multitransfer
+          </Button>
+
+          <Button
+            onClick={sendSFTNFT}
+            data-testid="btnPingRaw"
+            data-cy="transactionBtn"
+          >
+            <Fa icon={faArrowUp} size="sm" class="mr-1" />
+            NFT / SFT
           </Button>
 
           <Button

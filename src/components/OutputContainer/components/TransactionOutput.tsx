@@ -1,5 +1,5 @@
 import { ExplorerLink } from "components/CoreComponents/ExplorerLink";
-import { FormatAmount } from "components/CoreComponents/FormatAmount/FormatAmount";
+import { FormatAmount } from "components/CoreComponents/FormatAmount";
 import { Label } from "components/Label";
 import {
   ACCOUNTS_ENDPOINT,

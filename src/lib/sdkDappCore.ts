@@ -25,3 +25,5 @@ export type { InitAppType } from "@multiversx/sdk-dapp-core/out/core/methods/ini
 export type { IProviderConfig } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
 export { createCrossWindowProvider } from "@multiversx/sdk-dapp-core/out/core/providers/helpers/crossWindow/createCrossWindowProvider";
 export { EnvironmentsEnum } from "@multiversx/sdk-dapp-core/out/types/enums.types";
+export { useGetNetworkConfig } from "@multiversx/sdk-dapp-core/out/store/selectors/hooks/network/useGetNetworkConfig";
+export { FormatAmountController } from "@multiversx/sdk-dapp-core/out/controllers/FormatAmountController";

@@ -2,7 +2,7 @@ import { Label } from "components/Label";
 import { getAccount, getState, networkSelector } from "lib/sdkDappCore";
 import { Username } from "./components";
 import { OutputContainer } from "components/OutputContainer/OutputContainer";
-import { FormatAmount } from "components/CoreComponents/FormatAmount/FormatAmount";
+import { FormatAmount } from "components/CoreComponents/FormatAmount";
 import { useStore } from "hooks";
 import { Show } from "solid-js";
 

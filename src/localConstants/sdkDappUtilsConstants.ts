@@ -1,1 +1,1 @@
-export { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants'; 
+export { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';

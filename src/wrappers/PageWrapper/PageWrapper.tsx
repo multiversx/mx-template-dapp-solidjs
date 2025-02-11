@@ -1,4 +1,4 @@
-import { IPropsWithChildren } from "types";
+import { IPropsWithChildren } from 'types';
 
 export const PageWrapper = ({ children }: IPropsWithChildren) => {
   return (

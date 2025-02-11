@@ -1,9 +1,9 @@
-import { MxLink } from "components/MxLink";
-import MultiversXLogo from "assets/img/multiversx-logo.svg?component-solid";
-import { Button } from "components/Button";
-import { RouteNamesEnum } from "localConstants";
-import { getAccountProvider, getIsLoggedIn } from "lib/sdkDappCore";
-import { useLocation, useNavigate } from "@solidjs/router";
+import { useLocation, useNavigate } from '@solidjs/router';
+import MultiversXLogo from 'assets/img/multiversx-logo.svg?component-solid';
+import { Button } from 'components/Button';
+import { MxLink } from 'components/MxLink';
+import { getAccountProvider, getIsLoggedIn } from 'lib/sdkDappCore';
+import { RouteNamesEnum } from 'localConstants';
 
 export const Header = () => {
   const isLoggedIn = getIsLoggedIn();
@@ -35,7 +35,7 @@ export const Header = () => {
         <div class="flex justify-end container mx-auto items-center gap-2">
           <div class="flex gap-1 items-center">
             <div class="w-2 h-2 rounded-full bg-green-500" />
-            <p class="text-gray-600">{"environment"}</p>
+            <p class="text-gray-600">{'environment'}</p>
           </div>
 
           {isLoggedIn ? (

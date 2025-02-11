@@ -1,16 +1,19 @@
 import { FormatAmountController } from 'lib/sdkDappCore';
 import { DECIMALS, DIGITS } from 'localConstants/sdkDappUtilsConstants';
-import { FormatAmountControllerPropsType } from 'types/sdkDappCoreTypes';
 import { IPropsWithClass } from 'types';
 
-export const FormatAmount = (
-  props: FormatAmountControllerPropsType & IPropsWithClass
-) => {
+interface FormatAmountPropsType extends IPropsWithClass {
+  egldLabel?: string;
+  value: string;
+}
+
+export const FormatAmount = (props: FormatAmountPropsType) => {
   const { isValid, valueDecimal, valueInteger, label } =
     FormatAmountController.getData({
       digits: DIGITS,
       decimals: DECIMALS,
-      ...props
+      ...props,
+      input: props.value,
     });
 
   return (

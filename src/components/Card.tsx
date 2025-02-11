@@ -1,6 +1,6 @@
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import Fa from "solid-fa";
-import { IPropsWithChildren, IPropsWithClass } from "types";
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import Fa from 'solid-fa';
+import { IPropsWithChildren, IPropsWithClass } from 'types';
 
 interface CardType extends IPropsWithChildren, IPropsWithClass {
   title: string;
@@ -15,7 +15,7 @@ export const Card = (props: CardType) => {
   return (
     <div
       class="flex flex-col flex-1 rounded-xl bg-white p-6 justify-center"
-      data-testid={props["data-testid"]}
+      data-testid={props['data-testid']}
       id={anchor}
     >
       <h2 class="flex text-xl font-medium group">

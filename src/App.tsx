@@ -1,7 +1,7 @@
-import { Suspense, createResource, type Component } from "solid-js";
-import { Route, Router } from "@solidjs/router";
-import { routes } from "routes";
-import { Layout } from "./components/Layout/Layout";
+import { Route, Router } from '@solidjs/router';
+import { Suspense, type Component } from 'solid-js';
+import { routes } from 'routes';
+import { Layout } from './components/Layout/Layout';
 
 export const App: Component = () => {
   return (

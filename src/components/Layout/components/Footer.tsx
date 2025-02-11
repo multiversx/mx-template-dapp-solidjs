@@ -1,4 +1,4 @@
-import HeartIcon from "assets/img/heart.svg?component-solid";
+import HeartIcon from 'assets/img/heart.svg?component-solid';
 
 export const Footer = () => {
   return (

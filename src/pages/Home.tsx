@@ -1,4 +1,4 @@
-import { PageWrapper } from "../wrappers/PageWrapper";
+import { PageWrapper } from '../wrappers/PageWrapper';
 
 export const Home = () => {
   return (
@@ -9,23 +9,23 @@ export const Home = () => {
             <div>
               <h1>Template dApp</h1>
               <p class="text-gray-400">
-                The{" "}
+                The{' '}
                 <a
                   href="https://www.npmjs.com/package/@multiversx/sdk-dapp"
                   target="_blank"
                   class="text-gray-400 underline decoration-dotted hover:decoration-solid"
                 >
                   sdk-dapp
-                </a>{" "}
+                </a>{' '}
                 starter project for any dApp <br class="hidden xl:block" />
-                built on the{" "}
+                built on the{' '}
                 <a
                   href="https://multiversx.com/"
                   target="_blank"
                   class="text-gray-400 underline decoration-dotted hover:decoration-solid"
                 >
                   MultiversX
-                </a>{" "}
+                </a>{' '}
                 blockchain.
               </p>
             </div>

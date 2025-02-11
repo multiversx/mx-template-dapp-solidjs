@@ -1,10 +1,10 @@
-import { useNavigate } from '@solidjs/router';
-import { Button } from 'components';
-import { ExtendedProviders } from 'initConfig';
-import { ProviderFactory } from 'lib/sdkDappCore';
-import { RouteNamesEnum } from 'localConstants/routes';
-import { ProviderTypeEnum } from 'types/sdkDappCoreTypes';
-import { AuthRedirectWrapper } from 'wrappers';
+import { useNavigate } from "@solidjs/router";
+import { Button } from "components";
+import { ExtendedProviders } from "initConfig";
+import { ProviderFactory } from "lib/sdkDappCore";
+import { RouteNamesEnum } from "localConstants/routes";
+import { ProviderTypeEnum } from "types/sdkDappCoreTypes";
+import { AuthRedirectWrapper } from "wrappers";
 
 export const Unlock = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ export const Unlock = () => {
               <Button
                 onClick={async () => {
                   const provider = await ProviderFactory.create({
-                    type: ExtendedProviders.inMemoryProvider,
+                    type: ExtendedProviders.inMemoryProvider
                   });
                   await provider?.login();
                   navigate(RouteNamesEnum.dashboard);

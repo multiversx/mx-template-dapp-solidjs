@@ -1,7 +1,7 @@
-import { useNavigate } from '@solidjs/router';
-import { ParentProps, createEffect } from 'solid-js';
-import { getIsLoggedIn } from 'lib/sdkDappCore';
-import { RouteNamesEnum } from 'localConstants/routes';
+import { useNavigate } from "@solidjs/router";
+import { ParentProps, createEffect } from "solid-js";
+import { getIsLoggedIn } from "lib/sdkDappCore";
+import { RouteNamesEnum } from "localConstants/routes";
 
 interface AuthRedirectWrapperPropsType extends ParentProps {
   requireAuth?: boolean;
@@ -9,7 +9,7 @@ interface AuthRedirectWrapperPropsType extends ParentProps {
 
 export const AuthRedirectWrapper = ({
   children,
-  requireAuth = true,
+  requireAuth = true
 }: AuthRedirectWrapperPropsType) => {
   const navigate = useNavigate();
   const isLoggedIn = getIsLoggedIn();

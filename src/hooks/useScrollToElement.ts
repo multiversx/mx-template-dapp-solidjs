@@ -1,11 +1,11 @@
-import { useLocation } from '@solidjs/router';
-import { createEffect } from 'solid-js';
+import { useLocation } from "@solidjs/router";
+import { createEffect } from "solid-js";
 
 export const useScrollToElement = () => {
   const location = useLocation();
 
   createEffect(() => {
-    const [, anchor] = location.hash.split('#');
+    const [, anchor] = location.hash.split("#");
 
     if (!anchor) {
       return;

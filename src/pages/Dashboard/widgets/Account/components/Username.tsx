@@ -1,5 +1,5 @@
-import { Label } from 'components/Label';
-import { AccountType } from 'lib/sdkDappCore';
+import { Label } from "components/Label";
+import { AccountType } from "lib/sdkDappCore";
 
 export const Username = ({ account }: { account: AccountType | null }) => {
   if (!account) {
@@ -10,7 +10,7 @@ export const Username = ({ account }: { account: AccountType | null }) => {
     <p>
       <Label>Herotag: </Label>
       <span daata-testid="heroTag">
-        {account.username ? account.username : 'N/A'}
+        {account.username ? account.username : "N/A"}
       </span>
     </p>
   );

@@ -4,7 +4,7 @@ type GetCountdownSecondsType = {
 };
 export const getCountdownSeconds = ({
   secondsLeft,
-  setSecondsLeft,
+  setSecondsLeft
 }: GetCountdownSecondsType) => {
   let current = secondsLeft;
   if (secondsLeft) {

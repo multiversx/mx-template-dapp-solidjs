@@ -1,8 +1,8 @@
-import { createEffect } from 'solid-js';
-import { OutputContainer, TransactionsTable } from 'components';
-import { getActiveTransactionsStatus } from 'lib/sdkDappCore';
-import { useGetTransactions } from './hooks';
-import { TransactionsPropsType } from './types';
+import { createEffect } from "solid-js";
+import { OutputContainer, TransactionsTable } from "components";
+import { getActiveTransactionsStatus } from "lib/sdkDappCore";
+import { useGetTransactions } from "./hooks";
+import { TransactionsPropsType } from "./types";
 
 export const Transactions = (props: TransactionsPropsType) => {
   const { isLoading, transactions, getTransactions } =

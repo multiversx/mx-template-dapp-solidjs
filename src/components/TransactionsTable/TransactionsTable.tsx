@@ -1,21 +1,21 @@
-import { createSignal, onMount } from 'solid-js';
+import { createSignal, onMount } from "solid-js";
 import {
   getState,
   networkSelector,
   accountSelector,
-  TransactionsTableController,
-} from 'lib/sdkDappCore';
+  TransactionsTableController
+} from "lib/sdkDappCore";
 import {
   ServerTransactionType,
-  TransactionsTableRowType,
-} from 'types/sdkDappCoreTypes';
+  TransactionsTableRowType
+} from "types/sdkDappCoreTypes";
 
 interface TransactionsTablePropsType {
   transactions?: ServerTransactionType[];
 }
 
 export const TransactionsTable = ({
-  transactions = [],
+  transactions = []
 }: TransactionsTablePropsType) => {
   const [transactionsData, setTransactionsData] = createSignal<
     TransactionsTableRowType[]
@@ -28,7 +28,7 @@ export const TransactionsTable = ({
       address,
       egldLabel: network.egldLabel,
       explorerAddress: network.explorerAddress,
-      transactions,
+      transactions
     });
     setTransactionsData(data);
   });

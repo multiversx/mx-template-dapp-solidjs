@@ -1,10 +1,10 @@
-import { Show } from 'solid-js';
-import { FormatAmount } from 'components/CoreComponents/FormatAmount';
-import { Label } from 'components/Label';
-import { OutputContainer } from 'components/OutputContainer/OutputContainer';
-import { useStore } from 'hooks';
-import { getAccount, getState, networkSelector } from 'lib/sdkDappCore';
-import { Username } from './components';
+import { Show } from "solid-js";
+import { FormatAmount } from "components/CoreComponents/FormatAmount";
+import { Label } from "components/Label";
+import { OutputContainer } from "components/OutputContainer/OutputContainer";
+import { useStore } from "hooks";
+import { getAccount, getState, networkSelector } from "lib/sdkDappCore";
+import { Username } from "./components";
 
 export const Account = () => {
   const network = networkSelector(getState());

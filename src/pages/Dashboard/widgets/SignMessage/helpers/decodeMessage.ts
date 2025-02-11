@@ -1,8 +1,8 @@
-import { Message } from '@multiversx/sdk-core/out';
+import { Message } from "@multiversx/sdk-core/out";
 
 export const decodeMessage = ({
   message,
-  signature,
+  signature
 }: {
   message: Message;
   signature: string;
@@ -11,13 +11,13 @@ export const decodeMessage = ({
   messageObj.signature = `0x${signature}`;
 
   const encodedMessage =
-    '0x' +
-    Array.from(message.data, (byte) => byte.toString(16).padStart(2, '0')).join(
-      '',
+    "0x" +
+    Array.from(message.data, (byte) => byte.toString(16).padStart(2, "0")).join(
+      ""
     );
 
   return {
     encodedMessage: encodedMessage,
-    decodedMessage: Buffer.from(message?.data).toString(),
+    decodedMessage: Buffer.from(message?.data).toString()
   };
 };

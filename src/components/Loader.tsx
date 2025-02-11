@@ -1,6 +1,6 @@
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import Fa from 'solid-fa';
-import { Component } from 'solid-js';
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import Fa from "solid-fa";
+import { Component } from "solid-js";
 
 export const Loader: Component = () => {
   return (

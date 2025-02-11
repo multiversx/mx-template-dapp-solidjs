@@ -1,1 +1,1 @@
-export * from './AuthRedirectWrapper';
+export * from "./AuthRedirectWrapper";

@@ -1,9 +1,9 @@
-import { Transaction } from '@multiversx/sdk-core/out';
+import { Transaction } from "@multiversx/sdk-core/out";
 import {
   getAccountProvider,
   refreshAccount,
-  TransactionManager,
-} from 'lib/sdkDappCore';
+  TransactionManager
+} from "lib/sdkDappCore";
 
 interface TransactionsDisplayInfoType {
   processingMessage: string;
@@ -17,7 +17,7 @@ interface SignAndSendTransactionsProps {
 }
 
 export const signAndSendTransactions = async ({
-  transactions,
+  transactions
 }: SignAndSendTransactionsProps) => {
   const provider = getAccountProvider();
   const txManager = TransactionManager.getInstance();

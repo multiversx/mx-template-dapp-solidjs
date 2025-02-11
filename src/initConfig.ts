@@ -1,20 +1,20 @@
-import './styles/globals.css';
+import "./styles/globals.css";
 
-import { InMemoryProvider } from './provider/inMemoryProvider';
+import { InMemoryProvider } from "./provider/inMemoryProvider";
 import {
   EnvironmentsEnum,
   ICustomProvider,
   InitAppType,
-  ProviderTypeEnum,
-} from './types';
+  ProviderTypeEnum
+} from "./types";
 
 const ADDITIONAL_PROVIDERS = {
-  inMemoryProvider: 'inMemoryProvider',
+  inMemoryProvider: "inMemoryProvider"
 } as const;
 
 export const ExtendedProviders = {
   ...ProviderTypeEnum,
-  ...ADDITIONAL_PROVIDERS,
+  ...ADDITIONAL_PROVIDERS
 } as const;
 
 const DEFAULT_TOAST_LIEFTIME = 5000;
@@ -23,9 +23,9 @@ const providers: ICustomProvider<ProviderTypeEnum>[] = [
   {
     name: ADDITIONAL_PROVIDERS.inMemoryProvider,
     type: ExtendedProviders.inMemoryProvider,
-    icon: '',
-    constructor: async (_address?: string) => new InMemoryProvider(),
-  },
+    icon: "",
+    constructor: async (_address?: string) => new InMemoryProvider()
+  }
 ];
 
 (window as any).multiversx = {};
@@ -38,10 +38,10 @@ export const config: InitAppType = {
     nativeAuth: true,
     environment: EnvironmentsEnum.devnet,
     network: {
-      walletAddress: 'https://devnet-wallet.multiversx.com',
+      walletAddress: "https://devnet-wallet.multiversx.com"
     },
-    successfulToastLifetime: DEFAULT_TOAST_LIEFTIME,
-  },
+    successfulToastLifetime: DEFAULT_TOAST_LIEFTIME
+  }
 
   // Option 2: Add providers using the config `customProviders` array
   // customProviders: [customWalletProvider]

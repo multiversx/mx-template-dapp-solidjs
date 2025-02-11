@@ -1,9 +1,9 @@
-import { getState, networkSelector } from 'lib/sdkDappCore';
-import { IPropsWithChildren } from 'types';
+import { getState, networkSelector } from "lib/sdkDappCore";
+import { IPropsWithChildren } from "types";
 
 export interface ExplorerLinkPropsType extends IPropsWithChildren {
   class?: string;
-  'data-testid'?: string;
+  "data-testid"?: string;
   icon?: any;
   page: string;
   text?: any;
@@ -13,7 +13,7 @@ export const ExplorerLink = ({
   children,
   page,
   class: className,
-  'data-testid': dataTestId,
+  "data-testid": dataTestId,
   ...rest
 }: ExplorerLinkPropsType) => {
   const network = networkSelector(getState());

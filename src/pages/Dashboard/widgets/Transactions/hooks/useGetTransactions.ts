@@ -1,9 +1,9 @@
-import { createSignal } from 'solid-js';
-import { apiTimeout, transactionSize } from 'config';
-import { getTransactions, getInterpretedTransaction } from 'lib/sdkDappCore';
-import { accountSelector, getState, networkSelector } from 'lib/sdkDappCore';
-import { InterpretedTransactionType } from 'types/sdkDappCoreTypes';
-import { TransactionsPropsType } from '../types';
+import { createSignal } from "solid-js";
+import { apiTimeout, transactionSize } from "config";
+import { getTransactions, getInterpretedTransaction } from "lib/sdkDappCore";
+import { accountSelector, getState, networkSelector } from "lib/sdkDappCore";
+import { InterpretedTransactionType } from "types/sdkDappCoreTypes";
+import { TransactionsPropsType } from "../types";
 
 export const useGetTransactions = (props: TransactionsPropsType) => {
   const [transactions, setTransactions] = createSignal<
@@ -20,17 +20,17 @@ export const useGetTransactions = (props: TransactionsPropsType) => {
         apiAddress: network.apiAddress,
         sender: address,
         receiver: props.receiver,
-        condition: props.receiver ? 'must' : undefined,
+        condition: props.receiver ? "must" : undefined,
         transactionSize,
-        apiTimeout,
+        apiTimeout
       });
 
       const interpretedTransactions = data.map((transaction) =>
         getInterpretedTransaction({
           transaction,
           address,
-          explorerAddress: network.explorerAddress,
-        }),
+          explorerAddress: network.explorerAddress
+        })
       );
 
       setTransactions(interpretedTransactions);
@@ -42,6 +42,6 @@ export const useGetTransactions = (props: TransactionsPropsType) => {
   return {
     transactions: transactions(),
     isLoading: isLoading(),
-    getTransactions: fetchTransactions,
+    getTransactions: fetchTransactions
   };
 };

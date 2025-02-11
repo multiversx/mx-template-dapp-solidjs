@@ -1,1 +1,1 @@
-export * from './decodeMessage';
+export * from "./decodeMessage";

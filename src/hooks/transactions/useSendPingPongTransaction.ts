@@ -1,20 +1,20 @@
-import { contractAddress } from 'config';
-import { signAndSendTransactions } from 'helpers';
-import { Address, Transaction, TransactionPayload } from 'lib/sdkCore';
-import { getState, networkSelector, accountSelector } from 'lib/sdkDappCore';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants/sdkDappCoreConstants';
-import { smartContract } from 'utils/smartContract';
+import { contractAddress } from "config";
+import { signAndSendTransactions } from "helpers";
+import { Address, Transaction, TransactionPayload } from "lib/sdkCore";
+import { getState, networkSelector, accountSelector } from "lib/sdkDappCore";
+import { GAS_LIMIT, GAS_PRICE } from "localConstants/sdkDappCoreConstants";
+import { smartContract } from "utils/smartContract";
 
 const PING_TRANSACTION_INFO = {
-  processingMessage: 'Processing Ping transaction',
-  errorMessage: 'An error has occured during Ping',
-  successMessage: 'Ping transaction successful',
+  processingMessage: "Processing Ping transaction",
+  errorMessage: "An error has occured during Ping",
+  successMessage: "Ping transaction successful"
 };
 
 const PONG_TRANSACTION_INFO = {
-  processingMessage: 'Processing Pong transaction',
-  errorMessage: 'An error has occured during Pong',
-  successMessage: 'Pong transaction successful',
+  processingMessage: "Processing Pong transaction",
+  errorMessage: "An error has occured during Pong",
+  successMessage: "Pong transaction successful"
 };
 
 export const useSendPingPongTransaction = () => {
@@ -24,19 +24,19 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
       value: amount,
-      data: new TransactionPayload('ping'),
+      data: new TransactionPayload("ping"),
       receiver: address,
       gasLimit: 10 * GAS_LIMIT,
       gasPrice: GAS_PRICE,
       chainID: network.chainId,
       nonce,
       sender: address,
-      version: 1,
+      version: 1
     });
 
     await signAndSendTransactions({
       transactions: [pingTransaction],
-      transactionsDisplayInfo: PING_TRANSACTION_INFO,
+      transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
   };
 
@@ -44,14 +44,14 @@ export const useSendPingPongTransaction = () => {
     const pingTransaction = smartContract.methodsExplicit
       .ping()
       .withSender(new Address(address))
-      .withValue(amount ?? '0')
+      .withValue(amount ?? "0")
       .withGasLimit(60000000)
       .withChainID(network.chainId)
       .buildTransaction();
 
     const sessionId = await signAndSendTransactions({
       transactions: [pingTransaction],
-      transactionsDisplayInfo: PING_TRANSACTION_INFO,
+      transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
 
     return sessionId;
@@ -59,20 +59,20 @@ export const useSendPingPongTransaction = () => {
 
   const sendPongTransaction = async () => {
     const pongTransaction = new Transaction({
-      value: '0',
-      data: new TransactionPayload('pong'),
+      value: "0",
+      data: new TransactionPayload("pong"),
       receiver: contractAddress,
       gasLimit: GAS_LIMIT,
       gasPrice: GAS_PRICE,
       chainID: network.chainId,
       nonce: nonce,
       sender: address,
-      version: 1,
+      version: 1
     });
 
     await signAndSendTransactions({
       transactions: [pongTransaction],
-      transactionsDisplayInfo: PONG_TRANSACTION_INFO,
+      transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
   };
 
@@ -80,14 +80,14 @@ export const useSendPingPongTransaction = () => {
     const pongTransaction = smartContract.methodsExplicit
       .pong()
       .withSender(new Address(address))
-      .withValue('0')
+      .withValue("0")
       .withGasLimit(60000000)
       .withChainID(network.chainId)
       .buildTransaction();
 
     const sessionId = await signAndSendTransactions({
       transactions: [pongTransaction],
-      transactionsDisplayInfo: PONG_TRANSACTION_INFO,
+      transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
 
     return sessionId;
@@ -97,6 +97,6 @@ export const useSendPingPongTransaction = () => {
     sendPingTransaction,
     sendPingTransactionFromAbi,
     sendPongTransaction,
-    sendPongTransactionFromAbi,
+    sendPongTransactionFromAbi
   };
 };

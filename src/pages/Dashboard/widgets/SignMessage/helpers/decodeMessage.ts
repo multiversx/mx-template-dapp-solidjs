@@ -1,11 +1,9 @@
 import { Message } from "@multiversx/sdk-core/out";
 
 export const decodeMessage = ({
-  address,
   message,
-  signature,
+  signature
 }: {
-  address: string;
   message: Message;
   signature: string;
 }): { encodedMessage: string; decodedMessage: string } => {
@@ -20,6 +18,6 @@ export const decodeMessage = ({
 
   return {
     encodedMessage: encodedMessage,
-    decodedMessage: Buffer.from(message?.data).toString(),
+    decodedMessage: Buffer.from(message?.data).toString()
   };
 };

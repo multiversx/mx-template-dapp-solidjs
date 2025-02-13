@@ -1,46 +1,31 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import {
-  faArrowUpRightFromSquare,
-  IconDefinition,
-} from "@fortawesome/free-solid-svg-icons";
 import { getState, networkSelector } from "lib/sdkDappCore";
-import Fa from "solid-fa";
-import { IPropsWithChildren, IPropsWithClass } from "types";
+import { IPropsWithChildren } from "types";
 
-export interface ExplorerLinkPropsType
-  extends IPropsWithClass,
-    IPropsWithChildren {
+export interface ExplorerLinkPropsType extends IPropsWithChildren {
+  class?: string;
+  "data-testid"?: string;
+  icon?: any;
   page: string;
   text?: any;
-  customExplorerIcon?: IconDefinition;
-  title?: string;
-  onClick?: () => void;
-  "data-testid"?: string;
 }
 
 export const ExplorerLink = ({
-  page,
-  text,
-  class: className = "dapp-explorer-link",
   children,
-  customExplorerIcon,
+  page,
+  class: className,
+  "data-testid": dataTestId,
   ...rest
 }: ExplorerLinkPropsType) => {
   const network = networkSelector(getState());
 
-  const defaultContent = text ?? (
-    <Fa icon={customExplorerIcon ?? faArrowUpRightFromSquare} />
-  );
-
   return (
-    <a
-      href={`${network.explorerAddress}${page}`}
-      target="_blank"
+    <explorer-link
+      link={`${network.explorerAddress}${page}`}
       class={className}
-      rel="noreferrer"
+      data-testid={dataTestId}
       {...rest}
     >
-      {children ?? defaultContent}
-    </a>
+      {children ? <div slot="content">{children}</div> : null}
+    </explorer-link>
   );
 };

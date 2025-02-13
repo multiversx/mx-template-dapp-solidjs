@@ -1,13 +1,13 @@
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Fa from "solid-fa";
 import moment from "moment";
-import { Button } from "components/Button";
-import { useGetTimeToPong, useGetPingAmount } from "./hooks";
-import { getCountdownSeconds, setTimeRemaining } from "helpers";
-import { OutputContainer } from "components/OutputContainer/OutputContainer";
-import { PingPongOutput } from "components/OutputContainer/components";
+import Fa from "solid-fa";
 import { createSignal } from "solid-js";
+import { Button } from "components/Button";
+import { PingPongOutput } from "components/OutputContainer/components";
+import { OutputContainer } from "components/OutputContainer/OutputContainer";
+import { getCountdownSeconds, setTimeRemaining } from "helpers";
 import { useSendPingPongTransaction } from "hooks/transactions/useSendPingPongTransaction";
+import { useGetTimeToPong, useGetPingAmount } from "./hooks";
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {

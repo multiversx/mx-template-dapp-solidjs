@@ -1,10 +1,10 @@
+import { Show } from "solid-js";
+import { FormatAmount } from "components/CoreComponents/FormatAmount";
 import { Label } from "components/Label";
+import { OutputContainer } from "components/OutputContainer/OutputContainer";
+import { useStore } from "hooks";
 import { getAccount, getState, networkSelector } from "lib/sdkDappCore";
 import { Username } from "./components";
-import { OutputContainer } from "components/OutputContainer/OutputContainer";
-import { FormatAmount } from "components/CoreComponents/FormatAmount/FormatAmount";
-import { useStore } from "hooks";
-import { Show } from "solid-js";
 
 export const Account = () => {
   const network = networkSelector(getState());
@@ -29,9 +29,9 @@ export const Account = () => {
           <Label>Balance: </Label>
 
           <Show when={store()} keyed>
-            {(store) => (
+            {(currStore) => (
               <FormatAmount
-                value={getAccount(store).balance}
+                value={getAccount(currStore).balance}
                 egldLabel={network.egldLabel}
                 data-testid="balance"
               />

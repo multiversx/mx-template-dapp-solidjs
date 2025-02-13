@@ -1,9 +1,9 @@
 import axios from "axios";
 import BigNumber from "bignumber.js";
-import { contractAddress } from "config";
-import { PingPongResponseType } from "../types";
 import { createSignal } from "solid-js";
+import { contractAddress } from "config";
 import { getState, networkSelector } from "lib/sdkDappCore";
+import { PingPongResponseType } from "../types";
 
 const decodeAmount = (data: PingPongResponseType) => {
   const returnValue = data.data.data.returnData[0];
@@ -23,7 +23,7 @@ export const useGetPingAmount = () => {
         {
           scAddress: contractAddress,
           funcName: "getPingAmount",
-          args: [],
+          args: []
         }
       );
 

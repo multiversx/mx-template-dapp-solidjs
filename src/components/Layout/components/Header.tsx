@@ -1,9 +1,9 @@
-import { MxLink } from "components/MxLink";
+import { useLocation, useNavigate } from "@solidjs/router";
 import MultiversXLogo from "assets/img/multiversx-logo.svg?component-solid";
 import { Button } from "components/Button";
-import { RouteNamesEnum } from "localConstants";
+import { MxLink } from "components/MxLink";
 import { getAccountProvider, getIsLoggedIn } from "lib/sdkDappCore";
-import { useLocation, useNavigate } from "@solidjs/router";
+import { RouteNamesEnum } from "localConstants";
 
 export const Header = () => {
   const isLoggedIn = getIsLoggedIn();

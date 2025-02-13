@@ -1,15 +1,15 @@
 import {
   faFileSignature,
   faBroom,
-  faArrowsRotate,
+  faArrowsRotate
 } from "@fortawesome/free-solid-svg-icons";
+import { Address, Message } from "@multiversx/sdk-core/out";
+import Fa from "solid-fa";
 import { createSignal } from "solid-js";
 import { Button } from "components/Button";
-import { SignFailure, SignSuccess } from "./components";
-import { getAccount, getAccountProvider } from "lib/sdkDappCore";
-import Fa from "solid-fa";
 import { OutputContainer } from "components/OutputContainer/OutputContainer";
-import { Address, Message } from "@multiversx/sdk-core/out";
+import { getAccount, getAccountProvider } from "lib/sdkDappCore";
+import { SignFailure, SignSuccess } from "./components";
 
 export const SignMessage = () => {
   const [message, setMessage] = createSignal("");
@@ -25,18 +25,18 @@ export const SignMessage = () => {
     try {
       const messageToSign = new Message({
         address: new Address(address),
-        data: Buffer.from(message()),
+        data: Buffer.from(message())
       });
-      const signedMessage = await provider.signMessage(messageToSign);
+      const signedMessageResult = await provider.signMessage(messageToSign);
 
-      if (!signedMessage?.signature) {
+      if (!signedMessageResult?.signature) {
         setState("error");
         return;
       }
 
       setState("success");
-      setSignatrue(Buffer.from(signedMessage?.signature).toString("hex"));
-      setSignedMessage(signedMessage);
+      setSignatrue(Buffer.from(signedMessageResult?.signature).toString("hex"));
+      setSignedMessage(signedMessageResult);
       setMessage("");
     } catch (error) {
       console.error(error);

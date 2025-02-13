@@ -3,25 +3,45 @@ export { initializeNetwork } from "@multiversx/sdk-dapp-core/out/store/actions/n
 export { getState } from "@multiversx/sdk-dapp-core/out/store/store";
 export { initApp } from "@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp";
 export { trackTransactions } from "@multiversx/sdk-dapp-core/out/core/methods/trackTransactions/trackTransactions";
-export { sendTransactions } from "@multiversx/sdk-dapp-core/out/core/methods/sendTransactions/sendTransactions";
 export { getAccount } from "@multiversx/sdk-dapp-core/out/core/methods/account/getAccount";
 export { getIsLoggedIn } from "@multiversx/sdk-dapp-core/out/core/methods/account/getIsLoggedIn";
 export type { AccountType } from "@multiversx/sdk-dapp-core/out/types/account.types";
-export { getAccountProvider } from "@multiversx/sdk-dapp-core/out/core/providers/accountProvider";
+export { getAccountProvider } from "@multiversx/sdk-dapp-core/out/core/providers/helpers/accountProvider";
 export type { SignableMessage } from "@multiversx/sdk-core/out/signableMessage";
 export type { SignedTransactionType } from "@multiversx/sdk-dapp-core/out/types/transactions.types";
 export {
   TRANSACTIONS_ENDPOINT,
-  ACCOUNTS_ENDPOINT,
+  ACCOUNTS_ENDPOINT
 } from "@multiversx/sdk-dapp-core/out/apiCalls/endpoints";
-export {
-  ZERO,
-  DIGITS,
-  DECIMALS,
-} from "@multiversx/sdk-dapp-core/out/constants";
 export type { IProvider } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
 export { ProviderTypeEnum } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
 export type { InitAppType } from "@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp.types";
 export type { IProviderConfig } from "@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types";
-export { createCrossWindowProvider } from "@multiversx/sdk-dapp-core/out/core/providers/helpers/crossWindow/createCrossWindowProvider";
 export { EnvironmentsEnum } from "@multiversx/sdk-dapp-core/out/types/enums.types";
+export { useGetNetworkConfig } from "@multiversx/sdk-dapp-core/out/store/selectors/hooks/network/useGetNetworkConfig";
+export { FormatAmountController } from "@multiversx/sdk-dapp-core/out/controllers/FormatAmountController";
+export { TransactionsTableController } from "@multiversx/sdk-dapp-core/out/controllers/TransactionsTableController";
+export { accountSelector } from "@multiversx/sdk-dapp-core/out/store/selectors/accountSelectors";
+export { ProviderFactory } from "@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory";
+export { TransactionManager } from "@multiversx/sdk-dapp-core/out/core/managers/TransactionManager";
+export { addressIsValid } from "@multiversx/sdk-dapp-core/out/utils/validation/addressIsValid";
+export { getActiveTransactionsStatus } from "@multiversx/sdk-dapp-core/out/utils/transactions/getActiveTransactionsStatus";
+export { getHumanReadableTimeFormat } from "@multiversx/sdk-dapp-core/out/utils/transactions/getHumanReadableTimeFormat";
+export { getTransactionMethod } from "@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionMethod";
+export { getShardText } from "@multiversx/sdk-dapp-core/out/utils/transactions/getShardText";
+export { createBoundedUseStore } from "@multiversx/sdk-dapp-core/out/store/createBoundedStore";
+export { getTransactionMessages } from "@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionMessages";
+export { getTransactionStatus } from "@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionStatus";
+export { getInterpretedTransaction } from "@multiversx/sdk-dapp-core/out/utils/transactions/getInterpretedTransaction";
+export { explorerUrlBuilder } from "@multiversx/sdk-dapp-core/out/utils/transactions/explorerUrlBuilder";
+export { getTransactionValue } from "@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionValue";
+export { getTransactionActionNftText } from "@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionActionNftText";
+export { getTransactions } from "@multiversx/sdk-dapp-core/out/apiCalls/transactions/getTransactions";
+export { getTransactionsByHashes } from "@multiversx/sdk-dapp-core/out/apiCalls/transactions/getTransactionsByHashes";
+export { getTokenDetails } from "@multiversx/sdk-dapp-core/out/apiCalls/tokens/getTokenDetails";
+export { setCustomWalletAddress } from "@multiversx/sdk-dapp-core/out/store/actions/network";
+export { refreshAccount } from "@multiversx/sdk-dapp-core/out/utils/account/refreshAccount";
+export { isContract } from "@multiversx/sdk-dapp-core/out/utils/validation/isContract";
+export { timeAgo } from "@multiversx/sdk-dapp-core/out/utils/operations/timeRemaining";
+export { trimUsernameDomain } from "@multiversx/sdk-dapp-core/out/utils/account/trimUsernameDomain";
+export { signTransactions } from "@multiversx/sdk-dapp-core/out/core/providers/strategies/helpers/signTransactions/signTransactions";

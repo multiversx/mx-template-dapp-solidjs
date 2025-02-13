@@ -1,5 +1,5 @@
-import { createEffect } from "solid-js";
 import { useLocation } from "@solidjs/router";
+import { createEffect } from "solid-js";
 
 export const useScrollToElement = () => {
   const location = useLocation();

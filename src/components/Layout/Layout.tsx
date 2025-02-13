@@ -1,6 +1,6 @@
 import type { Component } from "solid-js";
-import { Footer } from "./components/Footer";
 import { IPropsWithChildren } from "types";
+import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
 export const Layout: Component<IPropsWithChildren> = ({ children }) => {

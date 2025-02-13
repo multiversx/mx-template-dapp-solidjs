@@ -1,7 +1,7 @@
 import { IPropsWithChildren, IPropsWithClass } from "types";
 
 interface ButtonType extends IPropsWithClass, IPropsWithChildren {
-  onClick: (e: MouseEvent) => void;
+  onClick?: (e: MouseEvent) => void;
   disabled?: boolean;
   dataCy?: string;
   id?: string;

@@ -11,21 +11,21 @@ export const routes: RouteWithTitleType[] = [
   {
     path: RouteNamesEnum.home,
     title: "Home",
-    component: Home,
+    component: Home
   },
   {
     path: RouteNamesEnum.unlock,
     title: "Unlock",
-    component: Unlock,
+    component: Unlock
   },
   {
     path: RouteNamesEnum.dashboard,
     title: "Dashboard",
-    component: Dashboard,
+    component: Dashboard
   },
   {
     path: RouteNamesEnum.disclaimer,
     title: "Disclaimer",
-    component: Disclaimer,
-  },
+    component: Disclaimer
+  }
 ];

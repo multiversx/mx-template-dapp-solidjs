@@ -7,7 +7,7 @@ export const Widget = ({
   reference,
   anchor,
   widget: MxWidget,
-  props = {},
+  props = {}
 }: WidgetType) => {
   return (
     <Card

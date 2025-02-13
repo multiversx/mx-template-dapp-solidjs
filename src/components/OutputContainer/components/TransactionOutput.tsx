@@ -1,16 +1,16 @@
 import { ExplorerLink } from "components/CoreComponents/ExplorerLink";
-import { FormatAmount } from "components/CoreComponents/FormatAmount/FormatAmount";
+import { FormatAmount } from "components/CoreComponents/FormatAmount";
 import { Label } from "components/Label";
 import {
   ACCOUNTS_ENDPOINT,
   getState,
   networkSelector,
   SignedTransactionType,
-  TRANSACTIONS_ENDPOINT,
+  TRANSACTIONS_ENDPOINT
 } from "lib/sdkDappCore";
 
 export const TransactionOutput = ({
-  transaction,
+  transaction
 }: {
   transaction: SignedTransactionType;
 }) => {
@@ -44,7 +44,6 @@ export const TransactionOutput = ({
         <Label>Amount: </Label>
         <FormatAmount
           value={transaction.value}
-          showLabel={transaction.value !== "0"}
           egldLabel={network.egldLabel}
           data-testid="balance"
         />

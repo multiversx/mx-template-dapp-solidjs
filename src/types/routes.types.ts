@@ -1,4 +1,4 @@
-import { JSX, Component } from "solid-js";
+import { Component } from "solid-js";
 
 export type RouteType = {
   path: string;

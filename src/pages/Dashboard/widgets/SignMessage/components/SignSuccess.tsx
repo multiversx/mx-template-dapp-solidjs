@@ -1,22 +1,18 @@
+import { Message } from "@multiversx/sdk-core/out";
 import { Label } from "components/Label";
 import { decodeMessage } from "../helpers";
-import { getAccount } from "lib/sdkDappCore";
-import { Message } from "@multiversx/sdk-core/out";
 
 export const SignSuccess = (props: {
   signedMessage: Message | null;
   signature: string;
 }) => {
-  const { address } = getAccount();
-
   if (props.signedMessage == null) {
     return null;
   }
 
   const { encodedMessage, decodedMessage } = decodeMessage({
-    address,
     message: props.signedMessage,
-    signature: props.signature,
+    signature: props.signature
   });
 
   return (

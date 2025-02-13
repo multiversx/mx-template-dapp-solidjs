@@ -1,9 +1,9 @@
+import { Address, AddressValue } from "@multiversx/sdk-core/out";
 import axios from "axios";
 import BigNumber from "bignumber.js";
 import { contractAddress } from "config";
-import { PingPongResponseType } from "../types";
-import { Address, AddressValue } from "@multiversx/sdk-core/out";
 import { getAccount, getState, networkSelector } from "lib/sdkDappCore";
+import { PingPongResponseType } from "../types";
 
 const decodeTime = (data: PingPongResponseType) => {
   const returnValue = data.data.data.returnData[0];
@@ -31,7 +31,7 @@ export const useGetTimeToPong = () => {
         {
           scAddress: contractAddress,
           funcName: "getTimeToPong",
-          args: [args],
+          args: [args]
         }
       );
 

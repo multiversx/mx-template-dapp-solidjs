@@ -2,11 +2,11 @@
 import { render } from "solid-js/web";
 import "./styles/globals.css";
 
-import { App } from "./App";
 import { initApp } from "lib/sdkDappCore";
-import { appConfig } from "config/appConfig";
+import { App } from "./App";
+import { config } from "./initConfig";
 
-initApp(appConfig).then(() => {
+initApp(config).then(() => {
   const root = document.getElementById("root");
   if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
     throw new Error(

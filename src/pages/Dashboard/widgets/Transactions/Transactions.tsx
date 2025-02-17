@@ -1,4 +1,4 @@
-import { createEffect } from "solid-js";
+import { createEffect, onMount, Show } from "solid-js";
 import { OutputContainer, TransactionsTable } from "components";
 import { getActiveTransactionsStatus } from "lib/sdkDappCore";
 import { useGetTransactions } from "./hooks";
@@ -9,6 +9,12 @@ export const Transactions = (props: TransactionsPropsType) => {
     useGetTransactions(props);
   const { success } = getActiveTransactionsStatus();
 
+  // Fetch on mount
+  onMount(() => {
+    getTransactions();
+  });
+
+  // Fetch when transaction status changes
   createEffect(() => {
     if (success) {
       getTransactions();
@@ -16,24 +22,26 @@ export const Transactions = (props: TransactionsPropsType) => {
   });
 
   createEffect(() => {
-    getTransactions();
+    console.log("Current transactions:", transactions());
+    console.log("Loading state:", isLoading());
   });
 
-  if (!isLoading && transactions.length === 0) {
-    return (
-      <OutputContainer>
-        <p class="text-gray-400">No transactions found</p>
-      </OutputContainer>
-    );
-  }
-
   return (
-    <div class="flex flex-col">
-      <OutputContainer isLoading={isLoading} class="p-0">
-        <div class="w-full h-full overflow-x-auto bg-white shadow rounded-lg">
-          <TransactionsTable transactions={transactions} />
-        </div>
-      </OutputContainer>
-    </div>
+    <Show
+      when={!isLoading() && transactions().length > 0}
+      fallback={
+        <OutputContainer>
+          <p class="text-gray-400">No transactions found</p>
+        </OutputContainer>
+      }
+    >
+      <div class="flex flex-col">
+        <OutputContainer isLoading={isLoading()} class="p-0">
+          <div class="w-full h-full overflow-x-auto bg-white shadow rounded-lg">
+            <TransactionsTable transactions={transactions()} />
+          </div>
+        </OutputContainer>
+      </div>
+    </Show>
   );
 };

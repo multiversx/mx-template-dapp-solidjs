@@ -9,34 +9,28 @@ import { Username } from "./components";
 export const Account = () => {
   const network = networkSelector(getState());
   const store = useStore();
+  const account = getAccount(store());
 
   return (
     <OutputContainer>
       <div class="flex flex-col text-black" data-testid="topInfo">
         <p class="truncate">
           <Label>Address: </Label>
-          <span data-testid="accountAddress">
-            {getAccount(store()).address}
-          </span>
+          <span data-testid="accountAddress">{account.address}</span>
         </p>
 
-        <Username account={getAccount(store())} />
+        <Username account={account} />
         <p>
-          <Label>Shard: </Label> {getAccount(store()).shard}
+          <Label>Shard: </Label> {account.shard}
         </p>
 
         <p>
           <Label>Balance: </Label>
-
-          <Show when={store()} keyed>
-            {(currStore) => (
-              <FormatAmount
-                value={getAccount(currStore).balance}
-                egldLabel={network.egldLabel}
-                data-testid="balance"
-              />
-            )}
-          </Show>
+          <FormatAmount
+            value={account.balance}
+            egldLabel={network.egldLabel}
+            data-testid="balance"
+          />
         </p>
       </div>
     </OutputContainer>

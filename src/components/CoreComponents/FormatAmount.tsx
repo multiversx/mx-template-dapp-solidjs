@@ -16,38 +16,43 @@ interface FormatAmountElement extends HTMLElement {
 }
 
 export const FormatAmount = (props: FormatAmountPropsType) => {
+  let elementRef: FormatAmountElement | undefined;
+
+  // Reactive state
+  const value = createMemo(() => props.value);
+  const label = createMemo(() => props.egldLabel);
+
+  // Format data processor
   const formatData = createMemo(() =>
     FormatAmountController.getData({
       digits: DIGITS,
       decimals: DECIMALS,
-      ...props,
-      input: props.value
+      egldLabel: label(),
+      input: value()
     })
   );
 
-  let elementRef: FormatAmountElement | undefined;
+  // Web component update handler
+  const updateElement = (data: ReturnType<typeof formatData>) => {
+    if (!elementRef) return;
 
-  const setRef = (el: FormatAmountElement) => {
-    elementRef = el;
+    elementRef.isValid = data.isValid;
+    elementRef.label = data.label || "";
+    elementRef.valueDecimal = data.valueDecimal;
+    elementRef.valueInteger = data.valueInteger;
+
+    if (props.class) {
+      elementRef.setAttribute("class", props.class);
+    }
+    if (props["data-testid"]) {
+      elementRef.setAttribute("data-testid", props["data-testid"]);
+    }
   };
 
+  // Update web component when data changes
   createEffect(() => {
-    const { isValid, valueDecimal, valueInteger, label } = formatData();
-
-    if (elementRef) {
-      // Set properties directly instead of using attributes
-      elementRef.isValid = isValid;
-      elementRef.label = label || "";
-      elementRef.valueDecimal = valueDecimal;
-      elementRef.valueInteger = valueInteger;
-    }
+    updateElement(formatData());
   });
 
-  return (
-    <format-amount
-      ref={setRef}
-      class={props.class}
-      data-testid={props["data-testid"]}
-    />
-  );
+  return <format-amount ref={elementRef} />;
 };

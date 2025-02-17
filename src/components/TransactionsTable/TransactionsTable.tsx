@@ -1,4 +1,4 @@
-import { createEffect, createMemo } from "solid-js";
+import { createEffect, createMemo, createSignal } from "solid-js";
 import {
   TransactionsTableController,
   getState,
@@ -17,7 +17,6 @@ interface TransactionsTablePropsType extends IPropsWithClass {
 
 interface TransactionsTableElement extends HTMLElement {
   transactions?: TransactionsTableRowType[];
-  class?: string;
 }
 
 export const TransactionsTable = ({
@@ -25,46 +24,63 @@ export const TransactionsTable = ({
   class: className
 }: TransactionsTablePropsType) => {
   let elementRef: TransactionsTableElement | undefined;
+  const [processedData, setProcessedData] = createSignal<
+    TransactionsTableRowType[]
+  >([]);
 
+  // Reactive state
   const store = createMemo(() => getState());
   const network = createMemo(() => networkSelector(store()));
   const account = createMemo(() => accountSelector(store()));
+  const currentTransactions = createMemo(() => transactions);
 
-  const processedTransactions = createMemo(async () => {
-    if (transactions.length === 0) {
-      return [];
+  // Web component update handler
+  const updateElement = (data: TransactionsTableRowType[]) => {
+    if (!elementRef) return;
+    elementRef.transactions = [...data];
+    if (className) {
+      elementRef.setAttribute("class", className);
     }
+  };
+
+  // Process transactions
+  const processTransactions = async (params: {
+    transactions: ServerTransactionType[];
+    account: { address: string };
+    network: { egldLabel: string; explorerAddress: string };
+  }) => {
+    if (transactions.length === 0) return [];
 
     try {
-      const data = await TransactionsTableController.processTransactions({
-        address: account().address,
-        egldLabel: network().egldLabel,
-        explorerAddress: network().explorerAddress,
+      const processed = await TransactionsTableController.processTransactions({
+        address: params.account.address,
+        egldLabel: params.network.egldLabel,
+        explorerAddress: params.network.explorerAddress,
         transactions
       });
-
-      return data || [];
+      return processed || [];
     } catch (error) {
       console.error("Error processing transactions:", error);
       return [];
     }
-  });
-
-  const setRef = (el: TransactionsTableElement) => {
-    elementRef = el;
   };
 
-  // Update web component when transactions are processed
+  // Process transactions when dependencies change
   createEffect(async () => {
-    if (elementRef) {
-      const processed = await processedTransactions();
-      elementRef.transactions = processed;
-
-      if (className) {
-        elementRef.class = className;
-      }
-    }
+    const data = await processTransactions({
+      transactions: currentTransactions(),
+      account: account(),
+      network: network()
+    });
+    setProcessedData(data);
   });
 
-  return <transactions-table ref={setRef} />;
+  // Update web component when processed data changes
+  createEffect(() => {
+    const data = processedData();
+    console.log("Updating transactions table with:", data.length, "items");
+    updateElement(data);
+  });
+
+  return <transactions-table ref={elementRef} />;
 };

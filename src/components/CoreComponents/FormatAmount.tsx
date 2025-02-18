@@ -12,7 +12,7 @@ interface FormatAmountPropsType
 }
 
 export const FormatAmount = (props: FormatAmountPropsType) => {
-  let elementRef: HTMLElement | undefined;
+  let elementRef: Partial<FormatAmountSDKPropsType> | undefined;
 
   const formatData = createMemo(() =>
     FormatAmountController.getData({
@@ -30,7 +30,7 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
       return;
     }
 
-    Object.assign(elementRef, data, props);
+    elementRef = { ...elementRef, ...props, ...data };
   });
 
   return <format-amount ref={elementRef} />;

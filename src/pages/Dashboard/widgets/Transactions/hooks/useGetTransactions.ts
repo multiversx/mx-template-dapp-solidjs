@@ -5,38 +5,29 @@ import { accountSelector, getState, networkSelector } from "lib/sdkDappCore";
 import { ServerTransactionType } from "types/sdkDappCoreTypes";
 import { TransactionsPropsType } from "../types";
 
-// Types for internal state management
 interface TransactionState {
   data: ServerTransactionType[];
   isLoading: boolean;
   error: Error | null;
 }
 
-export const useGetTransactions = (props: TransactionsPropsType) => {
-  // Reactive state with proper typing
+export const useGetTransactions = ({ receiver }: TransactionsPropsType) => {
   const [state, setState] = createSignal<TransactionState>({
     data: [],
     isLoading: false,
     error: null
   });
 
-  // Memoized selectors
   const store = createMemo(() => getState());
   const network = createMemo(() => networkSelector(store()));
   const account = createMemo(() => accountSelector(store()));
 
-  // Helper to check if we can fetch transactions
-  const canFetchTransactions = (params: {
-    account: ReturnType<typeof accountSelector>;
-    network: ReturnType<typeof networkSelector>;
-  }) => params.account?.address && params.network?.apiAddress;
-
-  // Fetch transactions with proper error handling
   const fetchTransactions = async () => {
-    if (!canFetchTransactions({ account: account(), network: network() })) {
+    if (!account().address || !network().apiAddress) {
       console.warn(
         "Cannot fetch transactions: missing account or network info"
       );
+
       return;
     }
 
@@ -46,14 +37,13 @@ export const useGetTransactions = (props: TransactionsPropsType) => {
       const { data } = await getTransactions({
         apiAddress: network().apiAddress,
         sender: account().address,
-        receiver: props.receiver,
-        condition: props.receiver ? "must" : undefined,
+        receiver,
+        condition: receiver ? "must" : undefined,
         transactionSize,
         apiTimeout
       });
 
       const transactions = Array.isArray(data) ? data : [];
-      console.log(`Fetched ${transactions.length} transactions`);
 
       setState((prev) => ({
         ...prev,
@@ -71,9 +61,8 @@ export const useGetTransactions = (props: TransactionsPropsType) => {
     }
   };
 
-  // Watch for account/network changes
   createEffect(() => {
-    if (canFetchTransactions({ account: account(), network: network() })) {
+    if (account().address && network().apiAddress) {
       fetchTransactions();
     }
   });

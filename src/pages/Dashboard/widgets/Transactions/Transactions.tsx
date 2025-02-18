@@ -1,4 +1,4 @@
-import { createEffect, onMount, Show } from "solid-js";
+import { createEffect, createMemo, onMount, Show } from "solid-js";
 import { OutputContainer, TransactionsTable } from "components";
 import { getActiveTransactionsStatus } from "lib/sdkDappCore";
 import { useGetTransactions } from "./hooks";
@@ -7,23 +7,17 @@ import { TransactionsPropsType } from "./types";
 export const Transactions = (props: TransactionsPropsType) => {
   const { isLoading, transactions, getTransactions } =
     useGetTransactions(props);
-  const { success } = getActiveTransactionsStatus();
 
-  // Fetch on mount
+  const { success } = createMemo(() => getActiveTransactionsStatus())();
+
   onMount(() => {
     getTransactions();
   });
 
-  // Fetch when transaction status changes
   createEffect(() => {
     if (success) {
       getTransactions();
     }
-  });
-
-  createEffect(() => {
-    console.log("Current transactions:", transactions());
-    console.log("Loading state:", isLoading());
   });
 
   return (

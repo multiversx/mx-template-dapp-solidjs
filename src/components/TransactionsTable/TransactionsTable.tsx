@@ -35,7 +35,9 @@ export const TransactionsTable = (props: TransactionsTablePropsType) => {
       transactions: props.transactions || []
     })) as ITransactionsTableRow[];
 
-    elementRef = { ...elementRef, ...props, transactions: data };
+    Object.assign(elementRef, props, {
+      transactions: data
+    });
   });
 
   return <transactions-table ref={elementRef} />;

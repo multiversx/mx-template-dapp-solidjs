@@ -30,7 +30,7 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
       return;
     }
 
-    elementRef = { ...elementRef, ...props, ...data };
+    Object.assign(elementRef, props, data);
   });
 
   return <format-amount ref={elementRef} />;

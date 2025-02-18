@@ -1,47 +1,76 @@
-import { createSignal } from "solid-js";
+import { createSignal, createMemo, createEffect } from "solid-js";
 import { apiTimeout, transactionSize } from "config";
-import { getTransactions, getInterpretedTransaction } from "lib/sdkDappCore";
+import { getTransactions } from "lib/sdkDappCore";
 import { accountSelector, getState, networkSelector } from "lib/sdkDappCore";
-import { InterpretedTransactionType } from "types/sdkDappCoreTypes";
+import { ServerTransactionType } from "types/sdkDappCoreTypes";
 import { TransactionsPropsType } from "../types";
 
-export const useGetTransactions = (props: TransactionsPropsType) => {
-  const [transactions, setTransactions] = createSignal<
-    InterpretedTransactionType[]
-  >([]);
-  const [isLoading, setIsLoading] = createSignal(true);
-  const { address } = accountSelector(getState());
-  const network = networkSelector(getState());
+interface TransactionState {
+  data: ServerTransactionType[];
+  isLoading: boolean;
+  error: Error | null;
+}
+
+export const useGetTransactions = ({ receiver }: TransactionsPropsType) => {
+  const [state, setState] = createSignal<TransactionState>({
+    data: [],
+    isLoading: false,
+    error: null
+  });
+
+  const store = createMemo(() => getState());
+  const network = createMemo(() => networkSelector(store()));
+  const account = createMemo(() => accountSelector(store()));
 
   const fetchTransactions = async () => {
+    if (!account().address || !network().apiAddress) {
+      console.warn(
+        "Cannot fetch transactions: missing account or network info"
+      );
+
+      return;
+    }
+
+    setState((prev) => ({ ...prev, isLoading: true, error: null }));
+
     try {
-      setIsLoading(true);
       const { data } = await getTransactions({
-        apiAddress: network.apiAddress,
-        sender: address,
-        receiver: props.receiver,
-        condition: props.receiver ? "must" : undefined,
+        apiAddress: network().apiAddress,
+        sender: account().address,
+        receiver,
+        condition: receiver ? "must" : undefined,
         transactionSize,
         apiTimeout
       });
 
-      const interpretedTransactions = data.map((transaction) =>
-        getInterpretedTransaction({
-          transaction,
-          address,
-          explorerAddress: network.explorerAddress
-        })
-      );
+      const transactions = Array.isArray(data) ? data : [];
 
-      setTransactions(interpretedTransactions);
-    } finally {
-      setIsLoading(false);
+      setState((prev) => ({
+        ...prev,
+        data: transactions,
+        isLoading: false
+      }));
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+      setState((prev) => ({
+        ...prev,
+        data: [],
+        isLoading: false,
+        error: error instanceof Error ? error : new Error(String(error))
+      }));
     }
   };
 
+  createEffect(() => {
+    if (account().address && network().apiAddress) {
+      fetchTransactions();
+    }
+  });
+
   return {
-    transactions: transactions(),
-    isLoading: isLoading(),
+    transactions: () => state().data,
+    isLoading: () => state().isLoading,
+    error: () => state().error,
     getTransactions: fetchTransactions
   };
 };

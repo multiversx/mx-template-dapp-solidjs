@@ -1,37 +1,44 @@
-import { createSignal, onMount } from "solid-js";
+import { createEffect, createMemo } from "solid-js";
 import {
+  TransactionsTableController,
   getState,
   networkSelector,
-  accountSelector,
-  TransactionsTableController
+  accountSelector
 } from "lib/sdkDappCore";
 import {
-  ServerTransactionType,
-  TransactionsTableRowType
-} from "types/sdkDappCoreTypes";
+  ITransactionsTableRow,
+  TransactionsTableSDKPropsType
+} from "lib/sdkDappCoreUI/sdkDappCoreUI.types";
+import { IPropsWithClass } from "types";
+import { ServerTransactionType } from "types/sdkDappCoreTypes";
 
-interface TransactionsTablePropsType {
+interface TransactionsTablePropsType extends IPropsWithClass {
   transactions?: ServerTransactionType[];
 }
 
-export const TransactionsTable = ({
-  transactions = []
-}: TransactionsTablePropsType) => {
-  const [transactionsData, setTransactionsData] = createSignal<
-    TransactionsTableRowType[]
-  >([]);
-  const network = networkSelector(getState());
-  const { address } = accountSelector(getState());
+export const TransactionsTable = (props: TransactionsTablePropsType) => {
+  let elementRef: Partial<TransactionsTableSDKPropsType> | undefined;
 
-  onMount(async () => {
-    const data = await TransactionsTableController.processTransactions({
-      address,
-      egldLabel: network.egldLabel,
-      explorerAddress: network.explorerAddress,
-      transactions
+  const store = createMemo(() => getState());
+  const network = createMemo(() => networkSelector(store()));
+  const account = createMemo(() => accountSelector(store()));
+
+  createEffect(async () => {
+    if (!elementRef) {
+      return;
+    }
+
+    const data = (await TransactionsTableController.processTransactions({
+      address: account().address,
+      egldLabel: network().egldLabel,
+      explorerAddress: network().explorerAddress,
+      transactions: props.transactions || []
+    })) as ITransactionsTableRow[];
+
+    Object.assign(elementRef, props, {
+      transactions: data
     });
-    setTransactionsData(data);
   });
 
-  return <transactions-table transactions={transactionsData()} />;
+  return <transactions-table ref={elementRef} />;
 };

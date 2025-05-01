@@ -25,7 +25,7 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    // preserveSymlinks: true,
+    // preserveSymlinks: true, // 👈 Activat this for links in links
     alias: {
       src: "/src",
     },

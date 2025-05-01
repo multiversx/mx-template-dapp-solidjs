@@ -7,9 +7,9 @@
     "build": "vite build",
     "dev": "vite",
     "serve": "vite preview",
-    "start": "tsc && vite --force",
-    "start-no-tsc": "vite --force",
-    "lint": "eslint --ext js,ts,tsx src --fix"
+    "lint": "eslint --ext js,ts,tsx src --fix",
+    "start": "tsc && vite",
+    "start-no-tsc": "vite --force"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.5.1",
@@ -53,6 +53,7 @@
     "vite-plugin-node-polyfills": "^0.22.0",
     "vite-plugin-solid": "^2.10.2",
     "vite-plugin-solid-svg": "^0.8.1",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite-tsconfig-paths": "^4.3.2",
+    "prettier": "3.2.5"
   }
 }

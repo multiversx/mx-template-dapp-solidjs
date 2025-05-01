@@ -1,5 +1,5 @@
-import { Message } from '@multiversx/sdk-core/out';
 import { Label } from 'components/Label';
+import { Message } from 'lib';
 import { decodeMessage } from '../helpers';
 
 export const SignSuccess = (props: {

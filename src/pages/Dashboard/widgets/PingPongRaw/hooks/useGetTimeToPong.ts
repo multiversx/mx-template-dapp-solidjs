@@ -1,8 +1,13 @@
-import { Address, AddressValue } from '@multiversx/sdk-core/out';
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
 import { contractAddress } from 'config';
-import { getAccount, getState, networkSelector } from 'lib';
+import {
+  Address,
+  AddressValue,
+  getAccount,
+  getState,
+  networkSelector
+} from 'lib';
 import { PingPongResponseType } from '../types';
 
 const decodeTime = (data: PingPongResponseType) => {

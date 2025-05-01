@@ -1,9 +1,9 @@
 import { Show, createMemo } from "solid-js";
-import { FormatAmount } from "components/CoreComponents/FormatAmount";
 import { Label } from "components/Label";
 import { OutputContainer } from "components/OutputContainer/OutputContainer";
 import { useStore } from "hooks";
-import { getAccount, networkSelector } from "lib/sdkDappCore";
+import { getAccount, networkSelector } from "lib";
+import { FormatAmount } from "lib/sdkDapp/components/FormatAmount/FormatAmount";
 import { Username } from "./components";
 
 export const Account = () => {

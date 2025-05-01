@@ -1,6 +1,8 @@
 import { RouteNamesEnum } from "localConstants";
-import { Unlock, Home, Disclaimer } from "pages";
 import { Dashboard } from "pages/Dashboard";
+import { Disclaimer } from "pages/Disclaimer";
+import { Home } from "pages/Home";
+import { Unlock } from "pages/Unlock";
 import { RouteType } from "types";
 
 interface RouteWithTitleType extends RouteType {

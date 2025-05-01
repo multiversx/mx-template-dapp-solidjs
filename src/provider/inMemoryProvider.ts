@@ -1,3 +1,4 @@
+import { signTransactions } from "lib";
 import {
   Address,
   Message,
@@ -6,7 +7,6 @@ import {
   UserSecretKey,
   UserSigner
 } from "lib/sdkCore";
-import { signTransactions } from "lib/sdkDappCore";
 import { IProvider } from "types/sdkDappCoreTypes";
 import { IDAppProviderAccount } from "types/sdkDappUtilsTypes";
 import { LoginModal } from "./LoginModal";

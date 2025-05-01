@@ -1,7 +1,11 @@
 import { createSignal, createMemo, createEffect } from "solid-js";
 import { apiTimeout, transactionSize } from "config";
-import { getTransactions } from "lib/sdkDappCore";
-import { accountSelector, getState, networkSelector } from "lib/sdkDappCore";
+import {
+  accountSelector,
+  getState,
+  networkSelector,
+  getTransactions
+} from "lib";
 import { ServerTransactionType } from "types/sdkDappCoreTypes";
 import { TransactionsPropsType } from "../types";
 

@@ -1,9 +1,5 @@
 import { Transaction } from "@multiversx/sdk-core/out";
-import {
-  getAccountProvider,
-  refreshAccount,
-  TransactionManager
-} from "lib/sdkDappCore";
+import { getAccountProvider, refreshAccount, TransactionManager } from "lib";
 
 interface TransactionsDisplayInfoType {
   processingMessage: string;

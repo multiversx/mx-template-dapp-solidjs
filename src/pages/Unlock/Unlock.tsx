@@ -1,7 +1,7 @@
 import { useNavigate } from "@solidjs/router";
 import { Button } from "components";
 import { ExtendedProviders } from "initConfig";
-import { ProviderFactory } from "lib/sdkDappCore";
+import { ProviderFactory } from "lib";
 import { RouteNamesEnum } from "localConstants/routes";
 import { ProviderTypeEnum } from "types/sdkDappCoreTypes";
 import { AuthRedirectWrapper } from "wrappers";

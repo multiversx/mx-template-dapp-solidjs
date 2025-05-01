@@ -1,5 +1,5 @@
 import { createEffect, createMemo } from "solid-js";
-import { FormatAmountController } from "lib/sdkDappCore";
+import { FormatAmountController } from "lib";
 import { FormatAmountSDKPropsType } from "lib/sdkDappCoreUI/sdkDappCoreUI.types";
 import { DECIMALS, DIGITS } from "localConstants/sdkDappUtilsConstants";
 import { IPropsWithClass } from "types";

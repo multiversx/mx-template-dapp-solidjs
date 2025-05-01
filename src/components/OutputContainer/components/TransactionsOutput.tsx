@@ -1,4 +1,4 @@
-import { SignedTransactionType } from "lib/sdkDappCore";
+import { SignedTransactionType } from "lib";
 import { TransactionOutput } from "./TransactionOutput";
 
 export const TransactionsOutput = ({

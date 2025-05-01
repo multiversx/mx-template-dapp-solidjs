@@ -1,5 +1,5 @@
 import { Label } from "components/Label";
-import { AccountType } from "lib/sdkDappCore";
+import { AccountType } from "lib";
 
 export const Username = ({ account }: { account: AccountType | null }) => {
   if (!account) {

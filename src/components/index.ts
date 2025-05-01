@@ -1,4 +1,3 @@
-export * from "./CoreComponents";
 export * from "./OutputContainer";
 export * from "./TransactionsTable";
 export * from "./Loader";

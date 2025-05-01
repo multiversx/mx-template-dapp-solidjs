@@ -1,4 +1,5 @@
-import { getState, networkSelector } from "lib/sdkDappCore";
+import { useStore } from "hooks";
+import { networkSelector } from "lib";
 import { IPropsWithChildren } from "types";
 
 export interface ExplorerLinkPropsType extends IPropsWithChildren {
@@ -16,8 +17,8 @@ export const ExplorerLink = ({
   "data-testid": dataTestId,
   ...rest
 }: ExplorerLinkPropsType) => {
-  const network = networkSelector(getState());
-
+  const store = useStore();
+  const network = networkSelector(store());
   return (
     <explorer-link
       link={`${network.explorerAddress}${page}`}

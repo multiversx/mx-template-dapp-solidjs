@@ -1,13 +1,12 @@
-import { ExplorerLink } from "components/CoreComponents/ExplorerLink";
-import { FormatAmount } from "components/CoreComponents/FormatAmount";
 import { Label } from "components/Label";
+import { ExplorerLink, FormatAmount } from "lib";
 import {
   ACCOUNTS_ENDPOINT,
   getState,
   networkSelector,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT
-} from "lib/sdkDappCore";
+} from "lib";
 
 export const TransactionOutput = ({
   transaction

@@ -2,7 +2,7 @@
 import { render } from "solid-js/web";
 import "./styles/globals.css";
 
-import { initApp } from "lib/sdkDappCore";
+import { initApp } from "lib/sdkDapp";
 import { App } from "./App";
 import { config } from "./initConfig";
 

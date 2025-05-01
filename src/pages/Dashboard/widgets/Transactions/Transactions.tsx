@@ -1,6 +1,6 @@
 import { createEffect, createMemo, onMount, Show } from "solid-js";
 import { OutputContainer, TransactionsTable } from "components";
-import { getActiveTransactionsStatus } from "lib/sdkDappCore";
+import { getActiveTransactionsStatus } from "lib";
 import { useGetTransactions } from "./hooks";
 import { TransactionsPropsType } from "./types";
 

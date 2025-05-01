@@ -1,6 +1,6 @@
 import { ContractAddress } from "components/ContractAddress";
 import { Label } from "components/Label";
-import { SignedTransactionType } from "lib/sdkDappCore";
+import { SignedTransactionType } from "lib";
 import { TransactionsOutput } from "./TransactionsOutput";
 
 type PingPongOutputType = {

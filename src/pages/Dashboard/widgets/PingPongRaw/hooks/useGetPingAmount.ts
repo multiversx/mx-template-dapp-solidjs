@@ -2,7 +2,7 @@ import axios from "axios";
 import BigNumber from "bignumber.js";
 import { createSignal } from "solid-js";
 import { contractAddress } from "config";
-import { getState, networkSelector } from "lib/sdkDappCore";
+import { getState, networkSelector } from "lib";
 import { PingPongResponseType } from "../types";
 
 const decodeAmount = (data: PingPongResponseType) => {

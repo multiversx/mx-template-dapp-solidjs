@@ -3,12 +3,12 @@ import {
   faBroom,
   faArrowsRotate
 } from "@fortawesome/free-solid-svg-icons";
-import { Address, Message } from "@multiversx/sdk-core/out";
+import { Address, Message } from "@multiversx/sdk-core";
 import Fa from "solid-fa";
 import { createSignal } from "solid-js";
 import { Button } from "components/Button";
 import { OutputContainer } from "components/OutputContainer/OutputContainer";
-import { getAccount, getAccountProvider } from "lib/sdkDappCore";
+import { getAccount, getAccountProvider } from "lib";
 import { SignFailure, SignSuccess } from "./components";
 
 export const SignMessage = () => {

@@ -4,7 +4,7 @@ import {
   getState,
   networkSelector,
   accountSelector
-} from "lib/sdkDappCore";
+} from "lib";
 import {
   ITransactionsTableRow,
   TransactionsTableSDKPropsType

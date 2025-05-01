@@ -1,5 +1,5 @@
-import { SignedTransactionType } from "lib";
-import { TransactionOutput } from "./TransactionOutput";
+import { SignedTransactionType } from 'lib';
+import { TransactionOutput } from './TransactionOutput';
 
 export const TransactionsOutput = ({
   transactions
@@ -7,7 +7,7 @@ export const TransactionsOutput = ({
   transactions: SignedTransactionType[];
 }) => {
   return (
-    <div class="flex flex-col gap-4">
+    <div class='flex flex-col gap-4'>
       {transactions?.map((transaction) => {
         return <TransactionOutput transaction={transaction} />;
       })}

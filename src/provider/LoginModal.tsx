@@ -1,44 +1,44 @@
-import { onCleanup } from "solid-js";
-import { render } from "solid-js/web";
-import { Button } from "components";
+import { onCleanup } from 'solid-js';
+import { render } from 'solid-js/web';
+import { Button } from 'components';
 
 const modalStyles = {
   overlay: {
-    position: "fixed",
+    position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     zIndex: 1000
   },
   modal: {
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "8px",
-    width: "400px",
-    maxWidth: "90%"
+    backgroundColor: 'white',
+    padding: '20px',
+    borderRadius: '8px',
+    width: '400px',
+    maxWidth: '90%'
   },
   form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px"
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '15px'
   },
   input: {
-    padding: "8px",
-    marginTop: "5px",
-    width: "100%",
-    borderRadius: "4px",
-    border: "1px solid #ccc"
+    padding: '8px',
+    marginTop: '5px',
+    width: '100%',
+    borderRadius: '4px',
+    border: '1px solid #ccc'
   },
   buttonGroup: {
-    display: "flex",
-    gap: "10px",
-    justifyContent: "flex-end",
-    marginTop: "15px"
+    display: 'flex',
+    gap: '10px',
+    justifyContent: 'flex-end',
+    marginTop: '15px'
   }
 } as const;
 
@@ -48,7 +48,7 @@ export class LoginModal {
   private cleanup: (() => void) | null = null;
 
   private constructor() {
-    this.modalContainer = document.createElement("div");
+    this.modalContainer = document.createElement('div');
     document.body.appendChild(this.modalContainer);
   }
 
@@ -70,13 +70,13 @@ export class LoginModal {
 
         const handleSubmit = (e: Event) => {
           e.preventDefault();
-          const privateKey = privateKeyInput?.value || "";
-          const address = addressInput?.value || "";
+          const privateKey = privateKeyInput?.value || '';
+          const address = addressInput?.value || '';
 
           if ((options?.needsAddress && !address) || !privateKey) {
             alert(
               `Please enter ${
-                options?.needsAddress ? "address and" : ""
+                options?.needsAddress ? 'address and' : ''
               } private key`
             );
             return;
@@ -89,7 +89,7 @@ export class LoginModal {
         };
 
         const handleClose = () => {
-          resolve({ privateKey: "", address: "" });
+          resolve({ privateKey: '', address: '' });
           if (this.cleanup) {
             this.cleanup();
           }
@@ -113,7 +113,7 @@ export class LoginModal {
                       Address
                       <input
                         style={modalStyles.input}
-                        type="text"
+                        type='text'
                         ref={addressInput}
                         autofocus
                         required
@@ -126,7 +126,7 @@ export class LoginModal {
                     Private Key
                     <input
                       style={modalStyles.input}
-                      type="text"
+                      type='text'
                       ref={privateKeyInput}
                       autofocus={!options?.needsAddress}
                       required
@@ -135,7 +135,7 @@ export class LoginModal {
                 </div>
                 <div style={modalStyles.buttonGroup}>
                   <Button onClick={handleClose}>Cancel</Button>
-                  <Button type="submit">Submit</Button>
+                  <Button type='submit'>Submit</Button>
                 </div>
               </form>
             </div>

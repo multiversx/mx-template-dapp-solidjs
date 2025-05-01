@@ -1,7 +1,7 @@
-import axios from "axios";
-import { contractAddress } from "config";
-import { signAndSendTransactions } from "helpers";
-import { useStore } from "hooks";
+import axios from 'axios';
+import { contractAddress } from 'config';
+import { signAndSendTransactions } from 'helpers';
+import { useStore } from 'hooks';
 import {
   AbiRegistry,
   Address,
@@ -12,18 +12,18 @@ import {
   SmartContractTransactionsFactory,
   Transaction,
   TransactionsFactoryConfig
-} from "lib";
+} from 'lib';
 
 const PING_TRANSACTION_INFO = {
-  processingMessage: "Processing Ping transaction",
-  errorMessage: "An error has occured during Ping",
-  successMessage: "Ping transaction successful"
+  processingMessage: 'Processing Ping transaction',
+  errorMessage: 'An error has occured during Ping',
+  successMessage: 'Ping transaction successful'
 };
 
 const PONG_TRANSACTION_INFO = {
-  processingMessage: "Processing Pong transaction",
-  errorMessage: "An error has occured during Pong",
-  successMessage: "Pong transaction successful"
+  processingMessage: 'Processing Pong transaction',
+  errorMessage: 'An error has occured during Pong',
+  successMessage: 'Pong transaction successful'
 };
 
 export const useSendPingPongTransaction = () => {
@@ -32,7 +32,7 @@ export const useSendPingPongTransaction = () => {
   const { address } = getAccount(store());
 
   const getSmartContractFactory = async () => {
-    const response = await axios.get("src/contracts/ping-pong.abi.json");
+    const response = await axios.get('src/contracts/ping-pong.abi.json');
     const abi = AbiRegistry.create(response.data);
     const scFactory = new SmartContractTransactionsFactory({
       config: new TransactionsFactoryConfig({
@@ -47,7 +47,7 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
       value: BigInt(amount),
-      data: Buffer.from("ping"),
+      data: Buffer.from('ping'),
       receiver: new Address(address),
       gasLimit: BigInt(10 * GAS_LIMIT),
       gasPrice: BigInt(GAS_PRICE),
@@ -68,7 +68,7 @@ export const useSendPingPongTransaction = () => {
       new Address(address),
       {
         gasLimit: BigInt(60000000),
-        function: "ping",
+        function: 'ping',
         contract: new Address(contractAddress),
         nativeTransferAmount: BigInt(amount)
       }
@@ -94,7 +94,7 @@ export const useSendPingPongTransaction = () => {
   const sendPongTransaction = async () => {
     const pongTransaction = new Transaction({
       value: BigInt(0),
-      data: Buffer.from("pong"),
+      data: Buffer.from('pong'),
       receiver: new Address(contractAddress),
       gasLimit: BigInt(GAS_LIMIT),
       gasPrice: BigInt(GAS_PRICE),
@@ -115,7 +115,7 @@ export const useSendPingPongTransaction = () => {
       new Address(address),
       {
         gasLimit: BigInt(60000000),
-        function: "pong",
+        function: 'pong',
         contract: new Address(contractAddress),
         nativeTransferAmount: BigInt(0)
       }

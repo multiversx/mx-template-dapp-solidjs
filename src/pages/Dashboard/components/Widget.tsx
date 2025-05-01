@@ -1,5 +1,5 @@
-import { Card } from "components/Card";
-import { WidgetType } from "types/widget.types";
+import { Card } from 'components/Card';
+import { WidgetType } from 'types/widget.types';
 
 export const Widget = ({
   title,

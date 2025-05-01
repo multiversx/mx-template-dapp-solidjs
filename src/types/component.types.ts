@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
 export interface IPropsWithChildren {
   children?: JSX.Element;
@@ -6,7 +6,7 @@ export interface IPropsWithChildren {
 
 export interface IPropsWithClass {
   class?: string;
-  "data-testid"?: string;
+  'data-testid'?: string;
 }
 
 export interface IPropsWithStyles {

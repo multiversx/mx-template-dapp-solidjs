@@ -1,8 +1,8 @@
 export const Disclaimer = () => {
   return (
-    <div class="prose-sm mx-auto max-w-prose">
-      <h2 class="mb-4 font-bold text-lg">Disclaimer</h2>
-      <div class="flex flex-col gap-4">
+    <div class='prose-sm mx-auto max-w-prose'>
+      <h2 class='mb-4 font-bold text-lg'>Disclaimer</h2>
+      <div class='flex flex-col gap-4'>
         <p>
           This template is provided "as is" and "as available", at your own
           risk, without warranty of any kind, either expressed or implied,

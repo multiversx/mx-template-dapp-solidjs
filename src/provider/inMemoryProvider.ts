@@ -1,4 +1,4 @@
-import { signTransactions } from "lib";
+import { signTransactions } from 'lib';
 import {
   Address,
   Message,
@@ -6,21 +6,21 @@ import {
   Transaction,
   UserSecretKey,
   UserSigner
-} from "lib/sdkCore";
-import { IProvider } from "types/sdkDappCoreTypes";
-import { IDAppProviderAccount } from "types/sdkDappUtilsTypes";
-import { LoginModal } from "./LoginModal";
+} from 'lib/sdkCore';
+import { IProvider } from 'types/sdkDappCoreTypes';
+import { IDAppProviderAccount } from 'types/sdkDappUtilsTypes';
+import { LoginModal } from './LoginModal';
 
 const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);
 };
 
-let privateKey = "";
+let privateKey = '';
 
 export class InMemoryProvider implements IProvider {
   private modal = LoginModal.getInstance();
   private _account: IDAppProviderAccount = {
-    address: ""
+    address: ''
   };
 
   constructor(address?: string) {
@@ -60,11 +60,11 @@ export class InMemoryProvider implements IProvider {
   }
 
   getType() {
-    return "inMemoryProvider";
+    return 'inMemoryProvider';
   }
 
   async signTransaction(transaction: Transaction) {
-    const _privateKey = await this._getPrivateKey("signTransaction");
+    const _privateKey = await this._getPrivateKey('signTransaction');
     const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
     const signature = await signer.sign(transaction.serializeForSigning());
     transaction.applySignature(new Uint8Array(signature));
@@ -81,9 +81,9 @@ export class InMemoryProvider implements IProvider {
   }
 
   async signTransactions(transactions: Transaction[]) {
-    const hasPrivateKey = await this._getPrivateKey("signTransactions");
+    const hasPrivateKey = await this._getPrivateKey('signTransactions');
     if (!hasPrivateKey) {
-      throw Error("Unable to sign transactions.");
+      throw Error('Unable to sign transactions.');
     }
     return signTransactions({
       transactions,
@@ -102,7 +102,7 @@ export class InMemoryProvider implements IProvider {
         });
 
       if (!address || !userPrivateKey) {
-        return reject("User cancelled login");
+        return reject('User cancelled login');
       }
 
       privateKey = userPrivateKey;
@@ -114,7 +114,7 @@ export class InMemoryProvider implements IProvider {
       if (!token) {
         resolve({
           address,
-          signature: ""
+          signature: ''
         });
         return;
       }
@@ -126,7 +126,7 @@ export class InMemoryProvider implements IProvider {
       });
       const signedMessage = await this.signMessage(msg);
       const signature = Buffer.from(String(signedMessage?.signature)).toString(
-        "hex"
+        'hex'
       );
 
       this.setAccount({
@@ -142,15 +142,15 @@ export class InMemoryProvider implements IProvider {
   }
 
   async logout() {
-    privateKey = "";
+    privateKey = '';
     this._account = {
-      address: ""
+      address: ''
     };
     return true;
   }
 
   async signMessage(message: Message) {
-    const _privateKey = await this._getPrivateKey("signTransaction");
+    const _privateKey = await this._getPrivateKey('signTransaction');
 
     const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
     const messageComputer = new MessageComputer();

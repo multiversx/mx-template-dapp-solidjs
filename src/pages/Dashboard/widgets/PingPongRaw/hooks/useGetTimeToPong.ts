@@ -1,13 +1,13 @@
-import { Address, AddressValue } from "@multiversx/sdk-core/out";
-import axios from "axios";
-import BigNumber from "bignumber.js";
-import { contractAddress } from "config";
-import { getAccount, getState, networkSelector } from "lib";
-import { PingPongResponseType } from "../types";
+import { Address, AddressValue } from '@multiversx/sdk-core/out';
+import axios from 'axios';
+import BigNumber from 'bignumber.js';
+import { contractAddress } from 'config';
+import { getAccount, getState, networkSelector } from 'lib';
+import { PingPongResponseType } from '../types';
 
 const decodeTime = (data: PingPongResponseType) => {
   const returnValue = data.data.data.returnData[0];
-  if (returnValue === "") {
+  if (returnValue === '') {
     return 0;
   }
 
@@ -15,7 +15,7 @@ const decodeTime = (data: PingPongResponseType) => {
     return null;
   }
 
-  const decodedString = Buffer.from(returnValue, "base64").toString("hex");
+  const decodedString = Buffer.from(returnValue, 'base64').toString('hex');
   return new BigNumber(decodedString, 16).toNumber();
 };
 
@@ -30,7 +30,7 @@ export const useGetTimeToPong = () => {
         `${network.apiAddress}/vm-values/query`,
         {
           scAddress: contractAddress,
-          funcName: "getTimeToPong",
+          funcName: 'getTimeToPong',
           args: [args]
         }
       );

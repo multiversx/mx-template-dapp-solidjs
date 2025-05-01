@@ -1,5 +1,5 @@
-import { Transaction } from "@multiversx/sdk-core/out";
-import { getAccountProvider, refreshAccount, TransactionManager } from "lib";
+import { Transaction } from '@multiversx/sdk-core/out';
+import { getAccountProvider, refreshAccount, TransactionManager } from 'lib';
 
 interface TransactionsDisplayInfoType {
   processingMessage: string;

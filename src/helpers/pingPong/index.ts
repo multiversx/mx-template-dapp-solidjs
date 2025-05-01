@@ -1,2 +1,2 @@
-export * from "./getCountdownSeconds";
-export * from "./setTimeRemaining";
+export * from './getCountdownSeconds';
+export * from './setTimeRemaining';

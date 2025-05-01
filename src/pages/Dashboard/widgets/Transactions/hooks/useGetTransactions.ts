@@ -1,13 +1,13 @@
-import { createSignal, createMemo, createEffect } from "solid-js";
-import { apiTimeout, transactionSize } from "config";
+import { createSignal, createMemo, createEffect } from 'solid-js';
+import { apiTimeout, transactionSize } from 'config';
 import {
   accountSelector,
   getState,
   networkSelector,
   getTransactions
-} from "lib";
-import { ServerTransactionType } from "types/sdkDappCoreTypes";
-import { TransactionsPropsType } from "../types";
+} from 'lib';
+import { ServerTransactionType } from 'types/sdkDappCoreTypes';
+import { TransactionsPropsType } from '../types';
 
 interface TransactionState {
   data: ServerTransactionType[];
@@ -29,7 +29,7 @@ export const useGetTransactions = ({ receiver }: TransactionsPropsType) => {
   const fetchTransactions = async () => {
     if (!account().address || !network().apiAddress) {
       console.warn(
-        "Cannot fetch transactions: missing account or network info"
+        'Cannot fetch transactions: missing account or network info'
       );
 
       return;
@@ -42,7 +42,7 @@ export const useGetTransactions = ({ receiver }: TransactionsPropsType) => {
         apiAddress: network().apiAddress,
         sender: account().address,
         receiver,
-        condition: receiver ? "must" : undefined,
+        condition: receiver ? 'must' : undefined,
         transactionSize,
         apiTimeout
       });
@@ -55,7 +55,7 @@ export const useGetTransactions = ({ receiver }: TransactionsPropsType) => {
         isLoading: false
       }));
     } catch (error) {
-      console.error("Error fetching transactions:", error);
+      console.error('Error fetching transactions:', error);
       setState((prev) => ({
         ...prev,
         data: [],

@@ -1,16 +1,16 @@
-import { createEffect, createMemo } from "solid-js";
+import { createEffect, createMemo } from 'solid-js';
 import {
   TransactionsTableController,
   getState,
   networkSelector,
   accountSelector
-} from "lib";
+} from 'lib';
 import {
   ITransactionsTableRow,
   TransactionsTableSDKPropsType
-} from "lib/sdkDappCoreUI/sdkDappCoreUI.types";
-import { IPropsWithClass } from "types";
-import { ServerTransactionType } from "types/sdkDappCoreTypes";
+} from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
+import { IPropsWithClass } from 'types';
+import { ServerTransactionType } from 'types/sdkDappCoreTypes';
 
 interface TransactionsTablePropsType extends IPropsWithClass {
   transactions?: ServerTransactionType[];

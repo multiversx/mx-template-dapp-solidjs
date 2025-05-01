@@ -1,1 +1,1 @@
-export * from "./pingPong.types";
+export * from './pingPong.types';

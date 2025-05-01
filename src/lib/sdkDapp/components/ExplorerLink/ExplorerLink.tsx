@@ -1,10 +1,10 @@
-import { useStore } from "hooks";
-import { networkSelector } from "lib";
-import { IPropsWithChildren } from "types";
+import { useStore } from 'hooks';
+import { networkSelector } from 'lib';
+import { IPropsWithChildren } from 'types';
 
 export interface ExplorerLinkPropsType extends IPropsWithChildren {
   class?: string;
-  "data-testid"?: string;
+  'data-testid'?: string;
   icon?: any;
   page: string;
   text?: any;
@@ -14,7 +14,7 @@ export const ExplorerLink = ({
   children,
   page,
   class: className,
-  "data-testid": dataTestId,
+  'data-testid': dataTestId,
   ...rest
 }: ExplorerLinkPropsType) => {
   const store = useStore();
@@ -26,7 +26,7 @@ export const ExplorerLink = ({
       data-testid={dataTestId}
       {...rest}
     >
-      {children ? <div slot="content">{children}</div> : null}
+      {children ? <div slot='content'>{children}</div> : null}
     </explorer-link>
   );
 };

@@ -1,13 +1,13 @@
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import moment from "moment";
-import Fa from "solid-fa";
-import { createSignal } from "solid-js";
-import { Button } from "components/Button";
-import { PingPongOutput } from "components/OutputContainer/components";
-import { OutputContainer } from "components/OutputContainer/OutputContainer";
-import { getCountdownSeconds, setTimeRemaining } from "helpers";
-import { useSendPingPongTransaction } from "hooks/transactions/useSendPingPongTransaction";
-import { useGetTimeToPong, useGetPingAmount } from "./hooks";
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
+import Fa from 'solid-fa';
+import { createSignal } from 'solid-js';
+import { Button } from 'components/Button';
+import { PingPongOutput } from 'components/OutputContainer/components';
+import { OutputContainer } from 'components/OutputContainer/OutputContainer';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
+import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
+import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {
@@ -39,9 +39,9 @@ export const PingPongRaw = () => {
   };
 
   const timeRemaining = moment()
-    .startOf("day")
+    .startOf('day')
     .seconds(secondsLeft() ?? 0)
-    .format("mm:ss");
+    .format('mm:ss');
 
   const pongAllowed = secondsLeft() === 0;
 
@@ -50,26 +50,26 @@ export const PingPongRaw = () => {
   setSecondsRemaining();
 
   return (
-    <div class="flex flex-col gap-6">
-      <div class="flex flex-col gap-2">
-        <div class="flex justify-start gap-2">
+    <div class='flex flex-col gap-6'>
+      <div class='flex flex-col gap-2'>
+        <div class='flex justify-start gap-2'>
           <Button
             disabled={!hasPing() || hasPendingTransactions}
             onClick={onSendPingTransaction}
-            data-testid="btnPingRaw"
-            data-cy="transactionBtn"
+            data-testid='btnPingRaw'
+            data-cy='transactionBtn'
           >
-            <Fa icon={faArrowUp} size="sm" class="mr-1" />
+            <Fa icon={faArrowUp} size='sm' class='mr-1' />
             Ping
           </Button>
 
           <Button
             disabled={!pongAllowed || hasPing() || hasPendingTransactions}
-            data-testid="btnPongRaw"
-            data-cy="transactionBtn"
+            data-testid='btnPongRaw'
+            data-cy='transactionBtn'
             onClick={onSendPongTransaction}
           >
-            <Fa icon={faArrowDown} size="sm" class="mr-1" />
+            <Fa icon={faArrowDown} size='sm' class='mr-1' />
             Pong
           </Button>
         </div>

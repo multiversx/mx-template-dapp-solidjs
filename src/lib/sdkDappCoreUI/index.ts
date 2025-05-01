@@ -1,1 +1,1 @@
-export * from "./sdkDappCoreUI.types";
+export * from './sdkDappCoreUI.types';

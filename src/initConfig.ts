@@ -1,15 +1,15 @@
-import "./styles/globals.css";
+import './styles/globals.css';
 
-import { InMemoryProvider } from "./provider/inMemoryProvider";
+import { InMemoryProvider } from './provider/inMemoryProvider';
 import {
   EnvironmentsEnum,
   ICustomProvider,
   InitAppType,
   ProviderTypeEnum
-} from "./types";
+} from './types';
 
 const ADDITIONAL_PROVIDERS = {
-  inMemoryProvider: "inMemoryProvider"
+  inMemoryProvider: 'inMemoryProvider'
 } as const;
 
 export const ExtendedProviders = {
@@ -23,7 +23,7 @@ const providers: ICustomProvider<ProviderTypeEnum>[] = [
   {
     name: ADDITIONAL_PROVIDERS.inMemoryProvider,
     type: ExtendedProviders.inMemoryProvider,
-    icon: "",
+    icon: '',
     constructor: async (_address?: string) => new InMemoryProvider()
   }
 ];
@@ -38,7 +38,7 @@ export const config: InitAppType = {
     nativeAuth: true,
     environment: EnvironmentsEnum.devnet,
     network: {
-      walletAddress: "https://devnet-wallet.multiversx.com"
+      walletAddress: 'https://devnet-wallet.multiversx.com'
     },
     successfulToastLifetime: DEFAULT_TOAST_LIEFTIME
   }

@@ -1,7 +1,7 @@
 import { createEffect, createMemo } from 'solid-js';
+import { useStore } from 'hooks';
 import {
   TransactionsTableController,
-  getState,
   networkSelector,
   accountSelector
 } from 'lib';
@@ -19,7 +19,7 @@ interface TransactionsTablePropsType extends IPropsWithClass {
 export const TransactionsTable = (props: TransactionsTablePropsType) => {
   let elementRef: Partial<TransactionsTableSDKPropsType> | undefined;
 
-  const store = createMemo(() => getState());
+  const store = useStore();
   const network = createMemo(() => networkSelector(store()));
   const account = createMemo(() => accountSelector(store()));
 
@@ -28,17 +28,17 @@ export const TransactionsTable = (props: TransactionsTablePropsType) => {
       return;
     }
 
-    const data = (await TransactionsTableController.processTransactions({
+    const data = await TransactionsTableController.processTransactions({
       address: account().address,
       egldLabel: network().egldLabel,
       explorerAddress: network().explorerAddress,
       transactions: props.transactions || []
-    })) as ITransactionsTableRow[];
+    });
 
     Object.assign(elementRef, props, {
-      transactions: data
+      transactions: data as ITransactionsTableRow[]
     });
   });
 
-  return <transactions-table ref={elementRef} />;
+  return <mvx-transactions-table ref={elementRef} />;
 };

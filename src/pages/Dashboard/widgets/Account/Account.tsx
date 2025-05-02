@@ -1,4 +1,4 @@
-import { Show, createMemo } from 'solid-js';
+import { Show } from 'solid-js';
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { useStore } from 'hooks';
@@ -8,8 +8,8 @@ import { Username } from './components';
 
 export const Account = () => {
   const store = useStore();
-  const network = createMemo(() => networkSelector(store()));
-  const account = createMemo(() => getAccount(store()));
+  const network = networkSelector(store());
+  const account = getAccount(store());
 
   return (
     <OutputContainer>
@@ -17,19 +17,19 @@ export const Account = () => {
         <Show when={store()}>
           <p class='truncate'>
             <Label>Address: </Label>
-            <span data-testid='accountAddress'>{account().address}</span>
+            <span data-testid='accountAddress'>{account.address}</span>
           </p>
 
-          <Username account={account()} />
+          <Username account={account} />
           <p>
-            <Label>Shard: </Label> {account().shard}
+            <Label>Shard: </Label> {account.shard}
           </p>
 
           <p>
             <Label>Balance: </Label>
             <FormatAmount
-              value={account().balance}
-              egldLabel={network().egldLabel}
+              value={account.balance}
+              egldLabel={network.egldLabel}
               data-testid='balance'
             />
           </p>

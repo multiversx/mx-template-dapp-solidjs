@@ -1,5 +1,5 @@
-import { Card } from "components/Card";
-import { WidgetType } from "types/widget.types";
+import { Card } from 'components/Card';
+import { WidgetType } from 'types/widget.types';
 
 export const Widget = ({
   title,
@@ -7,7 +7,7 @@ export const Widget = ({
   reference,
   anchor,
   widget: MxWidget,
-  props = {},
+  props = {}
 }: WidgetType) => {
   return (
     <Card

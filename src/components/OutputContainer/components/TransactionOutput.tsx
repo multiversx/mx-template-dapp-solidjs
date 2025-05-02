@@ -1,31 +1,30 @@
-import { ExplorerLink } from "components/CoreComponents/ExplorerLink";
-import { FormatAmount } from "components/CoreComponents/FormatAmount/FormatAmount";
-import { Label } from "components/Label";
+import { Label } from 'components/Label';
+import { ExplorerLink, FormatAmount } from 'lib';
 import {
   ACCOUNTS_ENDPOINT,
   getState,
   networkSelector,
   SignedTransactionType,
-  TRANSACTIONS_ENDPOINT,
-} from "lib/sdkDappCore";
+  TRANSACTIONS_ENDPOINT
+} from 'lib';
 
 export const TransactionOutput = ({
-  transaction,
+  transaction
 }: {
   transaction: SignedTransactionType;
 }) => {
   const network = networkSelector(getState());
   const decodedData = transaction.data
-    ? Buffer.from(transaction.data, "base64").toString("ascii")
-    : "N/A";
+    ? Buffer.from(transaction.data, 'base64').toString('ascii')
+    : 'N/A';
 
   return (
-    <div class="flex flex-col">
+    <div class='flex flex-col'>
       <p>
         <Label>Hash:</Label>
         <ExplorerLink
           page={`/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`}
-          class="border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800"
+          class='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.hash}
         </ExplorerLink>
@@ -34,7 +33,7 @@ export const TransactionOutput = ({
         <Label>Receiver:</Label>
         <ExplorerLink
           page={`/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
-          class="border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800"
+          class='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.receiver}
         </ExplorerLink>
@@ -44,9 +43,8 @@ export const TransactionOutput = ({
         <Label>Amount: </Label>
         <FormatAmount
           value={transaction.value}
-          showLabel={transaction.value !== "0"}
           egldLabel={network.egldLabel}
-          data-testid="balance"
+          data-testid='balance'
         />
       </p>
       <p>
@@ -57,7 +55,7 @@ export const TransactionOutput = ({
         <Label>Gas limit: </Label>
         {transaction.gasLimit}
       </p>
-      <p class="whitespace-nowrap">
+      <p class='whitespace-nowrap'>
         <Label>Data: </Label> {decodedData}
       </p>
     </div>

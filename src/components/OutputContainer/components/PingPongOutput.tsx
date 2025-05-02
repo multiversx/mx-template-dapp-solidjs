@@ -1,7 +1,7 @@
-import { Label } from "components/Label";
-import { TransactionsOutput } from "./TransactionsOutput";
-import { ContractAddress } from "components/ContractAddress";
-import { SignedTransactionType } from "lib/sdkDappCore";
+import { ContractAddress } from 'components/ContractAddress';
+import { Label } from 'components/Label';
+import { SignedTransactionType } from 'lib';
+import { TransactionsOutput } from './TransactionsOutput';
 
 type PingPongOutputType = {
   timeRemaining: string;
@@ -12,7 +12,7 @@ type PingPongOutputType = {
 export const PingPongOutput = ({
   timeRemaining,
   pongAllowed,
-  transactions,
+  transactions
 }: PingPongOutputType) => {
   if (!transactions) {
     return null;
@@ -25,7 +25,7 @@ export const PingPongOutput = ({
       {!pongAllowed && (
         <p>
           <Label>Time remaining: </Label>
-          <span class="text-red-600">{timeRemaining}</span> until able to pong
+          <span class='text-red-600'>{timeRemaining}</span> until able to pong
         </p>
       )}
     </>

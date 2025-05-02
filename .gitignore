@@ -3,4 +3,6 @@ dist
 .yalc
 .yarnrc
 .DS_Store
+.idea
+.vscode
 **/.DS_Store

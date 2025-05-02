@@ -1,3 +1,3 @@
-export * from "./Unlock";
-export * from "./Home";
-export * from "./Disclaimer";
+export * from './Unlock';
+export * from './Home';
+export * from './Disclaimer';

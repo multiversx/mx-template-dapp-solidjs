@@ -1,5 +1,4 @@
 export * from './OutputContainer';
-export * from './TransactionsTable';
 export * from './Loader';
 export * from './Layout';
 export * from './Button';

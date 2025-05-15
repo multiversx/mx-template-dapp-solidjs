@@ -1,4 +1,4 @@
-import { Show, createMemo } from 'solid-js';
+import { createMemo, Show } from 'solid-js';
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { useStore } from 'hooks';

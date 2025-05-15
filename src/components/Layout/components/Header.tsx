@@ -1,21 +1,16 @@
-import { useLocation, useNavigate } from '@solidjs/router';
+import { useNavigate } from '@solidjs/router';
 import MultiversXLogo from 'assets/img/multiversx-logo.svg?component-solid';
 import { Button } from 'components/Button';
 import { MxLink } from 'components/MxLink';
 import { getAccountProvider, getIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
+import { ConnectButton } from './ConnectButton';
+import { NotificationsButton } from './NotificationsButton';
 
 export const Header = () => {
   const isLoggedIn = getIsLoggedIn();
-  const { pathname } = useLocation();
   const navigate = useNavigate();
   const provider = getAccountProvider();
-
-  const isUnlockRoute = pathname === RouteNamesEnum.unlock;
-
-  const ConnectButton = isUnlockRoute ? null : (
-    <MxLink to={RouteNamesEnum.unlock}>Connect</MxLink>
-  );
 
   const handleLogout = async () => {
     await provider.logout();
@@ -39,14 +34,17 @@ export const Header = () => {
           </div>
 
           {isLoggedIn ? (
-            <Button
-              onClick={handleLogout}
-              class='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
-            >
-              Close
-            </Button>
+            <>
+              <NotificationsButton />
+              <Button
+                onClick={handleLogout}
+                class='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
+              >
+                Close
+              </Button>
+            </>
           ) : (
-            ConnectButton
+            <ConnectButton />
           )}
         </div>
       </nav>

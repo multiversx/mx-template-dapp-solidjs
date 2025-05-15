@@ -1,13 +1,12 @@
 import { useStore } from 'hooks';
-import { networkSelector } from 'lib';
-import { IPropsWithChildren } from 'types';
+import { ExplorerLinkSDKPropsType, networkSelector } from 'lib';
+import { IPropsWithClass, IPropsWithChildren } from 'types';
 
-export interface ExplorerLinkPropsType extends IPropsWithChildren {
-  class?: string;
-  'data-testid'?: string;
-  icon?: any;
+interface ExplorerLinkPropsType
+  extends Partial<ExplorerLinkSDKPropsType>,
+    IPropsWithClass,
+    IPropsWithChildren {
   page: string;
-  text?: any;
 }
 
 export const ExplorerLink = ({
@@ -20,13 +19,13 @@ export const ExplorerLink = ({
   const store = useStore();
   const network = networkSelector(store());
   return (
-    <explorer-link
+    <mvx-explorer-link
       link={`${network.explorerAddress}${page}`}
       class={className}
       data-testid={dataTestId}
       {...rest}
     >
       {children ? <div slot='content'>{children}</div> : null}
-    </explorer-link>
+    </mvx-explorer-link>
   );
 };

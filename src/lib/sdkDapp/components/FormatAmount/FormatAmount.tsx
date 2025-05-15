@@ -22,7 +22,6 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
       input: props.value
     })
   );
-
   createEffect(() => {
     const data = formatData();
 
@@ -33,5 +32,5 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
     Object.assign(elementRef, props, data);
   });
 
-  return <format-amount ref={elementRef} />;
+  return <mvx-format-amount ref={elementRef} />;
 };

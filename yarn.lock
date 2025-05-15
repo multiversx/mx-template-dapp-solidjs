@@ -990,7 +990,7 @@
   resolved "https://registry.npmjs.org/@multiversx/sdk-bls-wasm/-/sdk-bls-wasm-0.3.5.tgz"
   integrity sha512-c0tIdQUnbBLSt6NYU+OpeGPYdL0+GV547HeHT8Xc0BKQ7Cj0v82QUoA2QRtWrR1G4MNZmLsIacZSsf6DrIS2Bw==
 
-"@multiversx/sdk-core@^14.x":
+"@multiversx/sdk-core@14.0.2", "@multiversx/sdk-core@^14.x":
   version "14.0.2"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-core/-/sdk-core-14.0.2.tgz#e910f94f930fdbbf7a9c8587022d9c41f8aa9318"
   integrity sha512-bVrKH23NSsfVyIZKujFrc8k+mBMM4pJDNe+8CHG3M0OUPi/kOVBev6VFmLpQyW9/t25VHU1lR6c4A/qhZOl1Mw==
@@ -1013,26 +1013,29 @@
     axios "^1.7.4"
     bip39 "3.1.0"
 
-"@multiversx/sdk-dapp-core-ui@0.0.0-alpha.12", "@multiversx/sdk-dapp-core-ui@>=0.0.0-alpha.11":
-  version "0.0.0-alpha.12"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-core-ui/-/sdk-dapp-core-ui-0.0.0-alpha.12.tgz#6951dc8b0c824a2027eaf54eb85d7302e8dd9767"
-  integrity sha512-kU6aPDP9knFobkeVJPL84x0t90yWFzZU832GlhULfdYxKarPswSRan1zUx6gz9zY42tuaZ3j6lII3Bqmz5Ep8w==
+"@multiversx/sdk-dapp-core-ui@0.0.0-alpha.13", "@multiversx/sdk-dapp-core-ui@>=0.0.0-alpha.13":
+  version "0.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-core-ui/-/sdk-dapp-core-ui-0.0.0-alpha.13.tgz#f0ac448a941898cc3ee6d8aaaf5f48a29c629678"
+  integrity sha512-rH2+0OYEkqdpIcKVNI/L0wj6SFnTHVy8repwJ/a0oJeumjKh/MmnwqlZ6qeEHicwErxfRE/XsbYlREtaqknCRg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" ">= 6.7.2"
     "@fortawesome/free-solid-svg-icons" ">= 6.7.2"
     "@multiversx/sdk-dapp-utils" ">= 1.0.4"
     "@stencil/react-output-target" "0.8.2"
+    bignumber.js "^9.3.0"
     classnames ">= 2.5.1"
+    lodash.inrange "^3.3.0"
+    lodash.range "^3.2.0"
     qrcode ">= 1.5.4"
     sass-embedded "^1.85.1"
 
-"@multiversx/sdk-dapp-core@0.0.0-alpha.19":
-  version "0.0.0-alpha.19"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-core/-/sdk-dapp-core-0.0.0-alpha.19.tgz#8cb1fca07f32157ad252c6de5212a802ce81fd95"
-  integrity sha512-nljT9cKUdwylakmFxrWLig51MWx+JtPYUduMoa81m200ThQBprp4LvSOTJOcmctUJNMupMS9srcrzNHzee61MQ==
+"@multiversx/sdk-dapp-core@0.0.0-alpha.20":
+  version "0.0.0-alpha.20"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-core/-/sdk-dapp-core-0.0.0-alpha.20.tgz#7ab2ce7e92906790f2e720ac091822212cd2b840"
+  integrity sha512-vFEnkDCzg4xnfFPISY9yrbpnnzV8jRjlCyz6hAYS7rq/Mv0QhAMlt0g/ERSHQnWM/gemBLKQeYXEppo6FV9yTw==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
-    "@multiversx/sdk-core" "^14.x"
+    "@multiversx/sdk-core" "14.0.2"
     "@multiversx/sdk-dapp-utils" "^2.x"
     "@multiversx/sdk-extension-provider" "5.0.0"
     "@multiversx/sdk-hw-provider" "8.0.0"
@@ -1051,7 +1054,7 @@
     socket.io-client "4.7.5"
     zustand "4.4.7"
   optionalDependencies:
-    "@multiversx/sdk-dapp-core-ui" ">=0.0.0-alpha.11"
+    "@multiversx/sdk-dapp-core-ui" ">=0.0.0-alpha.13"
 
 "@multiversx/sdk-dapp-utils@2.0.0", "@multiversx/sdk-dapp-utils@>= 1.0.4", "@multiversx/sdk-dapp-utils@^2.x":
   version "2.0.0"
@@ -2600,6 +2603,11 @@ bignumber.js@9.1.2, bignumber.js@^9.0.0:
   version "9.1.2"
   resolved "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.1.2.tgz"
   integrity sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==
+
+bignumber.js@^9.3.0:
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.3.0.tgz#bdba7e2a4c1a2eba08290e8dcad4f36393c92acd"
+  integrity sha512-EM7aMFTXbptt/wZdMlBv2t8IViwQL+h6SLHosp8Yf0dqJMTnY6iL32opnAB6kAdL0SZPuvcAzFr31o0c/R3/RA==
 
 binary-extensions@^2.0.0:
   version "2.3.0"
@@ -5500,6 +5508,11 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
+lodash.inrange@^3.3.0:
+  version "3.3.6"
+  resolved "https://registry.yarnpkg.com/lodash.inrange/-/lodash.inrange-3.3.6.tgz#dfdfe915f6e30e8056293707e2395dab88ea128d"
+  integrity sha512-NqOT/CVclLZKet0ALwg1joQ/XnfxePGf8L9WKvzOcTDAI0axG3Ej24qDGwLk0ejN4AVfFvs6vY5AWBB53o5piw==
+
 lodash.isequal@4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
@@ -5514,6 +5527,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash.range@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.range/-/lodash.range-3.2.0.tgz#f461e588f66683f7eadeade513e38a69a565a15d"
+  integrity sha512-Fgkb7SinmuzqgIhNhAElo0BL/R1rHCnhwSZf78omqSwvWqD0kD2ssOAutQonDKH/ldS8BxA72ORYI09qAY9CYg==
 
 lodash@^4.17.21:
   version "4.17.21"

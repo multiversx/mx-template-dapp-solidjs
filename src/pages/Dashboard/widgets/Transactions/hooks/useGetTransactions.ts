@@ -4,9 +4,9 @@ import {
   accountSelector,
   getState,
   networkSelector,
-  getTransactions
+  getTransactions,
+  ServerTransactionType
 } from 'lib';
-import { ServerTransactionType } from 'types/sdkDappCoreTypes';
 import { TransactionsPropsType } from '../types';
 
 interface TransactionState {

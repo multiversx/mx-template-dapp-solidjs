@@ -14,7 +14,7 @@ export const Header = () => {
 
   const handleLogout = async () => {
     await provider.logout();
-    navigate(RouteNamesEnum.unlock);
+    navigate(RouteNamesEnum.home);
   };
 
   return (

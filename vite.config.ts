@@ -6,19 +6,6 @@ import solid from 'vite-plugin-solid';
 import solidSvg from 'vite-plugin-solid-svg';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-// Custom plugin to handle .map files
-const mapLoader = () => ({
-  name: 'map-loader',
-  transform(code, id) {
-    if (id.endsWith('.map')) {
-      return {
-        code: `export default ${code}`,
-        map: null
-      };
-    }
-  }
-});
-
 export default defineConfig({
   plugins: [
     /* 
@@ -29,7 +16,6 @@ export default defineConfig({
     //   /* features options - all disabled by default */
     //   autoname: true, // e.g. enable autoname
     // }),
-    mapLoader(),
     solid(),
     tsconfigPaths(),
     basicSsl(),

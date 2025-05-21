@@ -7,9 +7,9 @@ import {
 declare module 'solid-js' {
   namespace JSX {
     interface IntrinsicElements {
-      'format-amount': FormatAmount;
-      'explorer-link': ExplorerLink;
-      'transactions-table': TransactionsTable;
+      'mvx-format-amount': FormatAmount;
+      'mvx-explorer-link': ExplorerLink;
+      'mvx-transactions-table': TransactionsTable;
     }
   }
 }

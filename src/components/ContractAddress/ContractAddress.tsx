@@ -1,7 +1,6 @@
-import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp-core/out/apiCalls/endpoints';
 import { Label } from 'components/Label';
 import { contractAddress } from 'config';
-import { ExplorerLink } from 'lib';
+import { ACCOUNTS_ENDPOINT, ExplorerLink } from 'lib';
 
 export const ContractAddress = () => {
   return (

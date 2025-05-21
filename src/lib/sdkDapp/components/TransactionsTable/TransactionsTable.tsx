@@ -3,14 +3,14 @@ import { useStore } from 'hooks';
 import {
   TransactionsTableController,
   networkSelector,
-  accountSelector
+  accountSelector,
+  ServerTransactionType
 } from 'lib';
 import {
   ITransactionsTableRow,
   TransactionsTableSDKPropsType
-} from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
+} from 'lib/sdkDappUI/sdkDappUI.types';
 import { IPropsWithClass } from 'types';
-import { ServerTransactionType } from 'types/sdkDappCoreTypes';
 
 interface TransactionsTablePropsType extends IPropsWithClass {
   transactions?: ServerTransactionType[];

@@ -1,6 +1,5 @@
+import { EnvironmentsEnum, InitAppType } from 'lib';
 import './styles/globals.css';
-
-import { EnvironmentsEnum, InitAppType } from './types';
 
 const DEFAULT_TOAST_LIEFTIME = 5000;
 

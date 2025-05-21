@@ -1,5 +1,5 @@
-import { getStore } from '@multiversx/sdk-dapp-core/out/store/store';
 import { createSignal, onCleanup } from 'solid-js';
+import { getStore } from 'lib';
 
 export function useStore() {
   const store = getStore();

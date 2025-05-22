@@ -1,14 +1,18 @@
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import Fa from 'solid-fa';
-import { createSignal } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 import { Button } from 'components/Button';
 import { PingPongOutput } from 'components/OutputContainer/components';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
+import { useStore } from 'hooks/useStore';
+import {
+  pendingTransactionsSessionsSelector,
+  transactionsSliceSelector
+} from 'lib/sdkDapp/sdkDapp.selectors';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
-
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
@@ -16,9 +20,11 @@ export const PingPongRaw = () => {
   const { sendPingTransaction, sendPongTransaction, sendContactTransaction } =
     useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
+  const store = useStore();
 
   const [hasPing, setHasPing] = createSignal<boolean>(true);
   const [secondsLeft, setSecondsLeft] = createSignal<number>(0);
+  const [sessionId, setSessionId] = createSignal<string>('');
 
   const setSecondsRemaining = async () => {
     const secondsRemaining = await getTimeToPong();
@@ -31,7 +37,8 @@ export const PingPongRaw = () => {
   };
 
   const onSendContactTransaction = async () => {
-    await sendContactTransaction();
+    const session = await sendContactTransaction();
+    setSessionId(session);
   };
 
   const onSendPingTransaction = async () => {
@@ -52,6 +59,28 @@ export const PingPongRaw = () => {
   getCountdownSeconds({ secondsLeft: secondsLeft(), setSecondsLeft });
 
   setSecondsRemaining();
+
+  createEffect(() => {
+    const pendingSessions = pendingTransactionsSessionsSelector(store());
+    const allTransactionSessions = transactionsSliceSelector(store());
+
+    const isSessionIdPending =
+      Object.keys(pendingSessions).includes(sessionId());
+
+    const currentSession = allTransactionSessions[sessionId()];
+
+    const currentSessionStatus = currentSession?.status;
+
+    const currentTransaction = currentSession?.transactions?.[0];
+
+    const currentTransactionStatus = currentTransaction?.status;
+
+    console.log({
+      isSessionIdPending,
+      currentSessionStatus,
+      currentTransactionStatus
+    });
+  });
 
   return (
     <div class='flex flex-col gap-6'>

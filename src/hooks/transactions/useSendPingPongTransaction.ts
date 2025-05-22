@@ -57,10 +57,12 @@ export const useSendPingPongTransaction = () => {
       version: 1
     });
 
-    await signAndSendTransactions({
+    const sessionId = await signAndSendTransactions({
       transactions: [contactTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPingTransaction = async (amount: string) => {

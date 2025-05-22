@@ -26,5 +26,7 @@ export const signAndSendTransactions = async ({
 
   const signedTransactions = await provider.signTransactions(transactions);
   const sentTransactions = await txManager.send(signedTransactions);
-  await txManager.track(sentTransactions);
+  const sessionId = await txManager.track(sentTransactions);
+
+  return sessionId;
 };

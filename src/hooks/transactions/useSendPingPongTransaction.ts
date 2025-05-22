@@ -44,6 +44,25 @@ export const useSendPingPongTransaction = () => {
     return scFactory;
   };
 
+  const sendContactTransaction = async () => {
+    const contactTransaction = new Transaction({
+      value: BigInt(0),
+      receiver: new Address(
+        'erd1jmx30sjp6v5jpz4wlpuxqgyvcag9qy85z6r4svyn2fkcktq894ls76dymn'
+      ),
+      sender: new Address(address),
+      gasLimit: BigInt(GAS_LIMIT),
+      gasPrice: BigInt(GAS_PRICE),
+      chainID: network.chainId,
+      version: 1
+    });
+
+    await signAndSendTransactions({
+      transactions: [contactTransaction],
+      transactionsDisplayInfo: PING_TRANSACTION_INFO
+    });
+  };
+
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
       value: BigInt(amount),
@@ -142,6 +161,7 @@ export const useSendPingPongTransaction = () => {
 
   return {
     sendPingTransaction,
+    sendContactTransaction,
     sendPingTransactionFromAbi,
     sendPongTransaction,
     sendPongTransactionFromAbi,

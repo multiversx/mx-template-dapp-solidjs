@@ -13,7 +13,7 @@ import { useGetTimeToPong, useGetPingAmount } from './hooks';
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
   const hasPendingTransactions = false; // TODO: Implement this somewhere
-  const { sendPingTransaction, sendPongTransaction } =
+  const { sendPingTransaction, sendPongTransaction, sendContactTransaction } =
     useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
@@ -28,6 +28,10 @@ export const PingPongRaw = () => {
     if (timeRemaining && timeRemaining >= 0) {
       setSecondsLeft(timeRemaining);
     }
+  };
+
+  const onSendContactTransaction = async () => {
+    await sendContactTransaction();
   };
 
   const onSendPingTransaction = async () => {
@@ -53,6 +57,15 @@ export const PingPongRaw = () => {
     <div class='flex flex-col gap-6'>
       <div class='flex flex-col gap-2'>
         <div class='flex justify-start gap-2'>
+          <Button
+            disabled={!hasPing() || hasPendingTransactions}
+            onClick={onSendContactTransaction}
+            data-testid='btnPingRaw'
+            data-cy='transactionBtn'
+          >
+            <Fa icon={faArrowUp} size='sm' class='mr-1' />
+            Send to contact
+          </Button>
           <Button
             disabled={!hasPing() || hasPendingTransactions}
             onClick={onSendPingTransaction}

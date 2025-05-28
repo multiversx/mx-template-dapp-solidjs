@@ -1,7 +1,7 @@
-export type { ICustomProvider } from '@multiversx/sdk-dapp/out/core/providers/types/providerFactory.types';
-export type { IProvider } from '@multiversx/sdk-dapp/out/core/providers/types/providerFactory.types';
-export type { IProviderFactory } from '@multiversx/sdk-dapp/out/core/providers/types/providerFactory.types';
-export { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/core/providers/types/providerFactory.types';
+export type { ICustomProvider } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+export type { IProvider } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+export type { IProviderFactory } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+export { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 export type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 export {
   EnvironmentsEnum,
@@ -23,5 +23,5 @@ export type {
   FormatAmountControllerPropsType
 } from '@multiversx/sdk-dapp/out/controllers/FormatAmountController/types';
 export type { StoreType } from '@multiversx/sdk-dapp/out/store/store.types';
-export type { InitAppType } from '@multiversx/sdk-dapp/out/core/methods/initApp/initApp.types';
+export type { InitAppType } from '@multiversx/sdk-dapp/out/methods/initApp/initApp.types';
 export type { TransactionsTableRowType } from '@multiversx/sdk-dapp/out/controllers/TransactionsTableController/transactionsTableController.types';

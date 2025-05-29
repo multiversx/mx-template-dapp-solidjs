@@ -1033,10 +1033,10 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-2.0.0.tgz#15cae568ae5d25ea2ac12c3793d52d18db5ac1fe"
   integrity sha512-NcaQUgXrjDqjKJgbUj1eM11ID7sDJRVFamjEA/VO4qquP8jBOrSeW0ltvppHElZGC/A14tNDERPbZQkrLIa2KQ==
 
-"@multiversx/sdk-dapp@5.0.0-alpha.3":
-  version "5.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.3.tgz#18aa5f2add769ee45bbf1a982dcf6f3cb9ac21c6"
-  integrity sha512-aXGAQsz1d7YKnH2mGr06d0RmalhCMtvqaTmb1QBSPLqfj4g1a8xYx3bLPvdc06idE5AipTyRra55nst2AMhKbA==
+"@multiversx/sdk-dapp@5.0.0-alpha.4":
+  version "5.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.4.tgz#3ecb1a707446685b1b34da13bd9ec2ccd4b0f472"
+  integrity sha512-9a91V/bcudZAbhzfkf/42N7Tu2CL5SbaupySl7Om9LUUn4lSTVTUzkb/xay3Khx/nc97+jRhttsPxNWo1nAf3w==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "14.0.2"

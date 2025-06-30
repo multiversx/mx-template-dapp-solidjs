@@ -24,4 +24,4 @@ export type {
 } from '@multiversx/sdk-dapp/out/controllers/FormatAmountController/types';
 export type { StoreType } from '@multiversx/sdk-dapp/out/store/store.types';
 export type { InitAppType } from '@multiversx/sdk-dapp/out/methods/initApp/initApp.types';
-export type { TransactionsTableRowType } from '@multiversx/sdk-dapp/out/controllers/TransactionsTableController/transactionsTableController.types';
+export type { TransactionsRowType } from '@multiversx/sdk-dapp/out/controllers/TransactionsTableController/transactionsTableController.types';

@@ -6,6 +6,7 @@ import { getAccountProvider, getIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import { ConnectButton } from './ConnectButton';
 import { NotificationsButton } from './NotificationsButton';
+import { GitHubButton } from './GitHubButton';
 
 export const Header = () => {
   const isLoggedIn = getIsLoggedIn();
@@ -35,6 +36,7 @@ export const Header = () => {
 
           {isLoggedIn ? (
             <>
+              <GitHubButton />
               <NotificationsButton />
               <Button
                 onClick={handleLogout}

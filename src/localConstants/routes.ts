@@ -4,3 +4,6 @@ export enum RouteNamesEnum {
   unlock = '/unlock',
   disclaimer = '/disclaimer'
 }
+
+export const GITHUB_REPO =
+  'https://github.com/multiversx/mx-template-dapp-solidjs';

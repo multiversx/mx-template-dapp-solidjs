@@ -4,11 +4,11 @@ import { TransactionOutput } from './TransactionOutput';
 export const TransactionsOutput = ({
   transactions
 }: {
-  transactions: SignedTransactionType[];
+  transactions: () => SignedTransactionType[];
 }) => {
   return (
     <div class='flex flex-col gap-4'>
-      {transactions?.map((transaction) => {
+      {transactions?.().map((transaction) => {
         return <TransactionOutput transaction={transaction} />;
       })}
     </div>

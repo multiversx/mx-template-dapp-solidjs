@@ -9,8 +9,6 @@ import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
 import { getPendingTransactions, getStore } from 'lib';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
-import { ContractAddress } from 'components/ContractAddress';
-import { Label } from 'components';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {

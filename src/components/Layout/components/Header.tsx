@@ -2,9 +2,11 @@ import { useNavigate } from '@solidjs/router';
 import MultiversXLogo from 'assets/img/multiversx-logo.svg?component-solid';
 import { Button } from 'components/Button';
 import { MxLink } from 'components/MxLink';
+import { environment } from 'config';
 import { getAccountProvider, getIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import { ConnectButton } from './ConnectButton';
+import { GitHubButton } from './GitHubButton';
 import { NotificationsButton } from './NotificationsButton';
 
 export const Header = () => {
@@ -30,11 +32,12 @@ export const Header = () => {
         <div class='flex justify-end container mx-auto items-center gap-2'>
           <div class='flex gap-1 items-center'>
             <div class='w-2 h-2 rounded-full bg-green-500' />
-            <p class='text-gray-600'>{'environment'}</p>
+            <p class='text-gray-600'>{environment}</p>
           </div>
 
           {isLoggedIn ? (
             <>
+              <GitHubButton />
               <NotificationsButton />
               <Button
                 onClick={handleLogout}

@@ -1,18 +1,29 @@
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import Fa from 'solid-fa';
-import { createSignal } from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 import { Button } from 'components/Button';
 import { PingPongOutput } from 'components/OutputContainer/components';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
+import { getPendingTransactions, getStore } from 'lib';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
-  const hasPendingTransactions = false; // TODO: Implement this somewhere
+  const store = getStore();
+  const [transactions, setTransactions] = createSignal(
+    getPendingTransactions()
+  );
+  const unsubscribe = store.subscribe(() => {
+    setTransactions(getPendingTransactions());
+  });
+
+  onCleanup(() => unsubscribe());
+
+  const hasPendingTransactions = transactions().length > 0;
   const { sendPingTransaction, sendPongTransaction } =
     useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
@@ -43,11 +54,15 @@ export const PingPongRaw = () => {
     .seconds(secondsLeft() ?? 0)
     .format('mm:ss');
 
-  const pongAllowed = secondsLeft() === 0;
+  const pongAllowed = () => secondsLeft() === 0;
 
-  getCountdownSeconds({ secondsLeft: secondsLeft(), setSecondsLeft });
+  createEffect(() => {
+    getCountdownSeconds({ secondsLeft: secondsLeft(), setSecondsLeft });
+  });
 
-  setSecondsRemaining();
+  createEffect(() => {
+    setSecondsRemaining();
+  });
 
   return (
     <div class='flex flex-col gap-6'>
@@ -77,8 +92,8 @@ export const PingPongRaw = () => {
 
       <OutputContainer>
         <PingPongOutput
-          transactions={[]}
-          pongAllowed={pongAllowed}
+          transactions={transactions()}
+          pongAllowed={pongAllowed()}
           timeRemaining={timeRemaining}
         />
       </OutputContainer>

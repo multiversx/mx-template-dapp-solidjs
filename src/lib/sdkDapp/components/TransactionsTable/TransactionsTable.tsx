@@ -7,7 +7,7 @@ import {
   ServerTransactionType
 } from 'lib';
 import {
-  ITransactionsTableRow,
+  TransactionRowType,
   TransactionsTableSDKPropsType
 } from 'lib/sdkDappUI/sdkDappUI.types';
 import { IPropsWithClass } from 'types';
@@ -36,7 +36,7 @@ export const TransactionsTable = (props: TransactionsTablePropsType) => {
     });
 
     Object.assign(elementRef, props, {
-      transactions: data as ITransactionsTableRow[]
+      transactions: data as TransactionRowType[]
     });
   });
 

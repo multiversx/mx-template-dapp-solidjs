@@ -6,7 +6,7 @@ import { TransactionsOutput } from './TransactionsOutput';
 type PingPongOutputType = {
   timeRemaining: string;
   pongAllowed: boolean;
-  transactions?: () => SignedTransactionType[];
+  transactions?: SignedTransactionType[];
 };
 
 export const PingPongOutput = ({

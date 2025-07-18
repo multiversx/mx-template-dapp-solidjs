@@ -92,7 +92,7 @@ export const PingPongRaw = () => {
 
       <OutputContainer>
         <PingPongOutput
-          transactions={transactions}
+          transactions={transactions()}
           pongAllowed={pongAllowed()}
           timeRemaining={timeRemaining}
         />

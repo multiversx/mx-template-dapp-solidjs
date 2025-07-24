@@ -39,6 +39,7 @@ export const Header = () => {
 
           {isLoggedIn ? (
             <>
+              <GitHubButton />
               <NotificationsButton />
               <Button
                 onClick={handleLogout}

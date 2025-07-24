@@ -1,4 +1,4 @@
-import { GITHUB_REPO_URL } from 'localConstants';
+import { GITHUB_REPO_URL } from 'config';
 
 export const GitHubButton = () => {
   return (

@@ -35,9 +35,10 @@ export const Header = () => {
             <p class='text-gray-600'>{environment}</p>
           </div>
 
+          <GitHubButton />
+
           {isLoggedIn ? (
             <>
-              <GitHubButton />
               <NotificationsButton />
               <Button
                 onClick={handleLogout}

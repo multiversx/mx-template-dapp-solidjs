@@ -15,7 +15,7 @@ export const Button = ({
   type = 'button',
   id,
   class:
-    className = 'flex items-center justify-center rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed',
+    className = 'flex items-center justify-center rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-btn-primary text-btn-primary font-bold cursor-pointer',
   ...otherProps
 }: ButtonType) => {
   return (

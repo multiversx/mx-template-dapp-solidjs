@@ -5,3 +5,7 @@ export * from './Button';
 export * from './MxLink';
 export * from './Label';
 export * from './Card';
+export * from './Header';
+export * from './Footer';
+export * from './Tooltip';
+export * from './Logo';

@@ -13,13 +13,13 @@ import { GITHUB_REPO_URL } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
   getAccountProvider,
-  // MvxDataWithExplorerLink,
+  MvxDataWithExplorerLink,
   NotificationsFeedManager,
   getAccount,
   getIsLoggedIn,
   networkSelector,
-  getState,
-  UnlockPanelManager
+  UnlockPanelManager,
+  getState
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
@@ -52,6 +52,7 @@ interface HeaderBrowseButtonType {
 
 export const Header = () => {
   const network = networkSelector(getState());
+  const address = getAccount()?.address;
 
   const isLoggedIn = getIsLoggedIn();
   const provider = getAccountProvider();
@@ -148,11 +149,11 @@ export const Header = () => {
             />
 
             <div class={styles.headerNavigationAddressExplorer}>
-              {/* <MvxDataWithExplorerLink
+              <MvxDataWithExplorerLink
                 data={address}
                 withTooltip={true}
                 explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
-              /> */}
+              />
             </div>
 
             <Tooltip

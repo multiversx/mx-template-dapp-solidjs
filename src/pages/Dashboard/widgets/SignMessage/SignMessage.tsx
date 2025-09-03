@@ -29,7 +29,7 @@ export const SignMessage = () => {
     'pending'
   );
 
-  const [signatrue, setSignatrue] = createSignal('');
+  const [signature, setSignatrue] = createSignal('');
   const address = getAccount()?.address;
   const provider = getAccountProvider();
 
@@ -95,7 +95,7 @@ export const SignMessage = () => {
           {state() === 'success' && signedMessage != null && (
             <SignSuccess
               signedMessage={signedMessage as any}
-              signature={signatrue()}
+              signature={signature()}
               address={address}
             />
           )}

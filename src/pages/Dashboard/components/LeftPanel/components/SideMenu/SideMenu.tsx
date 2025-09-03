@@ -1,7 +1,6 @@
 import {
   faChevronUp,
   faFilter,
-  faFingerprint,
   faPenNib,
   faRectangleList,
   faTableTennisPaddleBall,
@@ -11,9 +10,6 @@ import classNames from 'classnames';
 
 import Fa from 'solid-fa';
 import { createSignal, JSX } from 'solid-js';
-import IconBatch from 'assets/img/batch-tx.svg';
-import IconAbi from 'assets/img/ping-pong-abi.svg';
-import IconBackend from 'assets/img/ping-pong-backend.svg';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 // prettier-ignore
@@ -49,29 +45,9 @@ const menuItems: MenuItemsType[] = [
     id: ItemsIdentifiersEnum.pingPongRaw
   },
   {
-    title: 'Ping & Pong (ABI)',
-    icon: IconAbi,
-    id: ItemsIdentifiersEnum.pingPongAbi
-  },
-  {
-    title: 'Ping & Pong (Backend)',
-    icon: IconBackend,
-    id: ItemsIdentifiersEnum.pingPongService
-  },
-  {
     title: 'Sign message',
     icon: faPenNib,
     id: ItemsIdentifiersEnum.signMessage
-  },
-  {
-    title: 'Native auth',
-    icon: faFingerprint,
-    id: ItemsIdentifiersEnum.nativeAuth
-  },
-  {
-    title: 'Batch Transactions',
-    icon: IconBatch,
-    id: ItemsIdentifiersEnum.batchTransactions
   },
   {
     title: 'Transactions (All)',
@@ -122,18 +98,19 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
       <div class={styles.sideMenuHeader}>
         <h2 class={styles.sideMenuHeaderTitle}>Library</h2>
 
-        <Fa
-          icon={faChevronUp}
+        <button
           class={classNames(styles.sideMenuHeaderIcon, {
-            [styles.sideMenuHeaderIconRotated]: isCollapsed
+            [styles.sideMenuHeaderIconRotated]: isCollapsed()
           })}
-          // onClick={toggleCollapse}
-        />
+          onClick={toggleCollapse}
+        >
+          <Fa icon={faChevronUp} />
+        </button>
       </div>
 
       <div
         class={classNames(styles.sideMenuItems, {
-          [styles.sideMenuItemsHidden]: isCollapsed
+          [styles.sideMenuItemsHidden]: isCollapsed()
         })}
       >
         {menuItems.map((item) => (

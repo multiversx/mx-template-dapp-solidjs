@@ -14,11 +14,11 @@ import { useStore } from 'hooks';
 import {
   DECIMALS,
   DIGITS,
+  FormatAmount,
   FormatAmountController,
   getAccount,
-  networkSelector
-  // MvxFormatAmount,
-  // MvxTrim,
+  networkSelector,
+  MvxTrim
 } from 'lib';
 
 import { Username } from './components';
@@ -77,12 +77,12 @@ export const Account = () => {
         <Fa icon={faWallet} class={styles.connectedAccountDetailsIcon} />
       ) as JSX.Element,
       label: 'Address',
-      value:
-        // <MvxTrim
-        //   text={address}
-        //   class={styles.connectedAccountDetailsTrimAddress}
-        // />
-        (<></>) as JSX.Element
+      value: (
+        <MvxTrim
+          text={address}
+          class={styles.connectedAccountDetailsTrimAddress}
+        />
+      ) as JSX.Element
     },
     {
       icon: herotag ? (
@@ -114,17 +114,17 @@ export const Account = () => {
         </div>
       ) as JSX.Element,
       label: 'Balance',
-      value:
-        // <MvxFormatAmount
-        //   isValid={isValid}
-        //   valueInteger={valueInteger}
-        //   valueDecimal={valueDecimal}
-        //   label={label}
-        //   data-testid='balance'
-        //   decimalClass='opacity-70'
-        //   labelClass='opacity-70'
-        // />
-        (<></>) as JSX.Element
+      value: (
+        <FormatAmount
+          isValid={isValid}
+          valueInteger={valueInteger}
+          valueDecimal={valueDecimal}
+          label={label}
+          data-testid='balance'
+          decimalClass='opacity-70'
+          labelClass='opacity-70'
+        />
+      ) as JSX.Element
     }
   ];
 
@@ -135,19 +135,20 @@ export const Account = () => {
           Connected account details
         </h2>
 
-        <Fa
-          icon={faChevronUp}
+        <button
           class={classNames(styles.connectedAccountHeaderIcon, {
-            [styles.connectedAccountHeaderIconRotated]: isCollapsed
+            [styles.connectedAccountHeaderIconRotated]: isCollapsed()
           })}
-          // onClick={toggleCollapse}
-        />
+          onClick={toggleCollapse}
+        >
+          <Fa icon={faChevronUp} />
+        </button>
       </div>
 
       <div
         data-testid='topInfo'
         class={classNames(styles.connectedAccountDetails, {
-          [styles.connectedAccountDetailsHidden]: isCollapsed
+          [styles.connectedAccountDetailsHidden]: isCollapsed()
         })}
       >
         {accountDetails.map((accountDetail) => (

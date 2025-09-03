@@ -1,15 +1,18 @@
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
 import moment from 'moment';
 
+import Fa from 'solid-fa';
 import { createEffect, createSignal, onCleanup } from 'solid-js';
 import { Label, OutputContainer, PingPongOutput } from 'components';
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-// import { MvxButton, MvxDataWithExplorerLink } from 'lib';
 import {
   ACCOUNTS_ENDPOINT,
+  MvxDataWithExplorerLink,
   getPendingTransactions,
   getStore,
+  MvxButton,
   Transaction
 } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
@@ -43,7 +46,6 @@ export const PingPongComponent = ({
   getTimeToPong,
   pingAmount
 }: PingPongComponentPropsType) => {
-  // const transactions = getPendingTransactions();
   const store = getStore();
   const [transactions, setTransactions] = createSignal(
     getPendingTransactions()
@@ -53,7 +55,7 @@ export const PingPongComponent = ({
   });
 
   onCleanup(() => unsubscribe());
-  const hasPendingTransactions = transactions.length > 0;
+  const hasPendingTransactions = transactions().length > 0;
 
   const [hasPing, setHasPing] = createSignal<boolean>(true);
   const [secondsLeft, setSecondsLeft] = createSignal<number>(0);
@@ -99,12 +101,12 @@ export const PingPongComponent = ({
         <OutputContainer>
           {!hasPendingTransactions && (
             <>
-              {/* <MvxDataWithExplorerLink
+              <MvxDataWithExplorerLink
                 withTooltip={true}
                 data={contractAddress}
-                className={styles.addressComponent}
+                class={styles.addressComponent}
                 explorerLink={`/${ACCOUNTS_ENDPOINT}/${contractAddress}`}
-              /> */}
+              />
 
               {!pongAllowed && (
                 <p>
@@ -127,31 +129,27 @@ export const PingPongComponent = ({
 
       <div class={styles.buttonsContainer}>
         <div class={styles.buttons}>
-          {/* <MvxButton
+          <MvxButton
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
             size='small'
+            variant='primary'
           >
-            <Fa
-              icon={faArrowUp}
-              className={styles.buttonContent}
-            />
+            <Fa icon={faArrowUp} class={styles.buttonContent} />
 
             <span class={styles.buttonContent}>Ping</span>
           </MvxButton>
 
           <MvxButton
-            disabled={!pongAllowed || hasPing || hasPendingTransactions}
+            disabled={!pongAllowed || hasPing() || hasPendingTransactions}
             onClick={onSendPongTransaction}
             size='small'
+            variant='primary'
           >
-            <Fa
-              icon={faArrowDown}
-              className={styles.buttonContent}
-            />
+            <Fa icon={faArrowDown} class={styles.buttonContent} />
 
             <span class={styles.buttonContent}>Pong</span>
-          </MvxButton> */}
+          </MvxButton>
         </div>
       </div>
     </div>

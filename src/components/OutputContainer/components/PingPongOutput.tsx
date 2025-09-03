@@ -1,14 +1,11 @@
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-
-import Fa from 'solid-fa';
 import { Label } from 'components';
 import { contractAddress } from 'config';
 import { useStore } from 'hooks';
 import {
   ACCOUNTS_ENDPOINT,
   getExplorerLink,
+  MvxDataWithExplorerLink,
   networkSelector,
-  // MvxCopyButton,
   SignedTransactionType
 } from 'lib';
 
@@ -47,17 +44,11 @@ export const PingPongOutput = ({
 
   return (
     <>
-      <div class={styles.pingPongAddressContainer}>
-        {contractAddress}
-
-        <div class={styles.pingPongButtons}>
-          {/* <MvxCopyButton text={contractAddress} /> */}
-
-          <a href={explorerLink} target='_blank' rel='noreferrer'>
-            <Fa icon={faArrowUpRightFromSquare} />
-          </a>
-        </div>
-      </div>
+      <MvxDataWithExplorerLink
+        withTooltip={true}
+        data={contractAddress}
+        explorerLink={explorerLink}
+      />
 
       <TransactionsOutput transactions={transactions} />
 

@@ -1,16 +1,16 @@
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-
-import Fa from 'solid-fa';
 import { Label } from 'components';
 import { useStore } from 'hooks';
 import {
   ACCOUNTS_ENDPOINT,
+  DECIMALS,
+  DIGITS,
   FormatAmount,
+  FormatAmountController,
   getAccount,
   getExplorerLink,
   getState,
+  MvxDataWithExplorerLink,
   networkSelector,
-  // MvxCopyButton,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT
 } from 'lib';
@@ -32,6 +32,13 @@ export const TransactionOutput = ({
   const store = useStore();
   const network = networkSelector(getState());
   const account = getAccount(store());
+  const { isValid, valueDecimal, valueInteger, label } =
+    FormatAmountController.getData({
+      digits: DIGITS,
+      decimals: DECIMALS,
+      egldLabel: network.egldLabel,
+      input: account.balance
+    });
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
@@ -51,17 +58,11 @@ export const TransactionOutput = ({
       <div class={styles.transactionElementContainer}>
         <Label>Hash:</Label>
 
-        <div class={styles.transactionElement}>
-          {transaction.hash}
-
-          <div class={styles.buttons}>
-            {/* <MvxCopyButton text={transaction.hash} /> */}
-
-            <a href={hashExplorerLink} target='_blank' rel='noreferrer'>
-              <Fa icon={faArrowUpRightFromSquare} />
-            </a>
-          </div>
-        </div>
+        <MvxDataWithExplorerLink
+          withTooltip={true}
+          data={transaction.hash}
+          explorerLink={hashExplorerLink}
+        />
       </div>
 
       <div class={styles.transactionElementContainer}>
@@ -69,19 +70,25 @@ export const TransactionOutput = ({
         <div class={styles.transactionElement}>
           {transaction.receiver}
 
-          <div class={styles.buttons}>
-            {/* <MvxCopyButton text={transaction.receiver} /> */}
-
-            <a href={receiverExplorerLink} target='_blank' rel='noreferrer'>
-              <Fa icon={faArrowUpRightFromSquare} />
-            </a>
-          </div>
+          <MvxDataWithExplorerLink
+            withTooltip={true}
+            data={transaction.receiver}
+            explorerLink={receiverExplorerLink}
+          />
         </div>
       </div>
 
       <p>
         <Label>Amount: </Label>
-        <FormatAmount value={account.balance} />
+        <FormatAmount
+          isValid={isValid}
+          valueInteger={valueInteger}
+          valueDecimal={valueDecimal}
+          label={label}
+          data-testid='balance'
+          decimalClass='opacity-70'
+          labelClass='opacity-70'
+        />
       </p>
       <p>
         <Label>Gas price: </Label>

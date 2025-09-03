@@ -1,5 +1,10 @@
 import { IPropsWithChildren } from 'types';
 
-export const Label = ({ children }: IPropsWithChildren) => {
-  return <label class='text-gray-500'>{children}</label>;
-};
+// prettier-ignore
+const styles = {
+  labelContainer: 'label-container text-secondary transition-all duration-200 ease-out text-sm font-normal'
+} satisfies Record<string, string>;
+
+export const Label = ({ children }: IPropsWithChildren) => (
+  <label class={styles.labelContainer}>{children}</label>
+);

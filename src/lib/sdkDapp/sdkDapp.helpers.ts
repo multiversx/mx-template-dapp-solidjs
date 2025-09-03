@@ -11,3 +11,5 @@ export { initApp } from '@multiversx/sdk-dapp/out/methods/initApp/initApp';
 export { setAxiosInterceptors } from '@multiversx/sdk-dapp/out/utils/network/setAxiosInterceptors';
 export { refreshAccount } from '@multiversx/sdk-dapp/out/utils/account/refreshAccount';
 export { getStore } from '@multiversx/sdk-dapp/out/store/store';
+export { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
+export { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';

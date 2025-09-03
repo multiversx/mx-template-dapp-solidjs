@@ -26,7 +26,7 @@ const decodeTime = (data: PingPongResponseType) => {
 
 export const useGetTimeToPong = () => {
   const network = networkSelector(getState());
-  const { address } = getAccount();
+  const address = getAccount()?.address;
 
   const getTimeToPong = async () => {
     try {

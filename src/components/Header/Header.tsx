@@ -10,7 +10,6 @@ import { useNavigate } from '@solidjs/router';
 import Fa from 'solid-fa';
 import { Button, Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
-import { useStore } from 'hooks';
 import {
   ACCOUNTS_ENDPOINT,
   getAccountProvider,
@@ -19,7 +18,8 @@ import {
   getAccount,
   getIsLoggedIn,
   networkSelector,
-  getState
+  getState,
+  UnlockPanelManager
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
@@ -51,13 +51,20 @@ interface HeaderBrowseButtonType {
 }
 
 export const Header = () => {
-  const store = useStore();
   const network = networkSelector(getState());
-  const { address } = getAccount(store());
 
   const isLoggedIn = getIsLoggedIn();
   const provider = getAccountProvider();
   const navigate = useNavigate();
+  const unlockPanelManager = UnlockPanelManager.init({
+    loginHandler: () => {
+      navigate(RouteNamesEnum.dashboard);
+    }
+  });
+
+  const handleOpenUnlockPanel = () => {
+    unlockPanelManager.openUnlockPanel();
+  };
 
   const handleLogout = async (event: MouseEvent) => {
     event.preventDefault();
@@ -68,11 +75,6 @@ export const Header = () => {
   const handleGitHubBrowsing = (event: MouseEvent) => {
     event.preventDefault();
     window.open(GITHUB_REPO_URL);
-  };
-
-  const handleLogIn = (event: MouseEvent) => {
-    event.preventDefault();
-    navigate(RouteNamesEnum.unlock);
   };
 
   const handleNotificationsBrowsing = (event: MouseEvent) => {
@@ -169,7 +171,9 @@ export const Header = () => {
           </div>
         )}
 
-        {!isLoggedIn && <Button onClick={handleLogIn}>Connect</Button>}
+        {!isLoggedIn && (
+          <Button onClick={handleOpenUnlockPanel}>Connect</Button>
+        )}
       </nav>
     </header>
   );

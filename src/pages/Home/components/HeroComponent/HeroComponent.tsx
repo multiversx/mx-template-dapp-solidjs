@@ -9,6 +9,7 @@ import BrightLightIcon from 'assets/img/bright-light-icon.svg';
 import TealLabIcon from 'assets/img/teal-lab-icon.svg';
 import VibeModeIcon from 'assets/img/vibe-mode-icon.svg';
 import { Button } from 'components';
+import { UnlockPanelManager } from 'lib';
 import { DOCUMENTATION_LINK, RouteNamesEnum } from 'localConstants';
 
 // prettier-ignore
@@ -70,11 +71,15 @@ export const HeroComponent = () => {
   );
 
   const navigate = useNavigate();
-
-  const handleLogIn = (event: MouseEvent) => {
-    event.preventDefault();
-    navigate(RouteNamesEnum.unlock);
+  const handleOpenUnlockPanel = () => {
+    unlockPanelManager.openUnlockPanel();
   };
+
+  const unlockPanelManager = UnlockPanelManager.init({
+    loginHandler: () => {
+      navigate(RouteNamesEnum.dashboard);
+    }
+  });
 
   const activeTheme = themeOptions.find(
     (themeOption) => themeOption.identifier === rootTheme()
@@ -118,7 +123,7 @@ export const HeroComponent = () => {
         </div>
 
         <div class={styles.heroSectionTopButtons}>
-          <Button onClick={handleLogIn}>Connect Wallet</Button>
+          <Button onClick={handleOpenUnlockPanel}>Connect Wallet</Button>
 
           <a
             href={DOCUMENTATION_LINK}

@@ -9,3 +9,5 @@ export * from './Header';
 export * from './Footer';
 export * from './Tooltip';
 export * from './Logo';
+export * from './MissingNativeAuthError';
+export * from './PingPongComponent';

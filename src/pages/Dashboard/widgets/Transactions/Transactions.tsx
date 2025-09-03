@@ -4,6 +4,12 @@ import { getActiveTransactionsStatus, TransactionsTable } from 'lib';
 import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';
 
+// prettier-ignore
+const styles = {
+  transactionsContainer: 'transactions-container flex flex-col border border-secondary rounded-xl transition-all duration-200 ease-out',
+  transactionsTable: 'transactions-table w-full h-full overflow-x-auto shadow rounded-lg'
+} satisfies Record<string, string>;
+
 export const Transactions = (props: TransactionsPropsType) => {
   const { isLoading, transactions, getTransactions } =
     useGetTransactions(props);
@@ -25,13 +31,13 @@ export const Transactions = (props: TransactionsPropsType) => {
       when={!isLoading() && transactions().length > 0}
       fallback={
         <OutputContainer>
-          <p class='text-gray-400'>No transactions found</p>
+          <p>No transactions found</p>
         </OutputContainer>
       }
     >
-      <div class='flex flex-col'>
+      <div class={styles.transactionsContainer}>
         <OutputContainer isLoading={isLoading()} class='p-0'>
-          <div class='w-full h-full overflow-x-auto bg-white shadow rounded-lg'>
+          <div class={styles.transactionsTable}>
             <TransactionsTable transactions={transactions()} />
           </div>
         </OutputContainer>

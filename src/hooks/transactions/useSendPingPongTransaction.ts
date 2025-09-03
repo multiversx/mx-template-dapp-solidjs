@@ -29,7 +29,7 @@ const PONG_TRANSACTION_INFO = {
 export const useSendPingPongTransaction = () => {
   const store = useStore();
   const network = networkSelector(store());
-  const { address } = getAccount(store());
+  const address = getAccount()?.address;
 
   const getSmartContractFactory = async () => {
     const response = await axios.get('src/contracts/ping-pong.abi.json');

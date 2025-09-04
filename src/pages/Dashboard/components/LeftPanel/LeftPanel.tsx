@@ -9,7 +9,13 @@ import classNames from 'classnames';
 import Fa from 'solid-fa';
 import IconExpand from 'assets/img/expand-up-down.svg';
 import { Logo } from 'components';
-import { getAccount, getAccountProvider, getIsLoggedIn } from 'lib';
+import {
+  ACCOUNTS_ENDPOINT,
+  getAccount,
+  getAccountProvider,
+  getIsLoggedIn,
+  MvxDataWithExplorerLink
+} from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
 import { Account, SideMenu } from './components';
@@ -28,7 +34,8 @@ const styles = {
   leftPanelMobileAddressIcon: 'left-panel-mobile-address-icon text-accent transition-all duration-200 ease-out',
   logoutButton: 'text-center text-link hover:text-primary transition-all duration-200 ease-out cursor-pointer',
   leftPanelComponents: 'flex flex-col gap-4 bg-accent p-6 lg:p-0 rounded-2xl transition-all duration-200 ease-out',
-  leftPanelBar: 'w-full h-0.25 bg-neutral-700 opacity-40 transition-all duration-200 ease-out'
+  leftPanelBar: 'w-full h-0.25 bg-neutral-700 opacity-40 transition-all duration-200 ease-out',
+  trimmedAddress: 'w-full text-primary'
 } satisfies Record<string, string>;
 
 interface LeftPanelPropsType {
@@ -87,7 +94,12 @@ export const LeftPanel = ({
           <div class={styles.leftPanelMobileAddress}>
             <Fa icon={faWallet} class={styles.leftPanelMobileAddressIcon} />
 
-            {/* <AddressComponent address={address} isHeader /> */}
+            <MvxDataWithExplorerLink
+              data={address}
+              class={styles.trimmedAddress}
+              withTooltip={true}
+              explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
+            />
           </div>
 
           {isLoggedIn && (

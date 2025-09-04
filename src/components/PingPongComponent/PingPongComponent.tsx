@@ -55,7 +55,7 @@ export const PingPongComponent = ({
   });
 
   onCleanup(() => unsubscribe());
-  const hasPendingTransactions = transactions().length > 0;
+  const hasPendingTransactions = () => transactions().length > 0;
 
   const [hasPing, setHasPing] = createSignal<boolean>(true);
   const [secondsLeft, setSecondsLeft] = createSignal<number>(0);
@@ -65,7 +65,7 @@ export const PingPongComponent = ({
     const { canPing, timeRemaining } = setTimeRemaining(secondsRemaining);
 
     setHasPing(canPing);
-    if (timeRemaining && timeRemaining >= 0) {
+    if (timeRemaining !== undefined && timeRemaining >= 0) {
       setSecondsLeft(timeRemaining);
     }
   };
@@ -78,18 +78,21 @@ export const PingPongComponent = ({
     await sendPongTransaction();
   };
 
-  const timeRemaining = moment()
-    .startOf('day')
-    .seconds(secondsLeft() ?? 0)
-    .format('mm:ss');
+  const timeRemaining = () =>
+    moment()
+      .startOf('day')
+      .seconds(secondsLeft() ?? 0)
+      .format('mm:ss');
 
-  const pongAllowed = secondsLeft() === 0;
+  const pongAllowed = () => secondsLeft() === 0;
 
   createEffect(() => {
     getCountdownSeconds({ secondsLeft: secondsLeft(), setSecondsLeft });
   });
 
   createEffect(() => {
+    hasPing();
+    hasPendingTransactions();
     setSecondsRemaining();
   });
 
@@ -99,7 +102,7 @@ export const PingPongComponent = ({
         <Label>Contract: </Label>
 
         <OutputContainer>
-          {!hasPendingTransactions && (
+          {!hasPendingTransactions() && (
             <>
               <MvxDataWithExplorerLink
                 withTooltip={true}
@@ -108,10 +111,10 @@ export const PingPongComponent = ({
                 explorerLink={`/${ACCOUNTS_ENDPOINT}/${contractAddress}`}
               />
 
-              {!pongAllowed && (
+              {!pongAllowed() && (
                 <p>
                   <Label>Time remaining: </Label>
-                  <span class={styles.timeRemaining}>{timeRemaining}</span>
+                  <span class={styles.timeRemaining}>{timeRemaining()}</span>
 
                   <span> until able to pong</span>
                 </p>
@@ -121,8 +124,8 @@ export const PingPongComponent = ({
 
           <PingPongOutput
             transactions={transactions()}
-            pongAllowed={pongAllowed}
-            timeRemaining={timeRemaining}
+            pongAllowed={pongAllowed()}
+            timeRemaining={timeRemaining()}
           />
         </OutputContainer>
       </div>
@@ -130,7 +133,7 @@ export const PingPongComponent = ({
       <div class={styles.buttonsContainer}>
         <div class={styles.buttons}>
           <MvxButton
-            disabled={!hasPing || hasPendingTransactions}
+            disabled={!hasPing() || hasPendingTransactions()}
             onClick={onSendPingTransaction}
             size='small'
             variant='primary'
@@ -141,7 +144,7 @@ export const PingPongComponent = ({
           </MvxButton>
 
           <MvxButton
-            disabled={!pongAllowed || hasPing() || hasPendingTransactions}
+            disabled={!pongAllowed() || hasPing() || hasPendingTransactions()}
             onClick={onSendPongTransaction}
             size='small'
             variant='primary'

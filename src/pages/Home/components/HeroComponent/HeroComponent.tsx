@@ -3,13 +3,12 @@ import { useNavigate } from '@solidjs/router';
 import classNames from 'classnames';
 
 import Fa from 'solid-fa';
-import { Component, createSignal, JSX, onMount } from 'solid-js';
+import { Component, createMemo, createSignal, JSX, onMount } from 'solid-js';
 
 import BrightLightIcon from 'assets/img/bright-light-icon.svg';
 import TealLabIcon from 'assets/img/teal-lab-icon.svg';
 import VibeModeIcon from 'assets/img/vibe-mode-icon.svg';
-import { Button } from 'components';
-import { UnlockPanelManager } from 'lib';
+import { MvxButton, UnlockPanelManager } from 'lib';
 import { DOCUMENTATION_LINK, RouteNamesEnum } from 'localConstants';
 
 // prettier-ignore
@@ -20,7 +19,7 @@ const styles = {
   heroTitle: 'hero-title !text-primary text-[42px] lg:text-[84px] font-medium leading-[1] tracking-[-2.52px] transition-all duration-200 ease-out',
   heroDescription: 'hero-description text-secondary text-xl lg:text-2xl lg:text-center leading-[1.5] tracking-[-0.24px] max-w-138 transition-all duration-200 ease-out',
   heroSectionTopButtons: 'hero-section-top-buttons flex flex-col lg:flex-row items-start lg:items-center justify-start gap-6',
-  heroSectionTopDocButton: 'hero-section-top-doc-button flex items-center px-3 text-btn-secondary bg-btn-secondary hover:bg-btn-primary hover:text-btn-primary font-bold rounded-xl h-8 lg:h-10 transition-all duration-200 ease-out',
+  heroSectionTopDocButton: 'hero-section-top-doc-button flex items-center px-3 text-btn-secondary bg-btn-secondary hover:bg-btn-primary hover:text-btn-primary font-bold rounded-xl h-8 lg:h-12 transition-all duration-200 ease-out',
   heroSectionTopDocButtonText: 'hero-section-top-doc-button-text px-4',
     heroSectionTopDocButtonIcon: 'hero-section-top-doc-button-icon px-3',
   heroSectionBottom: 'hero-section-bottom hidden lg:!flex gap-6',
@@ -81,8 +80,8 @@ export const HeroComponent = () => {
     }
   });
 
-  const activeTheme = themeOptions.find(
-    (themeOption) => themeOption.identifier === rootTheme()
+  const activeTheme = createMemo(() =>
+    themeOptions.find((themeOption) => themeOption.identifier === rootTheme())
   );
 
   const handleThemeSwitch =
@@ -111,7 +110,9 @@ export const HeroComponent = () => {
   });
 
   return (
-    <div class={classNames(styles.heroContainer, activeTheme?.backgroundClass)}>
+    <div
+      class={classNames(styles.heroContainer, activeTheme()?.backgroundClass)}
+    >
       <div class={styles.heroSectionTop}>
         <div class={styles.heroSectionTopContent}>
           <h1 class={styles.heroTitle}>dApp Template</h1>
@@ -123,7 +124,13 @@ export const HeroComponent = () => {
         </div>
 
         <div class={styles.heroSectionTopButtons}>
-          <Button onClick={handleOpenUnlockPanel}>Connect Wallet</Button>
+          <MvxButton
+            onClick={handleOpenUnlockPanel}
+            variant='primary'
+            size='large'
+          >
+            Connect Wallet
+          </MvxButton>
 
           <a
             href={DOCUMENTATION_LINK}
@@ -145,14 +152,13 @@ export const HeroComponent = () => {
       <div class={styles.heroSectionBottom}>
         {themeOptions.map((themeOption) => {
           const Icon = themeOption.icon;
-          console.log('The active theme is ', activeTheme);
 
           return (
             <div
               onClick={handleThemeSwitch(themeOption)}
               class={classNames(styles.heroSectionBottomThemeOptions, {
                 [styles.heroSectionBottomThemeOptionsOpacityFull]:
-                  themeOption.identifier === activeTheme?.identifier
+                  themeOption.identifier === activeTheme()?.identifier
               })}
             >
               <div class={styles.heroSectionBottomThemeOption}>
@@ -161,7 +167,7 @@ export const HeroComponent = () => {
                 <span class={styles.themeOptionTitle}>{themeOption.title}</span>
               </div>
 
-              {themeOption.identifier === activeTheme?.identifier && (
+              {themeOption.identifier === activeTheme()?.identifier && (
                 <>
                   <span class={styles.themeOptionActiveDot} />
 

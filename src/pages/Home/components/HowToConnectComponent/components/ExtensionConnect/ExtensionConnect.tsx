@@ -1,11 +1,11 @@
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
-// import { FunctionComponent, SVGProps } from 'react';
 
 import Fa from 'solid-fa';
+import { Component, JSX } from 'solid-js';
 import ArcLogo from 'assets/img/arc-logo.svg';
 import BraveLogo from 'assets/img/brave-logo.svg';
 import ChromeLogo from 'assets/img/chrome-logo.svg';
-// import Circles from 'assets/img/circles.svg';
+import circles from 'assets/img/circles.svg';
 import extensionImage from 'assets/img/extension-image.png';
 import FirefoxLogo from 'assets/img/firefox-logo.svg';
 import WalletBraveLogo from 'assets/img/wallet-brave-logo.svg';
@@ -31,17 +31,17 @@ const styles = {
   extensionCardDownloadSection: 'extension-card-download-section flex items-center justify-between max-w-80',
   extensionCardLink: 'extension-card-link text-accent hover:opacity-75 text-sm sm:text-lg font-semibold transition-all duration-200 ease-out flex items-center',
   extensionCardLinkTitle: 'extension-card-link-title p-2 xs:p-3',
-  extensionCardLogos: 'extension-card-logos flex gap-2.5 items-center',
+  extensionCardLogos: 'extension-card-logos flex gap-2.5 items-center hidden',
   extensionCardImage: 'relative max-w-100 w-full pb-10',
   extensionCardCircles: 'extension-card-circles absolute -right-22 -top-10 z-50', 
   extensionCardScreen: 'extension-card-image absolute top-10 right-4'
 } satisfies Record<string, string>;
 
-// interface BrowserLogo {
-//   icon: FunctionComponent<SVGProps<SVGSVGElement>>;
-// }
+interface BrowserLogo {
+  icon: string | Component<JSX.SvgSVGAttributes<SVGSVGElement>>;
+}
 
-const browserLogos = [
+const browserLogos: BrowserLogo[] = [
   { icon: ChromeLogo },
   { icon: FirefoxLogo },
   { icon: ArcLogo },
@@ -66,6 +66,9 @@ export const ExtensionConnect = () => {
   };
 
   const icon = getBrowserIcon(detectedBrowser);
+  const Circles = circles as unknown as Component<
+    JSX.SvgSVGAttributes<SVGSVGElement>
+  >;
 
   return (
     <div class={styles.extensionCardContainer}>
@@ -102,7 +105,7 @@ export const ExtensionConnect = () => {
       </div>
 
       <div class={styles.extensionCardImage}>
-        {/* <Circles class={styles.extensionCardCircles} /> */}
+        <Circles class={styles.extensionCardCircles} />
 
         <BrowserFrame />
 

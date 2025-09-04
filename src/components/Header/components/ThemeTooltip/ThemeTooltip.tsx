@@ -4,12 +4,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
-import { createSignal, onMount } from 'solid-js';
+import Fa from 'solid-fa';
+import { createMemo, createSignal, onMount } from 'solid-js';
 
 import { Tooltip } from 'components';
 
 import { ThemeTooltipDots } from './components';
-import Fa from 'solid-fa';
 
 interface ThemeTooltipOptionType {
   label: string;
@@ -55,8 +55,8 @@ export const ThemeTooltip = () => {
     }
   ];
 
-  const activeTheme = themeOptions.find(
-    (themeOption) => themeOption.identifier === rootTheme()
+  const activeTheme = createMemo(() =>
+    themeOptions.find((themeOption) => themeOption.identifier === rootTheme())
   );
 
   const handleThemeSwitch =
@@ -84,29 +84,29 @@ export const ThemeTooltip = () => {
     return () => observer.disconnect();
   });
 
-  if (!activeTheme) {
-    return null;
-  }
-
   return (
     <Tooltip
       position='bottom'
       class={styles.themeTooltip}
-      trigger={(isTooltipVisible: boolean) => (
-        <div class={styles.themeTooltipTrigger}>
-          <ThemeTooltipDots
-            dotColors={activeTheme.dotColors}
-            class={styles.themeTooltipTriggerDots}
-          />
+      trigger={(isTooltipVisible: boolean) => {
+        const currentTheme = activeTheme();
 
-          <Fa
-            icon={faChevronDown}
-            class={classNames(styles.themeTooltipTriggerIcon, {
-              [styles.themeTooltipTriggerIconRotated]: isTooltipVisible
-            })}
-          />
-        </div>
-      )}
+        return (
+          <div class={styles.themeTooltipTrigger}>
+            <ThemeTooltipDots
+              dotColors={currentTheme?.dotColors ?? []}
+              class={styles.themeTooltipTriggerDots}
+            />
+
+            <Fa
+              icon={faChevronDown}
+              class={classNames(styles.themeTooltipTriggerIcon, {
+                [styles.themeTooltipTriggerIconRotated]: isTooltipVisible
+              })}
+            />
+          </div>
+        );
+      }}
     >
       <div class={styles.themeTooltipOptions}>
         {themeOptions.map((themeOption) => (
@@ -114,7 +114,7 @@ export const ThemeTooltip = () => {
             onClick={handleThemeSwitch(themeOption)}
             class={classNames(styles.themeTooltipOption, {
               [styles.themeTooltipOptionActive]:
-                themeOption.identifier === activeTheme.identifier
+                themeOption.identifier === activeTheme()?.identifier
             })}
           >
             <ThemeTooltipDots
@@ -126,7 +126,7 @@ export const ThemeTooltip = () => {
               {themeOption.label}
             </div>
 
-            {themeOption.identifier !== activeTheme.identifier && (
+            {themeOption.identifier !== activeTheme()?.identifier && (
               <Fa
                 icon={faArrowRightLong}
                 class={styles.themeTooltipOptionArrow}

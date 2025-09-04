@@ -8,7 +8,7 @@ import {
 
 import { useNavigate } from '@solidjs/router';
 import Fa from 'solid-fa';
-import { Button, Logo, Tooltip } from 'components';
+import { Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
@@ -19,7 +19,8 @@ import {
   getIsLoggedIn,
   networkSelector,
   UnlockPanelManager,
-  getState
+  getState,
+  MvxButton
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
@@ -41,6 +42,7 @@ const styles = {
   headerNavigationAddressWallet: 'header-navigation-address-wallet relative z-1 text-accent hidden lg:flex!',
   headerNavigationAddressExplorer: 'header-navigation-address-explorer min-w-0 relative z-1 hidden lg:block!',
   headerNavigationAddressLogout: 'header-navigation-address-logout text-tertiary cursor-pointer relative z-1 transition-all duration-200 ease-out hover:text-accent',
+  trimmedAddress: 'text-primary'
 } satisfies Record<string, string>;
 
 interface HeaderBrowseButtonType {
@@ -151,6 +153,7 @@ export const Header = () => {
             <div class={styles.headerNavigationAddressExplorer}>
               <MvxDataWithExplorerLink
                 data={address}
+                class={styles.trimmedAddress}
                 withTooltip={true}
                 explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
               />
@@ -173,7 +176,13 @@ export const Header = () => {
         )}
 
         {!isLoggedIn && (
-          <Button onClick={handleOpenUnlockPanel}>Connect</Button>
+          <MvxButton
+            onClick={handleOpenUnlockPanel}
+            variant='primary'
+            size='large'
+          >
+            Connect
+          </MvxButton>
         )}
       </nav>
     </header>

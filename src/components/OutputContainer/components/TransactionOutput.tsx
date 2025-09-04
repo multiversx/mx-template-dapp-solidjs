@@ -67,15 +67,12 @@ export const TransactionOutput = ({
 
       <div class={styles.transactionElementContainer}>
         <Label>Receiver:</Label>
-        <div class={styles.transactionElement}>
-          {transaction.receiver}
 
-          <MvxDataWithExplorerLink
-            withTooltip={true}
-            data={transaction.receiver}
-            explorerLink={receiverExplorerLink}
-          />
-        </div>
+        <MvxDataWithExplorerLink
+          withTooltip={true}
+          data={transaction.receiver}
+          explorerLink={receiverExplorerLink}
+        />
       </div>
 
       <p>

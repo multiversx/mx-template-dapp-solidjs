@@ -3,12 +3,11 @@ import {
   faLayerGroup,
   faWallet
 } from '@fortawesome/free-solid-svg-icons';
-import { JSX } from '@multiversx/sdk-dapp-ui/dist/types/stencil-public-runtime';
 import classNames from 'classnames';
 import { Fa } from 'solid-fa';
 
-import { createSignal } from 'solid-js';
-import XLogo from 'assets/img/x-logo.svg';
+import { Component, createSignal, JSX } from 'solid-js';
+import xLogo from 'assets/img/x-logo.svg';
 import { Label } from 'components';
 import { useStore } from 'hooks';
 import {
@@ -39,7 +38,7 @@ const styles = {
   connectedAccountInfoTextValue: 'connected-account-info-text-value text-primary transition-all duration-200 ease-out text-base',
   connectedAccountDetailsIcon: 'connected-account-details-icon w-6 h-6',
   connectedAccountDetailsHerotag: 'connected-account-details-herotag rounded-full',
-  connectedAccountDetailsXLogo: 'connected-account-details-xlogo fill-primary w-6 h-6 transition-all duration-200 ease-out',
+  connectedAccountDetailsXLogo: 'connected-account-details-xlogo fill-primary w-8 h-8 transition-all duration-200 ease-out',
   connectedAccountDetailsTrimAddress: 'w-max'
 } satisfies Record<string, string>;
 
@@ -70,12 +69,13 @@ export const Account = () => {
   };
 
   const [herotag, profileUrl] = getUserHerotag(address);
+  const XLogo = xLogo as unknown as Component<
+    JSX.SvgSVGAttributes<SVGSVGElement>
+  >;
 
   const accountDetails: AccountDetailsType[] = [
     {
-      icon: (
-        <Fa icon={faWallet} class={styles.connectedAccountDetailsIcon} />
-      ) as JSX.Element,
+      icon: <Fa icon={faWallet} class={styles.connectedAccountDetailsIcon} />,
       label: 'Address',
       value: (
         <MvxTrim
@@ -85,7 +85,7 @@ export const Account = () => {
       ) as JSX.Element
     },
     {
-      icon: herotag ? (
+      icon: herotag() ? (
         profileUrl ? (
           <img
             src={profileUrl()}
@@ -103,16 +103,12 @@ export const Account = () => {
     {
       icon: (
         <Fa icon={faLayerGroup} class={styles.connectedAccountDetailsIcon} />
-      ) as JSX.Element,
+      ),
       label: 'Shard',
       value: account.shard as number
     },
     {
-      icon: (
-        <div class={styles.connectedAccountDetailsXLogo}>
-          <XLogo />
-        </div>
-      ) as JSX.Element,
+      icon: <XLogo class={styles.connectedAccountDetailsXLogo} />,
       label: 'Balance',
       value: (
         <FormatAmount

@@ -1,4 +1,4 @@
-import { createEffect, createMemo, onMount, Show } from 'solid-js';
+import { createEffect, createMemo, onMount } from 'solid-js';
 import { OutputContainer } from 'components';
 import { getActiveTransactionsStatus, TransactionsTable } from 'lib';
 import { useGetTransactions } from './hooks';
@@ -26,22 +26,23 @@ export const Transactions = (props: TransactionsPropsType) => {
     }
   });
 
-  return (
-    <Show
-      when={!isLoading() && transactions().length > 0}
-      fallback={
+  if (isLoading() || transactions().length === 0) {
+    return (
+      <div id={props.id}>
         <OutputContainer>
           <p>No transactions found</p>
         </OutputContainer>
-      }
-    >
-      <div class={styles.transactionsContainer}>
-        <OutputContainer isLoading={isLoading()} class='p-0'>
-          <div class={styles.transactionsTable}>
-            <TransactionsTable transactions={transactions()} />
-          </div>
-        </OutputContainer>
       </div>
-    </Show>
+    );
+  }
+
+  return (
+    <div id={props.id} class={styles.transactionsContainer}>
+      <OutputContainer isLoading={isLoading()} class='p-0'>
+        <div class={styles.transactionsTable}>
+          <TransactionsTable transactions={transactions()} />
+        </div>
+      </OutputContainer>
+    </div>
   );
 };

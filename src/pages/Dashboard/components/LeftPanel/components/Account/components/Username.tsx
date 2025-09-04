@@ -20,7 +20,7 @@ export const Username = (props: {
       <span class={styles.herotag}>{herotag() ? '@' : ''}</span>
 
       <span data-testid='heroTag'>
-        {herotag ? trimUsernameDomain(herotag()) : 'N/A'}
+        {herotag() ? trimUsernameDomain(herotag()) : 'N/A'}
       </span>
     </p>
   );

@@ -1,17 +1,7 @@
 import LedgerIcon from 'assets/img/ledger-icon.svg';
-import MetamaskIcon from 'assets/img/metamask-icon.svg';
-import PasskeyIcon from 'assets/img/passkey-icon.svg';
 import WebWalletIcon from 'assets/img/web-wallet-icon.svg';
 import XPortalIcon from 'assets/img/xportal-icon.svg';
-import { getDetectedBrowser } from 'helpers/getDetectedBrowser';
-import {
-  BrowserEnum,
-  CHROME_METAMASK_EXTENSION_LINK,
-  FIREFOX_METAMASK_ADDON_LINK,
-  GET_LEDGER,
-  GET_XPORTAL,
-  WALLET_ADDRESS
-} from 'localConstants';
+import { GET_LEDGER, GET_XPORTAL, WALLET_ADDRESS } from 'localConstants';
 
 import { ConnectCard, ExtensionConnect } from './components';
 
@@ -26,28 +16,28 @@ const styles = {
 } satisfies Record<string, string>;
 
 export const HowToConnectComponent = () => {
-  const detectedBrowser = getDetectedBrowser();
-  const isFirefox = detectedBrowser === BrowserEnum.Firefox;
+  // const detectedBrowser = getDetectedBrowser();
+  // const isFirefox = detectedBrowser === BrowserEnum.Firefox;
 
   const connectCards = [
-    {
-      icon: MetamaskIcon,
-      title: 'Metamask Snap',
-      description:
-        'Explore the entire MultiversX ecosystem with Metamask! Securely manage, swap and transfer your assets.',
-      linkTitle: 'Get Metamask',
-      linkDownloadAddress: isFirefox
-        ? FIREFOX_METAMASK_ADDON_LINK
-        : CHROME_METAMASK_EXTENSION_LINK
-    },
-    {
-      icon: PasskeyIcon,
-      title: 'Passkey',
-      description:
-        'Passkeys offer a more secure and user-friendly way to authenticate and sign transactions.',
-      linkTitle: 'Get Passkey',
-      linkDownloadAddress: WALLET_ADDRESS
-    },
+    // {
+    //   icon: MetamaskIcon,
+    //   title: 'Metamask Snap',
+    //   description:
+    //     'Explore the entire MultiversX ecosystem with Metamask! Securely manage, swap and transfer your assets.',
+    //   linkTitle: 'Get Metamask',
+    //   linkDownloadAddress: isFirefox
+    //     ? FIREFOX_METAMASK_ADDON_LINK
+    //     : CHROME_METAMASK_EXTENSION_LINK
+    // },
+    // {
+    //   icon: PasskeyIcon,
+    //   title: 'Passkey',
+    //   description:
+    //     'Passkeys offer a more secure and user-friendly way to authenticate and sign transactions.',
+    //   linkTitle: 'Get Passkey',
+    //   linkDownloadAddress: WALLET_ADDRESS
+    // },
     {
       icon: XPortalIcon,
       title: 'xPortal Wallet',

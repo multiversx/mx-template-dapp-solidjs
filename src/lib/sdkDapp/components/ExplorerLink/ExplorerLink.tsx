@@ -3,7 +3,8 @@ import { ExplorerLinkSDKPropsType, networkSelector } from 'lib';
 import { IPropsWithClass, IPropsWithChildren } from 'types';
 
 interface ExplorerLinkPropsType
-  extends Partial<ExplorerLinkSDKPropsType>,
+  extends
+    Partial<ExplorerLinkSDKPropsType>,
     IPropsWithClass,
     IPropsWithChildren {
   page: string;

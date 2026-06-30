@@ -18,7 +18,7 @@ export const getUserHerotag = (address: string) => {
       });
 
       return data;
-    } catch (err) {
+    } catch (_err) {
       console.error('Unable to fetch profile url');
     }
   };

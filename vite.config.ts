@@ -4,7 +4,6 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import solid from 'vite-plugin-solid';
 // import devtools from "solid-devtools/vite";
 import solidSvg from 'vite-plugin-solid-svg';
-import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
@@ -21,7 +20,6 @@ export default defineConfig({
     tsconfigPaths(),
     basicSsl(),
     solidSvg(),
-    svgr(),
     nodePolyfills({
       globals: { Buffer: true, global: true, process: true }
     })

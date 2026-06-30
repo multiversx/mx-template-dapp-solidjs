@@ -1,0 +1,5 @@
+allowBuilds:
+  esbuild: true
+  keccak: true
+  protobufjs: true
+  unrs-resolver: true

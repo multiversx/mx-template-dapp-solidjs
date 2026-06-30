@@ -3,8 +3,7 @@ import { FormatAmountSDKPropsType } from 'lib/sdkDappUI/sdkDappUI.types';
 import { IPropsWithClass } from 'types';
 
 interface FormatAmountPropsType
-  extends Partial<FormatAmountSDKPropsType>,
-    IPropsWithClass {
+  extends Partial<FormatAmountSDKPropsType>, IPropsWithClass {
   isValid: boolean;
   valueInteger: string;
   valueDecimal: string;

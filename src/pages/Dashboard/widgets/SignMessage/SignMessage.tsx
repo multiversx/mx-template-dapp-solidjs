@@ -120,7 +120,6 @@ export const SignMessage = () => {
               class={styles.signMessagePasteButton}
             >
               <span class={styles.signMessagePasteButtonText}>Paste</span>
-
               <Fa icon={faPaste} class={styles.signMessagePasteButtonText} />
             </button>
           </div>

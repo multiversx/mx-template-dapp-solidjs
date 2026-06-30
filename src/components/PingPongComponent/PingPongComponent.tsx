@@ -3,7 +3,7 @@ import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
 import moment from 'moment';
 
 import Fa from 'solid-fa';
-import { createEffect, createSignal, onCleanup } from 'solid-js';
+import { Accessor, createEffect, createSignal, onCleanup } from 'solid-js';
 import { Label, OutputContainer, PingPongOutput } from 'components';
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
@@ -33,7 +33,7 @@ interface PingPongComponentPropsType {
   sendPingTransaction: (amount: any) => Promise<any>;
   sendPongTransaction: (transaction?: any) => Promise<any>;
   getTimeToPong: () => Promise<number | null | undefined>;
-  pingAmount?: string;
+  pingAmount?: Accessor<string>;
   getPingTransaction?: () => Promise<Transaction | null>;
   getPongTransaction?: () => Promise<Transaction | null>;
   tokenLogin?: TokenLoginType | null;
@@ -71,7 +71,7 @@ export const PingPongComponent = ({
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransaction(pingAmount);
+    await sendPingTransaction(pingAmount?.());
   };
 
   const onSendPongTransaction = async () => {

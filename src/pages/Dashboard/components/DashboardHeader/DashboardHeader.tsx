@@ -1,5 +1,5 @@
 import {
-  REACT_LINK,
+  SOLID_LINK,
   SDK_DAPP_PACKAGE_LINK,
   TYPESCRIPT_LINK
 } from 'localConstants';
@@ -19,7 +19,7 @@ export const DashboardHeader = () => (
 
     <div class={styles.dashboardHeaderDescription}>
       <span>The MultiversX dApp Template, built using </span>
-      <LinkComponent linkAddress={REACT_LINK}>React.js</LinkComponent>
+      <LinkComponent linkAddress={SOLID_LINK}>SolidJS</LinkComponent>
       <span> and </span>
       <LinkComponent linkAddress={TYPESCRIPT_LINK}>Typescript</LinkComponent>.
       <span> It's a basic implementation of </span>

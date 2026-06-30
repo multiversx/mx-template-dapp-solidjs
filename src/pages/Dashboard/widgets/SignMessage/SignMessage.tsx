@@ -1,10 +1,20 @@
-import { faPaste } from '@fortawesome/free-solid-svg-icons';
-// import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
+import {
+  faArrowsRotate,
+  faBroom,
+  faPaste,
+  faPenNib
+} from '@fortawesome/free-solid-svg-icons';
 
 import Fa from 'solid-fa';
 import { createSignal } from 'solid-js';
 import { OutputContainer } from 'components';
-import { Address, getAccount, getAccountProvider, Message } from 'lib';
+import {
+  Address,
+  getAccount,
+  getAccountProvider,
+  Message,
+  MvxButton
+} from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 import { SignFailure, SignSuccess } from './components';
@@ -34,10 +44,14 @@ export const SignMessage = () => {
   const provider = getAccountProvider();
 
   const handleSubmit = async () => {
+    if (message().trim().length === 0) {
+      return;
+    }
+
     try {
       const messageToSign = new Message({
         address: new Address(address),
-        data: Buffer.from(message())
+        data: new Uint8Array(Buffer.from(message()))
       });
 
       const signedMessageResult = await provider.signMessage(messageToSign);
@@ -92,9 +106,9 @@ export const SignMessage = () => {
             />
           )}
 
-          {state() === 'success' && signedMessage != null && (
+          {state() === 'success' && signedMessage() != null && (
             <SignSuccess
-              signedMessage={signedMessage as any}
+              signedMessage={signedMessage()}
               signature={signature()}
               address={address}
             />
@@ -117,36 +131,27 @@ export const SignMessage = () => {
 
       <div class={styles.signMessageButton}>
         {['success', 'error'].includes(state()) ? (
-          <></>
+          <MvxButton
+            data-testid='closeTransactionSuccessBtn'
+            onClick={handleClear}
+            size='small'
+          >
+            <Fa icon={state() === 'success' ? faBroom : faArrowsRotate} />
+
+            <span class={styles.signButtonContent}>
+              {state() === 'error' ? 'Try again' : 'Clear'}
+            </span>
+          </MvxButton>
         ) : (
-          // <MvxButton
-          //   data-testid='closeTransactionSuccessBtn'
-          //   id='closeButton'
-          //   onClick={handleClear}
-          //   size='small'
-          // >
-          //   <Fa
-          //     icon={state() === 'success' ? faBroom : faArrowsRotate}
-          //     className={styles.signButtonContent}
-          //   />
+          <MvxButton
+            data-testid='signMsgBtn'
+            onClick={handleSubmit}
+            size='small'
+          >
+            <Fa icon={faPenNib} />
 
-          //   <span class={styles.signButtonContent}>
-          //     {state() === 'error' ? 'Try again' : 'Clear'}
-          //   </span>
-          // </MvxButton>
-          <></>
-          // <MvxButton
-          //   data-testid='signMsgBtn'
-          //   onClick={handleSubmit}
-          //   size='small'
-          // >
-          //   <Fa
-          //     icon={faPenNib}
-          //     className={styles.signButtonContent}
-          //   />
-
-          //   <span class={styles.signButtonContent}>Sign</span>
-          // </MvxButton>
+            <span class={styles.signButtonContent}>Sign</span>
+          </MvxButton>
         )}
       </div>
     </div>

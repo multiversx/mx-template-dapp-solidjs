@@ -1,3 +1,4 @@
+import { createMemo, Show } from 'solid-js';
 import { Label } from 'components';
 import { contractAddress } from 'config';
 import { useStore } from 'hooks';
@@ -24,41 +25,40 @@ type PingPongOutputType = {
   transactions?: SignedTransactionType[] | null;
 };
 
-export const PingPongOutput = ({
-  timeRemaining,
-  pongAllowed,
-  transactions
-}: PingPongOutputType) => {
+export const PingPongOutput = (props: PingPongOutputType) => {
   const store = useStore();
-  const network = networkSelector(store());
+  const network = createMemo(() => networkSelector(store()));
 
-  if (!transactions || transactions?.length === 0) {
-    return null;
-  }
-
-  const explorerAddress = network.explorerAddress;
-  const explorerLink = getExplorerLink({
-    to: `/${ACCOUNTS_ENDPOINT}/${contractAddress}`,
-    explorerAddress
-  });
+  const explorerLink = createMemo(() =>
+    getExplorerLink({
+      to: `/${ACCOUNTS_ENDPOINT}/${contractAddress}`,
+      explorerAddress: network().explorerAddress
+    })
+  );
 
   return (
-    <>
-      <MvxDataWithExplorerLink
-        withTooltip={true}
-        data={contractAddress}
-        explorerLink={explorerLink}
-      />
+    <Show when={props.transactions?.length ? props.transactions : null}>
+      {(transactions) => (
+        <>
+          <MvxDataWithExplorerLink
+            withTooltip={true}
+            data={contractAddress}
+            explorerLink={explorerLink()}
+          />
 
-      <TransactionsOutput transactions={transactions} />
+          <TransactionsOutput transactions={transactions()} />
 
-      {!pongAllowed && (
-        <p>
-          <Label>Time remaining: </Label>
-          <span class={styles.timeRemaining}>{timeRemaining}</span> until able
-          to pong
-        </p>
+          {!props.pongAllowed && (
+            <p>
+              <Label>Time remaining: </Label>
+              <span class={styles.timeRemaining}>
+                {props.timeRemaining}
+              </span>{' '}
+              until able to pong
+            </p>
+          )}
+        </>
       )}
-    </>
+    </Show>
   );
 };

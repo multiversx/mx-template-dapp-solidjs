@@ -9,24 +9,18 @@ interface MvxDataWithExplorerLinkPropsType extends IPropsWithClass {
   'data-testid'?: string;
 }
 
-export const MvxDataWithExplorerLink = ({
-  data,
-  explorerLink,
-  class: className,
-  'data-testid': dataTestId,
-  withTooltip,
-  showExplorerButton,
-  showCopyButton
-}: MvxDataWithExplorerLinkPropsType) => {
+export const MvxDataWithExplorerLink = (
+  props: MvxDataWithExplorerLinkPropsType
+) => {
   return (
     <mvx-data-with-explorer-link
-      data={data}
-      explorerLink={explorerLink}
-      class={className}
-      data-testid={dataTestId}
-      withTooltip={withTooltip}
-      showExplorerButton={showExplorerButton}
-      showCopyButton={showCopyButton}
+      data={props.data}
+      explorerLink={props.explorerLink}
+      class={props.class}
+      data-testid={props['data-testid']}
+      withTooltip={props.withTooltip}
+      showExplorerButton={props.showExplorerButton}
+      showCopyButton={props.showCopyButton}
     />
   );
 };

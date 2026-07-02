@@ -1,3 +1,4 @@
+import { For } from 'solid-js';
 import { SignedTransactionType } from 'lib';
 
 import { TransactionOutput } from './TransactionOutput';
@@ -7,16 +8,14 @@ const styles = {
   transactionsContainer: 'transactions-container flex flex-col gap-4'
 } satisfies Record<string, string>;
 
-export const TransactionsOutput = ({
-  transactions
-}: {
+export const TransactionsOutput = (props: {
   transactions: SignedTransactionType[];
 }) => {
   return (
     <div class={styles.transactionsContainer}>
-      {transactions?.map((transaction) => {
-        return <TransactionOutput transaction={transaction} />;
-      })}
+      <For each={props.transactions}>
+        {(transaction) => <TransactionOutput transaction={transaction} />}
+      </For>
     </div>
   );
 };

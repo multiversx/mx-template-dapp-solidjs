@@ -16,6 +16,11 @@ interface FormatAmountPropsType
 export const FormatAmount = (props: FormatAmountPropsType) => {
   let elementRef: Partial<FormatAmountSDKPropsType> | undefined;
 
+  const setElementRef = (el: Partial<FormatAmountSDKPropsType>) => {
+    elementRef = el;
+    Object.assign(elementRef, props);
+  };
+
   createEffect(() => {
     if (!elementRef) {
       return;
@@ -23,5 +28,5 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
     Object.assign(elementRef, props);
   });
 
-  return <mvx-format-amount ref={elementRef} />;
+  return <mvx-format-amount ref={setElementRef} />;
 };

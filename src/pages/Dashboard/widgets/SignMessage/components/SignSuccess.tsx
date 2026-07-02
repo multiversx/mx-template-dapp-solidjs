@@ -1,3 +1,4 @@
+import { createMemo, Show } from 'solid-js';
 import { Label } from 'components';
 import { Message } from 'lib';
 
@@ -21,49 +22,54 @@ interface VerifyMessagePropsType {
 }
 
 export const SignSuccess = (props: VerifyMessagePropsType) => {
-  if (props.signedMessage == null) {
-    return null;
-  }
+  const decoded = createMemo(() => {
+    const message = props.signedMessage;
 
-  const { encodedMessage, decodedMessage } = decodeMessage({
-    message: props.signedMessage,
-    signature: props.signature
+    if (message == null) {
+      return null;
+    }
+
+    return decodeMessage({ message, signature: props.signature });
   });
 
   return (
-    <div class={styles.signSuccessContainer}>
-      <div class={styles.signSuccess}>
-        <div class={styles.signatureContainer}>
-          <Label>Signature:</Label>
+    <Show when={decoded()}>
+      {(decodedResult) => (
+        <div class={styles.signSuccessContainer}>
+          <div class={styles.signSuccess}>
+            <div class={styles.signatureContainer}>
+              <Label>Signature:</Label>
 
-          <textarea
-            readOnly
-            class={styles.signatureText}
-            rows={2}
-            value={props.signature}
-          />
+              <textarea
+                readOnly
+                class={styles.signatureText}
+                rows={2}
+                value={props.signature}
+              />
 
-          {/* <CopyButton text={props.signature} /> */}
+              {/* <CopyButton text={props.signature} /> */}
+            </div>
+
+            <div class={styles.encodedMessageContainer}>
+              <Label>Encoded message:</Label>
+
+              <p>{decodedResult().encodedMessage}</p>
+            </div>
+
+            <div class={styles.decodedMessageContainer}>
+              <Label>Decoded message:</Label>
+
+              <textarea
+                readOnly
+                class={styles.decodedMessageText}
+                rows={1}
+                value={decodedResult().decodedMessage}
+                placeholder='Decoded message'
+              />
+            </div>
+          </div>
         </div>
-
-        <div class={styles.encodedMessageContainer}>
-          <Label>Encoded message:</Label>
-
-          <p>{encodedMessage}</p>
-        </div>
-
-        <div class={styles.decodedMessageContainer}>
-          <Label>Decoded message:</Label>
-
-          <textarea
-            readOnly
-            class={styles.decodedMessageText}
-            rows={1}
-            value={decodedMessage}
-            placeholder='Decoded message'
-          />
-        </div>
-      </div>
-    </div>
+      )}
+    </Show>
   );
 };

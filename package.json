@@ -1,6 +1,6 @@
 {
   "name": "mx-template-dapp-solidjs",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "",
   "license": "MIT",
   "scripts": {
@@ -16,9 +16,9 @@
     "@fortawesome/free-brands-svg-icons": "7.3.0",
     "@fortawesome/free-solid-svg-icons": "7.3.0",
     "@multiversx/sdk-core": "15.4.1",
-    "@multiversx/sdk-dapp": "5.6.23",
+    "@multiversx/sdk-dapp": "5.7.0",
     "@multiversx/sdk-dapp-ui": "0.1.24",
-    "@multiversx/sdk-dapp-utils": "3.0.2",
+    "@multiversx/sdk-dapp-utils": "3.1.0",
     "@solidjs/router": "0.16.1",
     "axios": "^1.18.1",
     "bignumber.js": "11.1.4",

@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": [
-      "vite-plugin-solid-svg/types",
-      "vite/client",
-      "jest",
-      "@testing-library/jest-dom"
-    ],
+    "types": ["vite-plugin-solid-svg/types", "vite/client"],
     "allowJs": true,
     "target": "ESNext",
     "module": "ESNext",

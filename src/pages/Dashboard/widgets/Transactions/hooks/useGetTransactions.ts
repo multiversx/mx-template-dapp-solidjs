@@ -1,8 +1,8 @@
 import { createSignal, createMemo, createEffect } from 'solid-js';
 import { apiTimeout, transactionSize } from 'config';
+import { useStore } from 'hooks';
 import {
   accountSelector,
-  getState,
   networkSelector,
   getTransactions,
   ServerTransactionType
@@ -22,7 +22,7 @@ export const useGetTransactions = ({ receiver }: TransactionsPropsType) => {
     error: null
   });
 
-  const store = createMemo(() => getState());
+  const store = useStore();
   const network = createMemo(() => networkSelector(store()));
   const account = createMemo(() => accountSelector(store()));
 

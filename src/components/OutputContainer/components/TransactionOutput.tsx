@@ -1,62 +1,108 @@
-import { Label } from 'components/Label';
-import { ExplorerLink, FormatAmount } from 'lib';
+import { createMemo } from 'solid-js';
+import { Label } from 'components';
+import { useStore } from 'hooks';
 import {
   ACCOUNTS_ENDPOINT,
-  getState,
+  DECIMALS,
+  DIGITS,
+  FormatAmount,
+  FormatAmountController,
+  getAccount,
+  getExplorerLink,
+  MvxDataWithExplorerLink,
   networkSelector,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT
 } from 'lib';
 
-export const TransactionOutput = ({
-  transaction
-}: {
+// prettier-ignore
+const styles = {
+  transactionContainer: 'transaction-container flex flex-col',
+  transactionElementContainer: 'transaction-elem-container flex gap-2',
+  transactionElement: 'transaction-elem flex justify-between w-full',
+  buttons: 'buttons flex gap-3',
+  dataContainer: 'data-container whitespace-nowrap'
+} satisfies Record<string, string>;
+
+export const TransactionOutput = (props: {
   transaction: SignedTransactionType;
 }) => {
-  const network = networkSelector(getState());
-  const decodedData = transaction.data
-    ? Buffer.from(transaction.data, 'base64').toString('ascii')
-    : 'N/A';
+  const store = useStore();
+  const network = createMemo(() => networkSelector(store()));
+  const account = createMemo(() => getAccount(store()));
+
+  const amount = createMemo(() =>
+    FormatAmountController.getData({
+      digits: DIGITS,
+      decimals: DECIMALS,
+      egldLabel: network().egldLabel,
+      input: account().balance
+    })
+  );
+
+  const decodedData = createMemo(() =>
+    props.transaction.data
+      ? Buffer.from(props.transaction.data, 'base64').toString('ascii')
+      : 'N/A'
+  );
+
+  const hashExplorerLink = createMemo(() =>
+    getExplorerLink({
+      to: `/${TRANSACTIONS_ENDPOINT}/${props.transaction.hash}`,
+      explorerAddress: network().explorerAddress
+    })
+  );
+  const receiverExplorerLink = createMemo(() =>
+    getExplorerLink({
+      to: `/${ACCOUNTS_ENDPOINT}/${props.transaction.receiver}`,
+      explorerAddress: network().explorerAddress
+    })
+  );
 
   return (
-    <div class='flex flex-col'>
-      <p>
+    <div class={styles.transactionContainer}>
+      <div class={styles.transactionElementContainer}>
         <Label>Hash:</Label>
-        <ExplorerLink
-          page={`/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`}
-          class='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
-        >
-          {transaction.hash}
-        </ExplorerLink>
-      </p>
-      <p>
+
+        <MvxDataWithExplorerLink
+          withTooltip={true}
+          data={props.transaction.hash}
+          explorerLink={hashExplorerLink()}
+        />
+      </div>
+
+      <div class={styles.transactionElementContainer}>
         <Label>Receiver:</Label>
-        <ExplorerLink
-          page={`/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
-          class='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
-        >
-          {transaction.receiver}
-        </ExplorerLink>
-      </p>
+
+        <MvxDataWithExplorerLink
+          withTooltip={true}
+          data={props.transaction.receiver}
+          explorerLink={receiverExplorerLink()}
+        />
+      </div>
 
       <p>
         <Label>Amount: </Label>
         <FormatAmount
-          value={transaction.value}
-          egldLabel={network.egldLabel}
+          isValid={amount().isValid}
+          valueInteger={amount().valueInteger}
+          valueDecimal={amount().valueDecimal}
+          label={amount().label}
           data-testid='balance'
+          decimalClass='opacity-70'
+          labelClass='opacity-70'
         />
       </p>
       <p>
         <Label>Gas price: </Label>
-        {transaction.gasPrice}
+        {props.transaction.gasPrice}
       </p>
       <p>
         <Label>Gas limit: </Label>
-        {transaction.gasLimit}
+        {props.transaction.gasLimit}
       </p>
-      <p class='whitespace-nowrap'>
-        <Label>Data: </Label> {decodedData}
+      <p class={styles.dataContainer}>
+        <Label>Data: </Label> {decodedData()}
       </p>
     </div>
   );

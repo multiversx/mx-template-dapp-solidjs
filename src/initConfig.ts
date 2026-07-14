@@ -1,6 +1,7 @@
-import { EnvironmentsEnum, InitAppType } from 'lib';
+import { InitAppType } from 'lib';
 import './styles/globals.css';
-import { walletConnectV2ProjectId } from './config';
+import './styles/tailwind.css';
+import { environment, walletConnectV2ProjectId } from './config';
 
 const DEFAULT_TOAST_LIEFTIME = 5000;
 
@@ -8,10 +9,7 @@ export const config: InitAppType = {
   storage: { getStorageCallback: () => sessionStorage },
   dAppConfig: {
     nativeAuth: true,
-    environment: EnvironmentsEnum.devnet,
-    network: {
-      walletAddress: 'https://devnet-wallet.multiversx.com'
-    },
+    environment,
     providers: {
       walletConnect: {
         walletConnectV2ProjectId
@@ -19,7 +17,8 @@ export const config: InitAppType = {
     },
     transactionTracking: {
       successfulToastLifetime: DEFAULT_TOAST_LIEFTIME
-    }
+    },
+    theme: 'mvx:dark-theme'
   }
 
   // Option 2: Add providers using the config `customProviders` array

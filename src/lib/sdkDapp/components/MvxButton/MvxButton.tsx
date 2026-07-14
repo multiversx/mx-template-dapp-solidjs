@@ -9,25 +9,17 @@ interface MvxButtonPropsType extends IPropsWithClass {
   children?: any;
 }
 
-export const MvxButton = ({
-  class: className,
-  'data-testid': dataTestId,
-  disabled,
-  size,
-  variant,
-  onClick,
-  children
-}: MvxButtonPropsType) => {
+export const MvxButton = (props: MvxButtonPropsType) => {
   return (
     <mvx-button
-      class={className}
-      data-testid={dataTestId}
-      disabled={disabled}
-      size={size}
-      variant={variant}
-      onClick={onClick}
+      class={props.class}
+      data-testid={props['data-testid']}
+      disabled={props.disabled}
+      size={props.size}
+      variant={props.variant}
+      onClick={props.onClick}
     >
-      {children}
+      {props.children}
     </mvx-button>
   );
 };

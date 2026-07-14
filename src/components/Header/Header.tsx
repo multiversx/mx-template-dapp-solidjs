@@ -178,8 +178,7 @@ export const Header = () => {
         {!isLoggedIn && (
           <MvxButton
             onClick={handleOpenUnlockPanel}
-            variant='primary'
-            size='large'
+            class={styles.headerNavigationConnect}
           >
             Connect
           </MvxButton>

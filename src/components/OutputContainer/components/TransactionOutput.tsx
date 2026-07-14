@@ -1,3 +1,4 @@
+import { createMemo } from 'solid-js';
 import { Label } from 'components';
 import { useStore } from 'hooks';
 import {
@@ -8,7 +9,6 @@ import {
   FormatAmountController,
   getAccount,
   getExplorerLink,
-  getState,
   MvxDataWithExplorerLink,
   networkSelector,
   SignedTransactionType,
@@ -24,34 +24,40 @@ const styles = {
   dataContainer: 'data-container whitespace-nowrap'
 } satisfies Record<string, string>;
 
-export const TransactionOutput = ({
-  transaction
-}: {
+export const TransactionOutput = (props: {
   transaction: SignedTransactionType;
 }) => {
   const store = useStore();
-  const network = networkSelector(getState());
-  const account = getAccount(store());
-  const { isValid, valueDecimal, valueInteger, label } =
+  const network = createMemo(() => networkSelector(store()));
+  const account = createMemo(() => getAccount(store()));
+
+  const amount = createMemo(() =>
     FormatAmountController.getData({
       digits: DIGITS,
       decimals: DECIMALS,
-      egldLabel: network.egldLabel,
-      input: account.balance
-    });
-  const decodedData = transaction.data
-    ? Buffer.from(transaction.data, 'base64').toString('ascii')
-    : 'N/A';
+      egldLabel: network().egldLabel,
+      input: account().balance
+    })
+  );
 
-  const explorerAddress = network.explorerAddress;
-  const hashExplorerLink = getExplorerLink({
-    to: `/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`,
-    explorerAddress
-  });
-  const receiverExplorerLink = getExplorerLink({
-    to: `/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`,
-    explorerAddress
-  });
+  const decodedData = createMemo(() =>
+    props.transaction.data
+      ? Buffer.from(props.transaction.data, 'base64').toString('ascii')
+      : 'N/A'
+  );
+
+  const hashExplorerLink = createMemo(() =>
+    getExplorerLink({
+      to: `/${TRANSACTIONS_ENDPOINT}/${props.transaction.hash}`,
+      explorerAddress: network().explorerAddress
+    })
+  );
+  const receiverExplorerLink = createMemo(() =>
+    getExplorerLink({
+      to: `/${ACCOUNTS_ENDPOINT}/${props.transaction.receiver}`,
+      explorerAddress: network().explorerAddress
+    })
+  );
 
   return (
     <div class={styles.transactionContainer}>
@@ -60,8 +66,8 @@ export const TransactionOutput = ({
 
         <MvxDataWithExplorerLink
           withTooltip={true}
-          data={transaction.hash}
-          explorerLink={hashExplorerLink}
+          data={props.transaction.hash}
+          explorerLink={hashExplorerLink()}
         />
       </div>
 
@@ -70,18 +76,18 @@ export const TransactionOutput = ({
 
         <MvxDataWithExplorerLink
           withTooltip={true}
-          data={transaction.receiver}
-          explorerLink={receiverExplorerLink}
+          data={props.transaction.receiver}
+          explorerLink={receiverExplorerLink()}
         />
       </div>
 
       <p>
         <Label>Amount: </Label>
         <FormatAmount
-          isValid={isValid}
-          valueInteger={valueInteger}
-          valueDecimal={valueDecimal}
-          label={label}
+          isValid={amount().isValid}
+          valueInteger={amount().valueInteger}
+          valueDecimal={amount().valueDecimal}
+          label={amount().label}
           data-testid='balance'
           decimalClass='opacity-70'
           labelClass='opacity-70'
@@ -89,14 +95,14 @@ export const TransactionOutput = ({
       </p>
       <p>
         <Label>Gas price: </Label>
-        {transaction.gasPrice}
+        {props.transaction.gasPrice}
       </p>
       <p>
         <Label>Gas limit: </Label>
-        {transaction.gasLimit}
+        {props.transaction.gasLimit}
       </p>
       <p class={styles.dataContainer}>
-        <Label>Data: </Label> {decodedData}
+        <Label>Data: </Label> {decodedData()}
       </p>
     </div>
   );

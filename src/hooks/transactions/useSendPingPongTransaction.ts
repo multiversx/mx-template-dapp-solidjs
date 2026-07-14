@@ -5,13 +5,13 @@ import { useStore } from 'hooks';
 import {
   AbiRegistry,
   Address,
-  GAS_LIMIT,
   GAS_PRICE,
-  getAccount,
-  networkSelector,
   SmartContractTransactionsFactory,
   Transaction,
-  TransactionsFactoryConfig
+  TransactionsFactoryConfig,
+  getAccount,
+  networkSelector,
+  ProxyNetworkProvider
 } from 'lib';
 
 const PING_TRANSACTION_INFO = {
@@ -48,26 +48,36 @@ export const useSendPingPongTransaction = () => {
     const pingTransaction = new Transaction({
       value: BigInt(amount),
       data: Buffer.from('ping'),
-      receiver: new Address(address),
-      gasLimit: BigInt(10 * GAS_LIMIT),
+      receiver: new Address(contractAddress),
+      gasLimit: BigInt(6000000),
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
       sender: new Address(address),
-      version: 1
+      version: 2
     });
 
-    await signAndSendTransactions({
+    const networkProvider = new ProxyNetworkProvider(network.apiAddress);
+    const account = await networkProvider.getAccount(new Address(address));
+    pingTransaction.nonce = account.nonce;
+
+    const transactionCost =
+      await networkProvider.estimateTransactionCost(pingTransaction);
+    pingTransaction.gasLimit = BigInt(transactionCost.gasLimit); // overwrite default gas limit with estimation
+
+    const sessionId = await signAndSendTransactions({
       transactions: [pingTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPingTransactionFromAbi = async (amount: string) => {
     const scFactory = await getSmartContractFactory();
-    const pingTransaction = scFactory.createTransactionForExecute(
+    const pingTransaction = await scFactory.createTransactionForExecute(
       new Address(address),
       {
-        gasLimit: BigInt(60000000),
+        gasLimit: BigInt(6000000),
         function: 'ping',
         contract: new Address(contractAddress),
         nativeTransferAmount: BigInt(amount)
@@ -85,10 +95,18 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransactionFromService = async (
     transactions: Transaction[]
   ) => {
-    await signAndSendTransactions({
-      transactions,
+    const versionTwoTransactions = transactions.map((transaction) => {
+      const tx = Transaction.newFromPlainObject(transaction.toPlainObject());
+      tx.version = 2;
+      return tx;
+    });
+
+    const sessionId = await signAndSendTransactions({
+      transactions: versionTwoTransactions,
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPongTransaction = async () => {
@@ -96,25 +114,35 @@ export const useSendPingPongTransaction = () => {
       value: BigInt(0),
       data: Buffer.from('pong'),
       receiver: new Address(contractAddress),
-      gasLimit: BigInt(GAS_LIMIT),
+      gasLimit: BigInt(6000000),
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
       sender: new Address(address),
-      version: 1
+      version: 2
     });
 
-    await signAndSendTransactions({
+    const networkProvider = new ProxyNetworkProvider(network.apiAddress);
+    const account = await networkProvider.getAccount(new Address(address));
+    pongTransaction.nonce = account.nonce;
+
+    const transactionCost =
+      await networkProvider.estimateTransactionCost(pongTransaction);
+    pongTransaction.gasLimit = BigInt(transactionCost.gasLimit); // overwrite default gas limit with estimation
+
+    const sessionId = await signAndSendTransactions({
       transactions: [pongTransaction],
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPongTransactionFromAbi = async () => {
     const scFactory = await getSmartContractFactory();
-    const pongTransaction = scFactory.createTransactionForExecute(
+    const pongTransaction = await scFactory.createTransactionForExecute(
       new Address(address),
       {
-        gasLimit: BigInt(60000000),
+        gasLimit: BigInt(6000000),
         function: 'pong',
         contract: new Address(contractAddress),
         nativeTransferAmount: BigInt(0)
@@ -130,10 +158,20 @@ export const useSendPingPongTransaction = () => {
   };
 
   const sendPongTransactionFromService = async (
-    transactions: Transaction[]
+    transactions?: Transaction[]
   ) => {
+    if (!transactions) {
+      return;
+    }
+
+    const versionTwoTransactions = transactions.map((transaction) => {
+      const tx = Transaction.newFromPlainObject(transaction.toPlainObject());
+      tx.version = 2;
+      return tx;
+    });
+
     const sessionId = await signAndSendTransactions({
-      transactions,
+      transactions: versionTwoTransactions,
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
 

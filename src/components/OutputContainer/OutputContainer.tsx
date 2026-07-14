@@ -13,16 +13,11 @@ type OutputContainerPropsType = IPropsWithChildren &
     isLoading?: boolean;
   };
 
-export const OutputContainer = ({
-  children,
-  isLoading = false,
-  class: className = 'p-4',
-  'data-testid': dataTestId
-}: OutputContainerPropsType) => (
+export const OutputContainer = (props: OutputContainerPropsType) => (
   <div
-    data-testid={dataTestId}
-    class={classNames(styles.outputContainer, className)}
+    data-testid={props['data-testid']}
+    class={classNames(styles.outputContainer, props.class ?? 'p-4')}
   >
-    {isLoading ? <Loader /> : children}
+    {props.isLoading ? <Loader /> : props.children}
   </div>
 );

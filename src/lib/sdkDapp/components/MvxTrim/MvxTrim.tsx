@@ -7,20 +7,14 @@ interface MvxTrimPropsType extends IPropsWithClass {
   'data-testid'?: string;
 }
 
-export const MvxTrim = ({
-  text,
-  class: className,
-  'data-testid': dataTestId,
-  shouldTrim,
-  trimFontSize
-}: MvxTrimPropsType) => {
+export const MvxTrim = (props: MvxTrimPropsType) => {
   return (
     <mvx-trim
-      text={text}
-      class={className}
-      data-testid={dataTestId}
-      shouldTrim={shouldTrim}
-      trimFontSize={trimFontSize}
+      text={props.text}
+      class={props.class}
+      data-testid={props['data-testid']}
+      shouldTrim={props.shouldTrim}
+      trimFontSize={props.trimFontSize}
     />
   );
 };

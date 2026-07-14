@@ -19,7 +19,7 @@ export const PingPongRaw = () => {
       sendPingTransaction={sendPingTransaction}
       sendPongTransaction={sendPongTransaction}
       getTimeToPong={getTimeToPong}
-      pingAmount={pingAmount()}
+      pingAmount={pingAmount}
     />
   );
 };

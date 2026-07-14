@@ -1,31 +1,37 @@
+import { createMemo, splitProps, Show } from 'solid-js';
 import { useStore } from 'hooks';
 import { ExplorerLinkSDKPropsType, networkSelector } from 'lib';
 import { IPropsWithClass, IPropsWithChildren } from 'types';
 
 interface ExplorerLinkPropsType
-  extends Partial<ExplorerLinkSDKPropsType>,
+  extends
+    Partial<ExplorerLinkSDKPropsType>,
     IPropsWithClass,
     IPropsWithChildren {
   page: string;
 }
 
-export const ExplorerLink = ({
-  children,
-  page,
-  class: className,
-  'data-testid': dataTestId,
-  ...rest
-}: ExplorerLinkPropsType) => {
+export const ExplorerLink = (props: ExplorerLinkPropsType) => {
+  const [local, rest] = splitProps(props, [
+    'children',
+    'page',
+    'class',
+    'data-testid'
+  ]);
+
   const store = useStore();
-  const network = networkSelector(store());
+  const network = createMemo(() => networkSelector(store()));
+
   return (
     <mvx-explorer-link
-      link={`${network.explorerAddress}${page}`}
-      class={className}
-      data-testid={dataTestId}
+      link={`${network().explorerAddress}${local.page}`}
+      class={local.class}
+      data-testid={local['data-testid']}
       {...rest}
     >
-      {children ? <div>{children}</div> : null}
+      <Show when={local.children}>
+        <div>{local.children}</div>
+      </Show>
     </mvx-explorer-link>
   );
 };

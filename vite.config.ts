@@ -4,8 +4,6 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import solid from 'vite-plugin-solid';
 // import devtools from "solid-devtools/vite";
 import solidSvg from 'vite-plugin-solid-svg';
-import svgr from 'vite-plugin-svgr';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
@@ -18,16 +16,15 @@ export default defineConfig({
     //   autoname: true, // e.g. enable autoname
     // }),
     solid(),
-    tsconfigPaths(),
     basicSsl(),
     solidSvg(),
-    svgr(),
     nodePolyfills({
       globals: { Buffer: true, global: true, process: true }
     })
   ],
   resolve: {
-    // preserveSymlinks: true, // 👈 Activat this for links in links
+    // preserveSymlinks: true, // 👈 Activate this for links in links
+    tsconfigPaths: true,
     alias: {
       src: '/src'
     }

@@ -44,8 +44,8 @@ const dashboardWidgets: WidgetType[] = [
   },
   {
     title: 'Transactions (Ping & Pong)',
-    widget: () => (
-      <Transactions id={ItemsIdentifiersEnum.transactionsPingPong} />
+    widget: (props) => (
+      <Transactions identifier='transactions-ping-pong' {...props} />
     ),
     props: { receiver: contractAddress },
     description: 'List transactions filtered for a given Smart Contract',

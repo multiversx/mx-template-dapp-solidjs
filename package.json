@@ -5,10 +5,19 @@
   "license": "MIT",
   "scripts": {
     "build": "vite build",
+    "build-devnet": "pnpm copy-devnet-config && vite build",
+    "build-testnet": "pnpm copy-testnet-config && vite build",
+    "build-mainnet": "pnpm copy-mainnet-config && vite build",
+    "copy-devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
+    "copy-testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
+    "copy-mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "dev": "vite",
     "serve": "vite preview",
     "lint": "eslint --ext js,ts,tsx src --fix",
     "start": "tsc && vite",
+    "start-devnet": "pnpm copy-devnet-config && vite",
+    "start-testnet": "pnpm copy-testnet-config && vite",
+    "start-mainnet": "pnpm copy-mainnet-config && vite",
     "start-no-tsc": "vite --force"
   },
   "dependencies": {
@@ -16,7 +25,7 @@
     "@fortawesome/free-brands-svg-icons": "7.3.0",
     "@fortawesome/free-solid-svg-icons": "7.3.0",
     "@multiversx/sdk-core": "15.4.1",
-    "@multiversx/sdk-dapp": "5.7.0",
+    "@multiversx/sdk-dapp": "5.7.1",
     "@multiversx/sdk-dapp-ui": "0.1.24",
     "@multiversx/sdk-dapp-utils": "3.1.0",
     "@solidjs/router": "0.16.1",

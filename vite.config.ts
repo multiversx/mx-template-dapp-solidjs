@@ -23,7 +23,7 @@ export default defineConfig({
     })
   ],
   resolve: {
-    // preserveSymlinks: true, // 👈 Activat this for links in links
+    // preserveSymlinks: true, // 👈 Activate this for links in links
     tsconfigPaths: true,
     alias: {
       src: '/src'

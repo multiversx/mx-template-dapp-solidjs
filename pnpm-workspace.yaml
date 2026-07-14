@@ -3,3 +3,5 @@ allowBuilds:
   keccak: true
   protobufjs: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@multiversx/*'

@@ -1,36 +1,32 @@
-import { createEffect, createMemo } from 'solid-js';
-import { FormatAmountController } from 'lib';
+import { createEffect } from 'solid-js';
 import { FormatAmountSDKPropsType } from 'lib/sdkDappUI/sdkDappUI.types';
-import { DECIMALS, DIGITS } from 'lib/sdkDappUtils/sdkDappUtils.constants';
 import { IPropsWithClass } from 'types';
 
 interface FormatAmountPropsType
-  extends Partial<FormatAmountSDKPropsType>,
-    IPropsWithClass {
-  egldLabel?: string;
-  value: string;
+  extends Partial<FormatAmountSDKPropsType>, IPropsWithClass {
+  isValid: boolean;
+  valueInteger: string;
+  valueDecimal: string;
+  label?: string;
+  decimalClass?: string;
+  labelClass?: string;
+  showLabel?: boolean;
 }
 
 export const FormatAmount = (props: FormatAmountPropsType) => {
   let elementRef: Partial<FormatAmountSDKPropsType> | undefined;
 
-  const formatData = createMemo(() =>
-    FormatAmountController.getData({
-      digits: DIGITS,
-      decimals: DECIMALS,
-      egldLabel: props.egldLabel,
-      input: props.value
-    })
-  );
-  createEffect(() => {
-    const data = formatData();
+  const setElementRef = (el: Partial<FormatAmountSDKPropsType>) => {
+    elementRef = el;
+    Object.assign(elementRef, props);
+  };
 
+  createEffect(() => {
     if (!elementRef) {
       return;
     }
-
-    Object.assign(elementRef, props, data);
+    Object.assign(elementRef, props);
   });
 
-  return <mvx-format-amount ref={elementRef} />;
+  return <mvx-format-amount ref={setElementRef} />;
 };

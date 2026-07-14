@@ -4,18 +4,26 @@ import { getActiveTransactionsStatus, TransactionsTable } from 'lib';
 import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';
 
+// prettier-ignore
+const styles = {
+  transactionsContainer: 'transactions-container flex flex-col border border-secondary rounded-xl transition-all duration-200 ease-out',
+  transactionsTable: 'transactions-table w-full h-full overflow-x-auto shadow rounded-lg'
+} satisfies Record<string, string>;
+
 export const Transactions = (props: TransactionsPropsType) => {
   const { isLoading, transactions, getTransactions } =
     useGetTransactions(props);
 
-  const { success } = createMemo(() => getActiveTransactionsStatus())();
+  const activeTransactionsStatus = createMemo(() =>
+    getActiveTransactionsStatus()
+  );
 
   onMount(() => {
     getTransactions();
   });
 
   createEffect(() => {
-    if (success) {
+    if (activeTransactionsStatus().success) {
       getTransactions();
     }
   });
@@ -24,14 +32,16 @@ export const Transactions = (props: TransactionsPropsType) => {
     <Show
       when={!isLoading() && transactions().length > 0}
       fallback={
-        <OutputContainer>
-          <p class='text-gray-400'>No transactions found</p>
-        </OutputContainer>
+        <div id={props.id}>
+          <OutputContainer isLoading={isLoading()}>
+            <p>No transactions found</p>
+          </OutputContainer>
+        </div>
       }
     >
-      <div class='flex flex-col'>
+      <div id={props.id} class={styles.transactionsContainer}>
         <OutputContainer isLoading={isLoading()} class='p-0'>
-          <div class='w-full h-full overflow-x-auto bg-white shadow rounded-lg'>
+          <div class={styles.transactionsTable}>
             <TransactionsTable transactions={transactions()} />
           </div>
         </OutputContainer>

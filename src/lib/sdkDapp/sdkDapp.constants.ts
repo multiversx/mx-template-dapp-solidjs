@@ -6,3 +6,4 @@ export {
   GAS_LIMIT,
   GAS_PRICE
 } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
+export { safeWindow } from '@multiversx/sdk-dapp/out/constants/window.constants';

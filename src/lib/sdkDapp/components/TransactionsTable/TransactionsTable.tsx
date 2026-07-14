@@ -23,6 +23,11 @@ export const TransactionsTable = (props: TransactionsTablePropsType) => {
   const network = createMemo(() => networkSelector(store()));
   const account = createMemo(() => accountSelector(store()));
 
+  const setElementRef = (el: Partial<TransactionsTableSDKPropsType>) => {
+    elementRef = el;
+    elementRef.transactions = [];
+  };
+
   createEffect(async () => {
     if (!elementRef) {
       return;
@@ -40,5 +45,5 @@ export const TransactionsTable = (props: TransactionsTablePropsType) => {
     });
   });
 
-  return <mvx-transactions-table ref={elementRef} />;
+  return <mvx-transactions-table ref={setElementRef} />;
 };
